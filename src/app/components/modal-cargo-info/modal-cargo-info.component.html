@@ -1,0 +1,364 @@
+<!-- inherit-h -->
+<div class="custom-flex inherit-h zero">
+    <div class="row">
+        <div class="col zero" *ngIf="publication">
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col">
+                    <h3 mat-dialog-title>{{ publication.load.description | uppercase }}
+                        &nbsp;
+                        <mat-icon class="title-icon mt-1" matTooltip="Nacional" matTooltipPosition="above" *ngIf="true; else localIcon">
+                            map
+                        </mat-icon>
+                        <ng-template #localIcon>
+                            <mat-icon class="icon mt-1" matTooltip="Local" matTooltipPosition="above">local_shipping</mat-icon>
+                        </ng-template>
+                    </h3>
+                </div>
+                <div>
+                    <span *ngIf="btnShow">
+                        <button mat-icon-button class="bc-transparent" matTooltip="Compartir carga con conductor"
+                            matTooltipPosition="above" (click)="loadSharingDriver()" *ngIf="!isGenerator">
+                            <mat-icon>send</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-icon-button class="bc-transparent" matTooltip="Copiar contenidos"
+                        matTooltipPosition="above" (click)="onContentCopy()" *ngIf="isGenerator">
+                        <mat-icon>content_copy</mat-icon>
+                    </button>
+                    &nbsp; &nbsp;
+                    <button mat-icon-button class="bc-transparent" matTooltip="Cerrar" matTooltipPosition="above"
+                        (click)="onClose()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Solicitante: &nbsp;</h4>
+                        <h4>{{ publisher }}</h4>
+                    </div>
+                </div>
+                <div class="col" *ngIf="isGenerator">
+                    <div class="row">
+                        <h4 class="title">Tipo de tarifa: &nbsp;</h4>
+                        <h4>{{ publication.fareType | translate }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Tipo de carga: &nbsp;</h4>
+                        <h4>{{ publication.load.type | translate }}</h4>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Fecha de cargue: &nbsp;</h4>
+                        <h4>{{ publication.date | formatDate }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Altura: &nbsp;</h4>
+                        <h4>{{ publication.load.height == 0 ? 'N/A' : publication.load.height }}</h4>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Modalidad: &nbsp;</h4>
+                        <h4>{{ publication.tripModality ? (publication.tripModality | translate) : 'N/A' }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Largo: &nbsp;</h4>
+                        <h4>{{ publication.load.length == 0 ? 'N/A' : publication.load.length }}</h4>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Ancho: &nbsp;</h4>
+                        <h4>{{ publication.load.width == 0 ? 'N/A' : publication.load.width }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Volumen: &nbsp;</h4>
+                        <h4>{{ publication.load.volume == 0 ? 'N/A' : publication.load.volume }}</h4>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Peso: &nbsp;</h4>
+                        <h4>{{ publication.load.weight == 0 ? 'N/A' : publication.load.weight }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Id solicitud: &nbsp;</h4>
+                        <h4>
+                            {{ publication.load.code ? publication.load.code : 'N/A' }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h4 class="title">Cliente: &nbsp;</h4>
+                        <h4>{{ publication.client ? publication.client : 'N/A' }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-1">
+               <div class="col">
+                   <div class="row">
+                        <!-- ROUTE -->
+                        <div class="col sub-container">
+                            <div class="row col-container pt-3">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">{{ 'GENERAL_WORD.ORIGIN' | translate }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero"></div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">{{ 'GENERAL_WORD.DESTINY' | translate }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
+                                    <h4 class="stackable fgc-gray-1" *ngFor="let origin of publication.origins">
+                                        <span *ngIf="origin.loadPlace">{{ origin.loadPlace | titlecase }}, &nbsp;</span>
+                                        <b>{{ origin.name | titlecase }}</b>
+                                    </h4>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 i-container fgc-gray-1">
+                                    <mat-icon class="colorArrow_right">arrow_right_alt</mat-icon>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
+                                    <h4 class="stackable fgc-gray-1" *ngFor="let destiny of publication.destinies">
+                                        <span *ngIf="destiny.loadPlace">{{ destiny.downloadPlace | titlecase }}, &nbsp;</span>
+                                        <b>{{ destiny.name | titlecase }}</b>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+
+            <div class="row mt-3 mb-1">
+               <div class="col">
+                   <div class="row">
+                        <!-- VEHICLE TYPE -->
+                        <div class="col sub-container">
+                            <div class="row pt-3">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">{{ 'VEHICLE.TYPE.TITLE' | translate }}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">
+                                            {{ 'HEADER_TABLE.QUANTITY' | translate }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                                    <h4 class="font-weight-bold fgc-gray-2">
+                                        {{ 'GENERAL_WORD.FARE' | translate }}
+                                    </h4>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row pt-3" *ngFor="let offer of publication.offers">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="stackable fgc-gray-1">
+                                            {{ offer.vehicleType | translate }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="stackable fgc-gray-1">
+                                            {{ offer.vehicleLimit }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="stackable fgc-gray-1">
+                                            <span *ngIf="user === country.COLOMBIA; else peru">
+                                                {{ offer.proposedFare | currency: 'COP':'symbol-narrow':'1.0' }}
+                                            </span>
+                                            <ng-template #peru>
+                                                <span>
+                                                    {{ offer.proposedFare | currency: 'S/ ':'symbol-narrow':'1.0' }}
+                                                </span>
+                                            </ng-template>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+
+            <!-- Observation && CAMPOS PERSONALIZADOS -->
+            <div class="row mt-3">
+               <div class="col">
+                   <div class="row">
+                        <!-- OBSERVATION -->
+                        <div class="col sub-container mr-1 mt-2 mb-2">
+                            <div class="row pt-3">
+                                <div class="col">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">
+                                            Observaciones cancelación o finalización
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <mat-divider class="mb-2"></mat-divider>
+
+                            <div class="row middle-lg middle-md middle-sm middle-xs">
+                                <div class="col mb-2">
+                                    <h4 class="fgc-gray-1 text-center">
+                                        {{
+                                        (publication.reasonFinish | titlecase) ||
+                                        (publication.reasonCancellation | titlecase) ||
+                                        'N/A'
+                                        }}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CUSTOM FIELDS -->
+                        <div class="col sub-container ml-1 mt-2 mb-2">
+                            <div class="row pt-3">
+                                <div class="col">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">Campos personalizados</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <mat-divider class="mb-2"></mat-divider>
+
+                            <div class="row middle-lg middle-md middle-sm middle-xs"
+                                *ngFor="let customField of publication.customFields">
+                                <h4 class="fgc-gray-1">
+                                    <b>{{ customField.name | titlecase }}: &nbsp;</b>
+                                </h4>
+                                <h4 class="fgc-gray-1" *ngIf="customField.datatype === 'CUSTOM_FIELD.TYPE.DATE'; else noDate">
+                                    {{ customField.value | date: 'MMM d y, h:mm a' }}
+                                </h4>
+                                <ng-template #noDate>
+                                    <h4 class="fgc-gray-1">
+                                        {{ customField.value ? customField.value : 'N/A' }}
+                                    </h4>
+                                </ng-template>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+
+            <!-- COMPANIES -->
+            <div class="row mt-3 mb-1" *ngIf="isGenerator">
+               <div class="col">
+                   <div class="row">
+                        <div class="col-12 sub-container" *ngIf="pending.length > 0">
+                            <div class="row pt-3">
+                                <div class="col">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">
+                                            Solicitudes pendientes: {{ pending.length }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-divider class="mb-3"></mat-divider>
+                            <div class="row middle-lg middle-md middle-sm middle-xs">
+                                <div class="col" *ngFor="let company of pending">
+                                    <h4 class="fgc-gray-1">{{ company.name }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+
+            <div class="row mt-3 mb-3" *ngIf="isGenerator">
+               <div class="col">
+                   <div class="row">
+                        <div class="col-12 sub-container" *ngIf="rejected.length > 0">
+                            <div class="row pt-3">
+                                <div class="col">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">
+                                            Solicitudes rechazadas: {{ rejected.length }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-divider class="mb-3"></mat-divider>
+                            <div class="row middle-lg middle-md middle-sm middle-xs">
+                                <div class="col" *ngFor="let company of rejected">
+                                    <h4>{{ company.name }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-divider class="mt-1 mb-3"></mat-divider>
+
+    <div class="row"  *ngIf="!isGenerator && btnShow">
+        <div class="col">
+            <div class="row mb-4">
+                <div class="col mb-2 mt-1">
+                    <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onRejectClicked()"
+                        *ngIf="publication?.state === publicationStatus.ACTIVE">
+                        <mat-icon color="white">close</mat-icon> Rechazar
+                    </button>
+                </div>
+                <div class="col mb-2 mt-1">
+                    <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onClose(true)">
+                        <mat-icon color="white">local_shipping</mat-icon> Reportes
+                    </button>
+                </div>
+                <div class="col mt-1">
+                    <button mat-flat-button class="btn-submit btn-block" (click)="onClose(true, true)"
+                        *ngIf="publication?.state === publicationStatus.ACTIVE">
+                        <mat-icon color="white">done</mat-icon> Proponer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

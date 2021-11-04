@@ -1,0 +1,144 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>{{ vehicleDataCopy.id ? 'Editar' : 'Registrar' }} Vehículo</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button matTooltip="Cerrar" class="bc-transparent float-right" matTooltipPosition="above"
+                (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Relaci&oacute;n con el vehículo</mat-label>
+                        <mat-select formControlName="ownershipRelation" appearance="outline" class="w-100">
+                            <mat-option>Seleccione propiedad</mat-option>
+                            <mat-option value="{{ ownership.OWNED }}">{{ ownership.OWNED | translate }}</mat-option>
+                            <mat-option value="{{ ownership.LOYAL }}">{{ ownership.LOYAL | translate }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f.ownershipRelation.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Conductor</mat-label>
+                        <input matInput appearance="outline" formControlName="driverId" [matAutocomplete]="auto"
+                            (change)="selectDriverChange()" />
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+                                {{ option.name }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Placa</mat-label>
+                        <input matInput formControlName="plate" maxlength="6" class="uppercase" />
+                        <mat-error *ngIf="f.plate.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.plate.hasError('pattern')">
+                            La placa no tiene el formato correspondiente.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Tipo</mat-label>
+                        <mat-select formControlName="type" appearance="outline" class="full-width">
+                            <mat-option>Seleccione tipo</mat-option>
+                            <ng-container *ngFor="let item of vehicleType">
+                                <mat-option [value]="item.id">{{ item.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.type.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Año del vehículo</mat-label>
+                        <input matInput formControlName="vehicleAge" maxlength="4" />
+                        <mat-error *ngIf="f.vehicleAge.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.vehicleAge.hasError('pattern')">
+                            El año del vehículo debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Capacidad</mat-label>
+                        <input matInput formControlName="capacity" type="number" />
+                        <mat-error *ngIf="f.capacity.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.capacity.hasError('pattern')">
+                            La capacidad debe ser numérica
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Proveedor satelital</mat-label>
+                        <input matInput formControlName="supplierSatellite" />
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Usuario satelital</mat-label>
+                        <input matInput formControlName="satelliteUser" />
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Contraseña satelital</mat-label>
+                        <input matInput formControlName="satellitePassword" [type]="hidePwd ? 'password' : 'text'" minlength="6" />
+                        <mat-icon matSuffix (click)="hidePwd = !hidePwd" class="clickable">
+                            {{ hidePwd ? 'visibility_off' : 'visibility' }}
+                        </mat-icon>
+                        <mat-error *ngIf="f.satellitePassword.hasError('minlength')">
+                            La contraseña debe contener mín. 6 caracteres
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider class="mt-2 mb-3"></mat-divider>
+
+        <div class="row" mat-dialog-actions>
+            <div class="col" *ngIf="vehicleDataCopy.id">
+                <button mat-flat-button type="submit" class="btn-cancelar btn-block p-1" (click)="openDialogFiles('vehicle')">
+                    <mat-icon color="white" class="">upload_file</mat-icon> Subir archivos
+                </button>
+            </div>
+            <div class="col">
+                <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block p-1">
+                    <mat-icon color="white">done</mat-icon>
+                    {{ vehicleDataCopy.id ? 'Editar' : 'Registrar' }}
+                    <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,303 @@
+<!-- Controls -->
+<div class="row mt-4 mb-4 between-lg between-md between-sm between-xs full-width">
+    <div class="col"></div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" *ngIf="!isSearch">
+        <mat-form-field appearance="outline" class="inherit-w">
+            <mat-label>Buscar</mat-label>
+            <input type="text" matInput [(ngModel)]="filterYard" (ngModelChange)="search($event)" />
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field class="search-bar" appearance="outline">
+            <mat-label>Seleccione planta</mat-label>
+            <mat-select appearance="outline" (selectionChange)="changeYard($event)">
+                <ng-container *ngFor="let yard of yards">
+                    <mat-option [value]="yard.id">{{ yard.name | titlecase }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1" *ngIf="!isSearch">
+        <button
+            (click)="showQR()"
+            mat-raised-button
+            color="primary"
+            class="d-block d-sm-block d-md-none mt-4"
+            style="width: 100%;"
+        >
+            Escanear QR
+        </button>
+        <mat-icon matSuffix class="d-none d-sm-none d-md-block mt-3" (click)="showQR()" style="cursor: pointer;"
+            >qr_code_scanner</mat-icon
+        >
+    </div>
+</div>
+
+<div class="row body-stepper" *ngIf="!notSearch; else empty">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- image -->
+            <div class="col-sm-12 col-md-2 d-none d-sm-block text-center">
+                <img
+                    src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/user-male-icon.png"
+                    alt="Photo user"
+                    width="50"
+                    style="border-radius: 20px;"
+                />
+            </div>
+
+            <!-- driver info -->
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <h4 class="font-weight-bold" style="cursor: text;">
+                    {{ operations?.driver.fullname }}
+                    <br />
+                    <small>C.C. {{ operations?.driver.idCard | formatDriverId }}</small>
+                </h4>
+            </div>
+
+            <!-- vehicle info -->
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <h4 class="font-weight-bold" style="cursor: text;">
+                    {{ operations?.vehicle.type | translate }}
+                    <br />
+                    <small>{{ operations?.vehicle.plate | uppercase }}</small>
+                </h4>
+            </div>
+
+            <!-- Security course info -->
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <h4 class="font-weight-bold" style="cursor: text;">
+                    Curso de seguridad<br />
+                    <small *ngIf="operations?.driver.validityDays > 5 && operations?.driver.validityDays !== null"
+                        >Vigente</small
+                    >
+                    <small
+                        *ngIf="
+                            operations?.driver.validityDays <= 5 &&
+                            operations?.driver.validityDays > 0 &&
+                            operations?.driver.validityDays !== null
+                        "
+                        >Pronto a vencer</small
+                    >
+                    <small *ngIf="operations?.driver.validityDays <= 0 && operations?.driver.validityDays !== null"
+                        >Vencido</small
+                    >
+                </h4>
+            </div>
+
+            <!-- Detalles del viaje -->
+            <div class="col-xs-12 col-sm-12 col-md-3">
+                <h4 class="font-weight-bold" style="cursor: text;">
+                    <span class="text-center">Detalles del viaje</span><br /><small>{{
+                        operations?.tripDescription | titlecase
+                    }}</small>
+                </h4>
+            </div>
+
+            <!-- Inspeccion -->
+            <div class="col-xs-12 col-sm-12 col-md-1">
+                <div class="d-block d-sm-block d-md-none mt-2">
+                    <button
+                        mat-raised-button
+                        color="warn"
+                        *ngIf="!flagCode"
+                        (click)="openModalInspection()"
+                        style="width: 100%;"
+                    >
+                        Realizar formulario
+                    </button>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        *ngIf="flagCode"
+                        click)="openModalInspectionResponses()"
+                        style="width: 100%;"
+                    >
+                        Ver Formulario
+                    </button>
+                </div>
+
+                <h4 class="font-weight-bold mt-4 d-none d-sm-none d-md-block" style="cursor: pointer;">
+                    <mat-icon
+                        (click)="openModalInspection()"
+                        matTooltip="Formulario de inspección sin realizar"
+                        color="warn"
+                        *ngIf="!flagCode"
+                        >assignment_turned_in</mat-icon
+                    >
+                    <mat-icon
+                        (click)="openModalInspectionResponses()"
+                        matTooltip="Formulario de inspección realizado"
+                        color="primary"
+                        *ngIf="flagCode"
+                        >assignment_turned_in</mat-icon
+                    >
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #empty>
+    <div class="row body-stepper" style="height: 100px;">
+        <div class="col text-center">
+            <p class="p-tb-20 text-muted h5 font-weight-bold">
+                {{ 'GENERAL_WORD.EMPTY' | translate }}
+            </p>
+        </div>
+    </div>
+</ng-template>
+
+<!-- {{ JSON.stringify(operations) }} -->
+<ng-container *ngIf="operations && !notSearch">
+    <!-- Steps -->
+    <mat-horizontal-stepper #stepper [selectedIndex]="selectedIndex" class="mt-2" style="width: 90%; margin-left: 5%;">
+        <mat-step errorMessage="Campos requeridos." *ngFor="let stage of operations?.stages">
+            <ng-template matStepLabel>
+                <h4>
+                    <small>{{ stage.name | titlecase }}</small>
+                </h4>
+            </ng-template>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+    <!-- Current form -->
+    <div class="row mb-5">
+        <div class="col-md-6 body-stepper">
+            <h3>{{ operations.currentStage?.name | titlecase }}</h3>
+
+            <form [formGroup]="yardForm" novalidate>
+                <ng-template matStepLabel>{{ 'GENERAL_WORD.MANDATORY' | translate }}</ng-template>
+                <mat-divider class="pb-3" *ngIf="getTextOfSubmitByStage() !== ''"></mat-divider>
+                <!-- CAMPOS PERSONALIZADOS -->
+                <ng-container *ngIf="customFields?.length > 0">
+                    <div class="row zero between-lg between-md between-sm between-xs" formArrayName="customFields">
+                        <ng-container
+                            *ngFor="let customField of getCustomFields.controls; let i = index"
+                            [formGroupName]="i"
+                        >
+                            <!-- CAMPO PERSONALIZADO LISTA -->
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-xs-12 col-sm-12 col-md-8"
+                                *ngIf="customFields[i]?.datatype === datatype.LIST"
+                            >
+                                <mat-label>{{ customFields[i].name | titlecase }}</mat-label>
+                                <mat-select
+                                    formControlName="{{ getFormControlName(customField) }}"
+                                    appearance="outline"
+                                    class="full-width"
+                                >
+                                    <mat-option value="">Seleccione la opción</mat-option>
+                                    <ng-container *ngFor="let option of customFields[i].options">
+                                        <mat-option value="{{ option.value }}">{{
+                                            option.value | titlecase
+                                        }}</mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <!-- CAMPO PERSONALIZADO NUMERICO -->
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-xs-12 col-sm-12 col-md-8"
+                                *ngIf="customFields[i]?.datatype === datatype.NUMERIC"
+                            >
+                                <mat-label>{{ customFields[i].name | titlecase }}</mat-label>
+                                <input matInput type="number" formControlName="{{ getFormControlName(customField) }}" />
+                            </mat-form-field>
+
+                            <!-- CAMPO PERSONALIZADO TEXTO -->
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-xs-12 col-sm-12 col-md-8"
+                                *ngIf="customFields[i]?.datatype === datatype.TEXT"
+                            >
+                                <mat-label>{{ customFields[i].name | titlecase }}</mat-label>
+                                <input matInput type="text" formControlName="{{ getFormControlName(customField) }}" />
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-xs-12 col-sm-12 col-md-8"
+                                *ngIf="customFields[i]?.datatype === datatype.DATE"
+                            >
+                                <mat-label>{{ customFields[i].name | titlecase }}</mat-label>
+                                <input
+                                    matInput
+                                    [ngxMatDatetimePicker]="picker"
+                                    formControlName="{{ getFormControlName(customField) }}"
+                                    [min]="minDate"
+                                    [max]="maxDate"
+                                />
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <ngx-mat-datetime-picker
+                                    #picker
+                                    [showSpinners]="showSpinners"
+                                    [showSeconds]="showSeconds"
+                                    [stepHour]="stepHour"
+                                    [stepMinute]="stepMinute"
+                                    [stepSecond]="stepSecond"
+                                    [touchUi]="touchUi"
+                                    [color]="color"
+                                    [enableMeridian]="enableMeridian"
+                                >
+                                </ngx-mat-datetime-picker>
+                            </mat-form-field>
+                        </ng-container>
+                    </div>
+                    <mat-divider></mat-divider>
+                </ng-container>
+
+                <div *ngIf="customFields?.length === 0" class="text-center">
+                    <p class="mt-4 mb-4 p-tb-20 text-muted h5">
+                        {{ 'GENERAL_WORD.NO_FIELDS' | translate }}
+                    </p>
+                </div>
+                <div class="mt-4 d-flex justify-content-end" *ngIf="getTextOfSubmitByStage() !== ''">
+                    <div class="col-xs-12 col-sm-12 col-md-8">
+                        <button
+                            style="width: 100%;"
+                            type="submit"
+                            [disabled]="submit"
+                            mat-flat-button
+                            class="btn-submit full-width"
+                            (click)="onSubmit()"
+                        >
+                            <mat-icon color="white">done</mat-icon>
+                            {{ getTextOfSubmitByStage() }}
+                            <img
+                                src="../../../../../../assets/loading.gif"
+                                class="ml-1"
+                                *ngIf="submit"
+                                alt="Cargando"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <div class="row" style="height: 200px; overflow-y: auto;">
+                <div class="col-6 mt-2" *ngFor="let history of operations?.history">
+                    <div class="inherit-h body-stepper">
+                        <div class="row middle-xs middle-sm middle-md middle-lg pt-2 stage-record-container__header">
+                            <span>{{ history.name.charAt(0) | uppercase }}</span>
+                            <h5 class="header">{{ history.name | titlecase }}</h5>
+                        </div>
+                        <div class="list pt-3">
+                            <div class="row list__item mb-2" *ngFor="let customField of history.customFields">
+                                <b>{{ customField.name | titlecase }}:</b> &nbsp; {{ customField.value }}
+                            </div>
+                        </div>
+                        <div class="mt-5"></div>
+                        <div class="row reverse completion-date">
+                            <i> {{ history.completedAt | formatDate }}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

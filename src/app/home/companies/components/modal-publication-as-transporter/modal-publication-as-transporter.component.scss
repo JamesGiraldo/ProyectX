@@ -1,0 +1,14 @@
+@import 'src/sass/modal';
+
+.add mat-icon {
+    color: #fff;
+}
+
+.inline-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.padding-left{
+    left: -13px;
+}

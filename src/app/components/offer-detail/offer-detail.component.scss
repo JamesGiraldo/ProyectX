@@ -1,0 +1,101 @@
+@import 'src/sass/variables';
+
+h4 {
+    color: #434343;
+    //font-weight: bold;
+    text-align: center;
+    margin-right: 15px;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.title{
+    cursor: pointer;
+}
+
+button {
+    color: white;
+    background-color: #434343;
+}
+
+span {
+    text-align: center;
+}
+
+.active {
+    color: #4caf50;
+}
+
+.box-sh-none {
+    box-shadow: none;
+}
+
+.cancelled {
+    color: #e33241;
+}
+
+.center-title {
+    margin: auto !important;
+}
+
+.sub-container {
+    background-color: #efefef;
+    border-radius: 10px;
+}
+
+.custom-p {
+    padding: 0;
+}
+
+.fgc-gray-1 {
+    color: #a6a6a6;
+}
+
+.fgc-gray-2 {
+    color: #656565;
+}
+
+.finished {
+    color: #2196f3;
+}
+
+.stick-r {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.type-active {
+    color: #737373;
+    font-weight: bold;
+    border-bottom: solid $orange 2px;
+    height: auto;
+}
+
+thead th {
+    padding: 10px 0;
+}
+
+thead th:first-child {
+    border-radius: 10px 0 0 10px;
+}
+thead th:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+/* remove border from th... */
+/* !important is only required in stack snippet, probably not in your production code */
+
+.table > thead > tr > th {
+    border: none !important;
+}
+
+/* remove border from first tbody row... */
+.table > tbody > tr:first-child > td,
+.table > tbody > tr:first-child > th {
+    border-top: none;
+}
+
+.center-title {
+    margin: auto !important;
+}

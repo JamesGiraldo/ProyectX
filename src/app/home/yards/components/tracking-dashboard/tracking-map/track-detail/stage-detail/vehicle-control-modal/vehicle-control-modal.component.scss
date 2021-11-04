@@ -1,0 +1,81 @@
+@import 'src/sass/modal';
+
+h5 {
+    margin: 0;
+    text-align: left;
+
+    &.header {
+        font-size: 16px;
+
+        &--reverse {
+            font-size: 16px;
+            text-align: right;
+        }
+    }
+
+    &.sub-header {
+        color: #434343;
+        font-size: 12px;
+
+        &--reverse {
+            color: #434343;
+            font-size: 12px;
+            text-align: right;
+        }
+    }
+}
+
+.stage-record-container {
+    border: 2px solid #e5e5e5;
+    border-radius: 4px;
+
+    &__header {
+        color: #000;
+        font-size: 16px;
+        flex-grow: 1;
+
+        h5 {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+
+        span {
+            margin-right: 5px;
+            border-radius: 4px;
+            padding: 3px;
+            min-width: 26px;
+            min-height: 26px;
+            max-height: 26px;
+            max-height: 26px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #e5e5e5;
+            color: #000;
+        }
+    }
+}
+
+.list {
+    &__item {
+        background-color: #e5e5e5;
+        border-radius: 4px;
+        padding: 5px;
+        padding-left: 8px;
+    }
+}
+
+.completion-date {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: calc(100% - 30px);
+    font-size: 14px;
+    color: #b5b5b5;
+    text-align: right;
+    align-self: flex-end;
+    position: absolute;
+    bottom: 0;
+}
+
+.relative {
+    position: relative;
+}

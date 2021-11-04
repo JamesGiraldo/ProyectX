@@ -1,0 +1,624 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Crear publicación como Transportadora</h3>
+        </div>
+        <div class="col">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider class="py-2"></mat-divider>
+    <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-radio-group aria-label="Seleccione el tipo de publicación" formControlName="tripType">
+                        <div class="form-check form-check-inline py-2" *ngFor="let trip of tripType | enumToArray">
+                            <mat-radio-button class="form-check-input" color="primary" [value]="trip.value"
+                                [checked]="trip.value === 'TRIP.TYPE.NATIONAL'">
+                                {{ trip.value | translate }}
+                            </mat-radio-button>
+                            &nbsp;
+                            <mat-icon class="form-check-label">
+                                {{ trip.value === 'TRIP.TYPE.NATIONAL' ? 'map' : 'local_shipping' }}
+                            </mat-icon>
+                        </div>
+                    </mat-radio-group>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check form-check-inline py-2">
+                        <mat-checkbox class="form-check-label" color="primary" formControlName="isParcelService">
+                            ¿Es servicio de paquetería?
+                        </mat-checkbox>
+                        <mat-error *ngIf="f.isParcelService.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput formControlName="client" />
+                        <mat-error *ngIf="f.client.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.client.hasError('maxlength')">
+                            Ha superado el máximo de caracteres permitidos.
+                        </mat-error>
+                        <mat-error *ngIf="f.client.hasError('minlength')">
+                            El nombre del cliente es demasiado pequeño
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>ID Solicitud</mat-label>
+                        <input matInput formControlName="requestId" />
+                        <mat-error *ngIf="f.requestId.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.requestId.hasError('maxlength')">
+                            Ha superado el máximo de caracteres permitidos.
+                        </mat-error>
+                        <mat-error *ngIf="f.requestId.hasError('minlength')">
+                            El ID es demasiado pequeño
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput style="resize: none;" formControlName="description"></textarea>
+                        <mat-error *ngIf="f.description.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.description.hasError('maxlength')">
+                            Ha superado el máximo de caracteres permitidos.
+                        </mat-error>
+                        <mat-error *ngIf="f.description.hasError('minlength')">
+                            La descripción es demasiado pequeño
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Tipo de carga</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="type">
+                            <mat-option>Seleccione tipo de carga</mat-option>
+                            <ng-container *ngFor="let load of loadType | enumToArray">
+                                <mat-option [value]="load.value">{{ load.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.type.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Conj 2 -->
+            <div class="row py-2">
+                <div class="col-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Largo (mts)</mat-label>
+                        <input matInput formControlName="length" />
+                        <mat-error *ngIf="f.length.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.length.hasError('pattern')">
+                            El largo debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Ancho (mts)</mat-label>
+                        <input matInput formControlName="width" />
+                        <mat-error *ngIf="f.width.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.width.hasError('pattern')">
+                            El ancho debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Alto (mts)</mat-label>
+                        <input matInput formControlName="height" />
+                        <mat-error *ngIf="f.height.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.height.hasError('pattern')">
+                            El alto debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 padding-left">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Peso (Kg)</mat-label>
+                                <input matInput formControlName="weight" />
+                                <mat-error *ngIf="f.weight.hasError('required')">
+                                    {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                </mat-error>
+                                <mat-error *ngIf="f.weight.hasError('pattern')">
+                                    El peso debe ser numérico
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Volumen (m³)</mat-label>
+                                <input matInput formControlName="volume" />
+                                <mat-error *ngIf="f.volume.hasError('required')">
+                                    {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                </mat-error>
+                                <mat-error *ngIf="f.volume.hasError('pattern')">
+                                    El volumen debe ser numérico
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- LOCATIONS -->
+            <p class="text-muted font-weight-bold mb-4 h6">Orígenes y destinos</p>
+            <div class="row" formArrayName="loads">
+                <ng-container *ngFor="let record of getLoads.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-1 mt-3">
+                        <a class="cursor black float-right py-3" (click)="addLoad()">
+                            <mat-icon>add_circle</mat-icon>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row py-3">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>Municipio de cargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="name" [matAutocomplete]="originLookup" />
+                                    <mat-autocomplete autoActiveFirstOption #originLookup="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOrigins[i] | async" [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getLoads.controls[i].get('name').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>Lugar de cargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="loadPlace" [matAutocomplete]="loadPlaceLookup" />
+                                    <mat-autocomplete autoActiveFirstOption #loadPlaceLookup="matAutocomplete">
+                                        <mat-option *ngFor="let optionLoad of filteredLoadPlaces[i] | async"
+                                            [value]="optionLoad.name">
+                                            {{ optionLoad.name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getLoads.controls[i].get('loadPlace').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Fecha de cargue {{ i + 1 }}</mat-label>
+                                    <input matInput [ngxMatDatetimePicker]="picker" formControlName="loadDate"
+                                        [min]="minDate" [max]="maxDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners"
+                                        [showSeconds]="showSeconds" [stepHour]="stepHour" [stepMinute]="stepMinute"
+                                        [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color"
+                                        [enableMeridian]="enableMeridian">
+                                    </ngx-mat-datetime-picker>
+                                    <mat-error *ngIf="getLoads.controls[i].get('loadDate').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button mat-raised-button color="primary" type="button"
+                                            (click)="openDialogMap(i, true)" class="mt-3 d-flex primary"
+                                            *ngIf="coordinatesLoad[i] == null" matTooltip="Geoposicionar"
+                                            matTooltipPosition="above">
+                                            <mat-icon>location_on</mat-icon>
+                                        </button>
+                                        <button mat-raised-button color="warn" type="button" class="mt-2 d-flex"
+                                            (click)="removeCoordLoad(i)" *ngIf="coordinatesLoad[i] != null"
+                                            matTooltip="Borrar geoposicion" matTooltipPosition="above">
+                                            <mat-icon>location_off</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="cursor d-flex mt-3 deleteRow" *ngIf="i > 0" (click)="removeLoad(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row" formArrayName="downloads">
+                <ng-container *ngFor="let record of getDownloads.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-1 mt-3">
+                        <a class="cursor black float-right py-3" (click)="addDownload()">
+                            <mat-icon matTooltip="Agregar Origenes y destinos">add_circle</mat-icon>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row py-3">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Municipio de descargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="name" [matAutocomplete]="destinyLookup" />
+                                    <mat-autocomplete #destinyLookup="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredDestinies[i] | async"
+                                            [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getDownloads.controls[i].get('name').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>Lugar de descargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="downloadPlace"
+                                        [matAutocomplete]="downloadPlaceLookup" />
+                                    <mat-autocomplete autoActiveFirstOption #downloadPlaceLookup="matAutocomplete">
+                                        <mat-option *ngFor="let optionDownload of filteredDownloadPlaces[i] | async"
+                                            [value]="optionDownload.name">
+                                            {{ optionDownload.name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error
+                                        *ngIf="getDownloads.controls[i].get('downloadPlace').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>Fecha de destino {{ i + 1 }}</mat-label>
+                                    <input matInput [ngxMatDatetimePicker]="picker" formControlName="downloadDate"
+                                        [min]="minDate" [max]="maxDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners"
+                                        [showSeconds]="showSeconds" [stepHour]="stepHour" [stepMinute]="stepMinute"
+                                        [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color"
+                                        [enableMeridian]="enableMeridian">
+                                    </ngx-mat-datetime-picker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button mat-raised-button type="button" (click)="openDialogMap(i)"
+                                            color="primary" class="mt-2 d-flex primary" *ngIf="coordinatesDownload[i] == null"
+                                            matTooltip="Geoposicionar" matTooltipPosition="above">
+                                            <mat-icon>location_on</mat-icon>
+                                        </button>
+                                        <button mat-raised-button color="warn" type="button" class="mt-2 d-flex"
+                                            (click)="removeCoordDownload(i)" *ngIf="coordinatesDownload[i] != null"
+                                            matTooltip="Borrar geoposicion" matTooltipPosition="above">
+                                            <mat-icon>location_off</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="d-flex mt-3 cursor deleteRow" *ngIf="i > 0"
+                                            (click)="removeDownload(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- CAMPOS PERSONALIZADOS -->
+            <p class="text-muted font-weight-bold mb-4 h6">Campos personalizados</p>
+            <ng-container *ngIf="customFields?.length > 0">
+                <div class="row" formArrayName="customFields">
+                    <ng-container *ngFor="let customField of getCustomFields.controls; let i = index"
+                        [formGroupName]="i">
+                        <!-- CAMPO PERSONALIZADO LISTA -->
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.LIST">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <mat-select formControlName="{{ getFormControlName(customField) }}" appearance="outline"
+                                class="full-width">
+                                <mat-option value="">Seleccione la opción</mat-option>
+                                <ng-container *ngFor="let option of customFields[i].options">
+                                    <mat-option value="{{ option.value }}">{{ option.value }}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- CAMPO PERSONALIZADO NUMERICO -->
+                        <mat-form-field appearance="outline" class="col-md-4" *ngIf="customFields[i].datatype === datatype.NUMERIC">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <input matInput class="text-center" type="number" min="1" minlength="1" formControlName="{{ getFormControlName(customField) }}" />
+                        </mat-form-field>
+
+                        <!-- CAMPO PERSONALIZADO TEXTO -->
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.TEXT">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <input matInput class="text-center" type="text"
+                                formControlName="{{ getFormControlName(customField) }}" />
+                        </mat-form-field>
+
+                        <!-- CAMPO PERSONALIZADO FECHA -->
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.DATE">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <input matInput [ngxMatDatetimePicker]="picker" [min]="minDate" [max]="maxDate"
+                                formControlName="{{ getFormControlName(customField) }}" />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                                [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                                [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian">
+                            </ngx-mat-datetime-picker>
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- OFERTAS -->
+            <p class="text-muted font-weight-bold mb-4 h6">Información de tarifa</p>
+            <div class="row">
+                <!-- Conj 1 -->
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Modalidad tarifa</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="tripModality">
+                            <mat-option>Seleccione modalidad de tarifa</mat-option>
+                            <ng-container *ngFor="let trip of tripModality | enumToArray">
+                                <mat-option [value]="trip.value">{{ trip.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Tipo de vehículos</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="vehicleType">
+                            <mat-option>Seleccione tipo de vehículo</mat-option>
+                            <ng-container *ngFor="let vehicle of vehicleType | enumToArray">
+                                <mat-option [value]="vehicle.value">{{ vehicle.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.vehicleType.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Carrocería</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="vehicleBodywork">
+                            <mat-option>Seleccione tipo de carrocería</mat-option>
+                            <ng-container *ngFor="let bodywork of bodyworkType | enumToArray">
+                                <mat-option [value]="bodywork.value">{{ bodywork.value | translate }}</mat-option>
+                            </ng-container>
+                            <mat-error *ngIf="f.vehicleBodywork.hasError('required')">
+                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                            </mat-error>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Número de vehículos</mat-label>
+                        <input matInput formControlName="vehicleLimit" min="1" minlength="1" type="number" (change)="onVehicleCountChanged()" />
+                        <mat-error *ngIf="f.vehicleLimit.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.vehicleLimit.hasError('pattern')">
+                            La cantidad de vehículos debe ser numérica
+                        </mat-error>
+                        <mat-error *ngIf="f.vehicleLimit.hasError('min')">
+                            La cantidad de vehículos debe ser mayor a 0
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Tarifa</mat-label>
+                        <input matInput formControlName="proposedFare" min="1" minlength="1" />
+                        <mat-error *ngIf="f.proposedFare.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.proposedFare.hasError('pattern')">
+                            La tarifa debe ser numérica
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- REPORT -->
+            <p class="text-muted font-weight-bold mb-4 h6">Reporte vehículo</p>
+            <div class="row" formArrayName="reports">
+                <ng-container *ngFor="let report of getReports.controls; let i = index" [formGroupName]="i">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-1 mr-3">
+                                <mat-chip-list>
+                                    <mat-chip class="mt-3">{{ i + 1 | number: '2.0-0' }}</mat-chip>
+                                </mat-chip-list>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Placa</mat-label>
+                                    <input matInput formControlName="vehiclePlate"
+                                        (change)="onVehiclePlateChanged($event.target.value, i)"
+                                        [matAutocomplete]="plateLookup" style="text-transform: uppercase;"
+                                        maxlength="6" />
+                                    <mat-autocomplete #plateLookup="matAutocomplete" autoActiveFirstOption
+                                        (optionSelected)="onVehiclePlateChanged($event.option.value, i)">
+                                        <mat-option *ngFor="let option of filteredOptions[i] | async" [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getReports.controls[i].get('vehiclePlate').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                    <mat-error *ngIf="getReports.controls[i].get('vehiclePlate').hasError('pattern')">
+                                        La placa no tiene el formato correspondiente.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Identificaci&oacute;n</mat-label>
+                                    <input matInput formControlName="driverIdCard" />
+                                    <mat-error *ngIf="getReports.controls[i].get('driverIdCard').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                    <mat-error *ngIf="getReports.controls[i].get('driverIdCard').hasError('pattern')">
+                                        La identificación es inválida
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Nombre completo</mat-label>
+                                    <input matInput formControlName="driverName" />
+                                    <mat-error *ngIf="getReports.controls[i].get('driverName').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Tel&eacute;fono</mat-label>
+                                    <input matInput formControlName="driverPhone" />
+                                    <mat-error *ngIf="getReports.controls[i].get('driverPhone').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                    <mat-error *ngIf="getReports.controls[i].get('driverPhone').hasError('pattern')">
+                                        El teléfono es inválido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Capacidad</mat-label>
+                                    <input matInput formControlName="vehicleCapacity" />
+                                    <mat-error *ngIf=" getReports.controls[i].get('vehicleCapacity').hasError('required') ">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Fecha de cargue</mat-label>
+                                    <input matInput [ngxMatDatetimePicker]="picker" formControlName="loadDate"
+                                        (dateChange)="getWeekday(i)" [min]="minDate" [max]="maxDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners"
+                                        [showSeconds]="showSeconds" [stepHour]="stepHour"
+                                        [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+                                        [color]="color" [enableMeridian]="enableMeridian">
+                                    </ngx-mat-datetime-picker>
+                                    <mat-error *ngIf="getReports.controls[i].get('loadDate').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Tarifa</mat-label>
+                                    <input matInput formControlName="fareValue" min="1" minlength="1" type="number" />
+                                    <mat-error *ngIf="getReports.controls[i].get('fareValue').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                    <mat-error *ngIf="getReports.controls[i].get('fareValue').hasError('pattern')">
+                                        La tarifa es inválida
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100" *ngIf="isVisible">
+                                    <mat-label>Horarios de enturnamientos</mat-label>
+                                    <mat-select appearance="outline" class="full-width" formControlName="shiftSchedule" (selectionChange)="alert()">
+                                        <mat-option value="">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                                        <ng-container *ngFor="let item of yards">
+                                            <mat-option [value]="item.startTime">
+                                                {{ formatTime(item.startTime) }} - {{ formatTime(item.endTime) }}
+                                            </mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="getReports.controls[i].get('shiftSchedule').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-divider class="py-3 mt-2"></mat-divider>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="row zero between-lg between-md between-sm between-xs full-width">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row zero between-lg between-md between-sm between-xs full-width">
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onClose()">
+                                <mat-icon color="white">close</mat-icon> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block">
+                                <mat-icon color="white">done</mat-icon>
+                                Publicar
+                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

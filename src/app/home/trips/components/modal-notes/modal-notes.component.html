@@ -1,0 +1,69 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Ver reportes de estado</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-4 mb-3"></mat-divider>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" *ngFor="let column of columns">
+                        <div class="text-center mr-2 theaderWidth">
+                            <h5 class="headerSize m-2 w-100">{{ column | titlecase }}</h5>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bodyColor">
+                <tr *ngFor="let report of reportStatus">
+                    <td class="text-center">
+                        <h5 class="theaderWidth">{{ report.createdAt | date: 'MMM d y, h:mm a' }}</h5>
+                    </td>
+                    <td class="text-center">
+                        <h5 class="theaderWidth">{{ getStates(report.state) }}</h5>
+                    </td>
+                    <td class="text-center">
+                        <h5 class="theaderWidth">{{ report.observation.length > 0 ? (report.observation | titlecase) : 'N/A' }}</h5>
+                    </td>
+                    <td class="text-center">
+                        <h5 class="text-center">{{ report.estimatedTime }}</h5>
+                    </td>
+                    <td class="text-center">
+                        <h5 class="theaderWidth">
+                            <span class="cursor badge badge-pill badge-success pt-1 pb-1"
+                                matTooltip="Ver archivos cargados" matTooltipPosition="above"
+                                (click)="showFiles(report.images)">
+                                Ver documentos
+                            </span>
+                        </h5>
+                    </td>
+                    <td class="text-center">
+                        <h5>{{ report.loadedTonnage }}</h5>
+                    </td>
+                    <td class="text-center">
+                        <h5>
+                            <mat-icon matTooltip="Eliminar estado" matTooltipPosition="above" class="delete"
+                                (click)="deleteReport(report)">delete</mat-icon>
+                        </h5>
+                    </td>
+                </tr>
+                <tr *ngIf="reportStatus.length === 0" class="text-center">
+                    <td colspan="7">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

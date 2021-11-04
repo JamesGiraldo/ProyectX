@@ -1,0 +1,668 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>{{ requestData.editPublication?.option.id ? 'Editar' : 'Crear' }} publicación</h3>
+        <div>
+            <ng-container *ngIf="!requestData.editPublication?.option.id">
+                <button mat-icon-button class="bc-transparent" matTooltip="Pegar contenidos del portapapeles"
+                    matTooltipPosition="above" (click)="onContentPaste()" [disabled]="clipboardDisabled"
+                    *ngIf="isGenerator">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+            </ng-container>
+            <button mat-icon-button class="bc-transparent" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider class="py-2"></mat-divider>
+    <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-radio-group aria-label="Seleccione el tipo de publicación" formControlName="tripType">
+                        <div class="form-check form-check-inline py-2" *ngFor="let trip of tripType | enumToArray">
+                            <mat-radio-button class="form-check-input" color="primary" [value]="trip.value"
+                                [checked]="trip.value === 'TRIP.TYPE.NATIONAL'">{{ trip.value | translate }}
+                            </mat-radio-button>
+                            &nbsp;
+                            <mat-icon class="form-check-label">
+                                {{ trip.value === 'TRIP.TYPE.NATIONAL' ? 'map' : 'local_shipping' }}
+                            </mat-icon>
+                        </div>
+                    </mat-radio-group>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check form-check-inline py-2">
+                        <mat-checkbox class="form-check-label" color="primary" formControlName="isParcelService">
+                            ¿Es servicio de paquetería?
+                        </mat-checkbox>
+                        <mat-error *ngIf="f.isParcelService.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput formControlName="client" />
+                        <mat-error *ngIf="f.client.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.client.hasError('maxlength')">
+                            Ha superado el máximo de caracteres permitidos.
+                        </mat-error>
+                        <mat-error *ngIf="f.client.hasError('minlength')">
+                            El nombre del cliente es demasiado pequeño
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>ID Solicitud</mat-label>
+                        <input matInput formControlName="requestId" />
+                        <mat-error *ngIf="f.requestId.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.requestId.hasError('maxlength')">
+                            Ha superado el máximo de caracteres permitidos.
+                        </mat-error>
+                        <mat-error *ngIf="f.requestId.hasError('minlength')">
+                            El ID es demasiado pequeño
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput style="resize: none;" formControlName="description"></textarea>
+                        <mat-error *ngIf="f.description.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.description.hasError('maxlength')">
+                            Ha superado el máximo de caracteres permitidos.
+                        </mat-error>
+                        <mat-error *ngIf="f.description.hasError('minlength')">
+                            La descripción es demasiado pequeño
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Tipo de carga</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="type">
+                            <mat-option>Seleccione tipo de carga</mat-option>
+                            <ng-container *ngFor="let load of loadType | enumToArray">
+                                <mat-option [value]="load.value">{{ load.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.type.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Conj 2 -->
+            <div class="row py-2">
+                <div class="col-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Largo (mts)</mat-label>
+                        <input matInput formControlName="length" />
+                        <mat-error *ngIf="f.length.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.length.hasError('pattern')">
+                            El largo debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Ancho (mts)</mat-label>
+                        <input matInput formControlName="width" />
+                        <mat-error *ngIf="f.width.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.width.hasError('pattern')">
+                            El ancho debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Alto (mts)</mat-label>
+                        <input matInput formControlName="height" />
+                        <mat-error *ngIf="f.height.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.height.hasError('pattern')">
+                            El alto debe ser numérico
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 padding-left">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Peso (Kg)</mat-label>
+                                <input matInput formControlName="weight" />
+                                <mat-error *ngIf="f.weight.hasError('required')">
+                                    {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                </mat-error>
+                                <mat-error *ngIf="f.weight.hasError('pattern')">
+                                    El peso debe ser numérico
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Volumen (m³)</mat-label>
+                                <input matInput formControlName="volume" />
+                                <mat-error *ngIf="f.volume.hasError('required')">
+                                    {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                </mat-error>
+                                <mat-error *ngIf="f.volume.hasError('pattern')">
+                                    El volumen debe ser numérico
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- LOCATIONS -->
+            <p class="text-muted font-weight-bold mb-4 h6">Orígenes y destinos</p>
+            <div class="row" formArrayName="loads">
+                <ng-container *ngFor="let record of getLoads.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-1 mt-3">
+                        <a class="cursor black float-right py-3" (click)="addLoad()">
+                            <mat-icon matTooltip="Agregar Origenes y destinos">add_circle</mat-icon>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row py-3">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>Municipio de cargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="name" [matAutocomplete]="originLookup" />
+                                    <mat-autocomplete #originLookup="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOrigins[i] | async" [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getLoads.controls[i].get('name').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>Lugar de cargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="loadPlace" [matAutocomplete]="loadPlaceLookup" />
+                                    <mat-autocomplete autoActiveFirstOption #loadPlaceLookup="matAutocomplete">
+                                        <mat-option *ngFor="let optionLoad of filteredLoadPlaces[i] | async"
+                                            [value]="optionLoad.name">
+                                            {{ optionLoad.name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getLoads.controls[i].get('loadPlace').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Fecha de cargue {{ i + 1 }}</mat-label>
+                                    <input matInput [ngxMatDatetimePicker]="picker" formControlName="loadDate"
+                                        [min]="minDate" [max]="maxDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners"
+                                        [showSeconds]="showSeconds" [stepHour]="stepHour" [stepMinute]="stepMinute"
+                                        [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color"
+                                        [enableMeridian]="enableMeridian">
+                                    </ngx-mat-datetime-picker>
+                                    <mat-error *ngIf="getLoads.controls[i].get('loadDate').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button mat-raised-button color="primary" type="button"
+                                            (click)="openDialogMap(i, true)" class="primary d-flex mt-2"
+                                            *ngIf="coordinatesLoad[i] == null" matTooltip="Geoposicionar"
+                                            matTooltipPosition="above">
+                                            <mat-icon>location_on</mat-icon>
+                                        </button>
+                                        <button mat-raised-button color="warn" type="button" class="mt-2 d-flex"
+                                            (click)="removeCoordLoad(i)" *ngIf="coordinatesLoad[i] != null"
+                                            matTooltip="Borrar geoposicion" matTooltipPosition="above">
+                                            <mat-icon>location_off</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <a class="cursor d-flex mt-3 deleteRow" *ngIf="i > 0" (click)="removeLoad(i)">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row" formArrayName="downloads">
+                <ng-container *ngFor="let record of getDownloads.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-1 mt-3">
+                        <a class="cursor black float-right py-3" (click)="addDownload()">
+                            <mat-icon matTooltip="Agregar Origenes y destinos">add_circle</mat-icon>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row py-3">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Municipio de descargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="name" [matAutocomplete]="destinyLookup" />
+                                    <mat-autocomplete #destinyLookup="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredDestinies[i] | async"
+                                            [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getDownloads.controls[i].get('name').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Lugar de descargue {{ i + 1 }}</mat-label>
+                                    <input matInput formControlName="downloadPlace"
+                                        [matAutocomplete]="downloadPlaceLookup" />
+                                    <mat-autocomplete autoActiveFirstOption #downloadPlaceLookup="matAutocomplete">
+                                        <mat-option *ngFor="let optionDownload of filteredDownloadPlaces[i] | async"
+                                            [value]="optionDownload.name">
+                                            {{ optionDownload.name }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error
+                                        *ngIf="getDownloads.controls[i].get('downloadPlace').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Fecha de destino {{ i + 1 }}</mat-label>
+                                    <input matInput [ngxMatDatetimePicker]="picker" formControlName="downloadDate"
+                                        [min]="minDate" [max]="maxDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners"
+                                        [showSeconds]="showSeconds" [stepHour]="stepHour" [stepMinute]="stepMinute"
+                                        [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color"
+                                        [enableMeridian]="enableMeridian">
+                                    </ngx-mat-datetime-picker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button mat-raised-button type="button" (click)="openDialogMap(i)"
+                                            color="primary" class="mt-2 d-flex primary" *ngIf="coordinatesDownload[i] == null"
+                                            matTooltip="Geoposicionar" matTooltipPosition="above">
+                                            <mat-icon>location_on</mat-icon>
+                                        </button>
+                                        <button mat-raised-button color="warn" type="button" class="mt-2 d-flex"
+                                            (click)="removeCoordDownload(i)" *ngIf="coordinatesDownload[i] != null"
+                                            matTooltip="Borrar geoposicion" matTooltipPosition="above">
+                                            <mat-icon>location_off</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                      <div>
+                                        <a class="cursor d-flex mt-3 deleteRow" *ngIf="i > 0" (click)="removeDownload(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </a>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- OFERTAS -->
+            <p class="text-muted font-weight-bold mb-4 h6">Información de tarifa</p>
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <mat-radio-group aria-label="Seleccione el tipo de publicación" class="row"
+                        formControlName="fareType">
+                        <div class="col-md-4" *ngFor="let fare of fareType | enumToArray">
+                            <mat-radio-button color="primary" [value]="fare.value"
+                                [checked]="fare.value === fareType.NEGOTIABLE" (change)="fareChange($event)">
+                                {{ fare.value | translate }}
+                            </mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Modalidad tarifa</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="tripModality">
+                            <mat-option>Seleccione modalidad de tarifa</mat-option>
+                            <ng-container *ngFor="let trip of tripModality | enumToArray">
+                                <mat-option [value]="trip.value">{{ trip.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <button type="button" mat-stroked-button class="cursor h-65 w-100 py-2 mt-1" (click)="addOffer()">
+                        Agregar <mat-icon>add_circle</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Conj 1 -->
+            <div class="row">
+                <div class="col-12">
+                    <div formArrayName="offers">
+                        <ng-container *ngFor="let record of getOffers.controls; let i = index" [formGroupName]="i">
+                            <ng-container *ngIf="i > 0">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <span class="text-muted">Información de tarifa # {{ i + 1 }} </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="float-right">
+                                            <a class="deleteRow cursor" (click)="removeOffer(i)">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div class="row py-1">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Tipo de vehículos</mat-label>
+                                        <mat-select appearance="outline" class="full-width"
+                                            formControlName="vehicleType">
+                                            <mat-option>Seleccione tipo de vehículo</mat-option>
+                                            <ng-container *ngFor="let vehicle of vehicleType | enumToArray">
+                                                <mat-option [value]="vehicle.value">{{
+                                                    vehicle.value | translate
+                                                    }}</mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="getOffers.controls[i].get('vehicleType').hasError('required')">
+                                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Carrocería</mat-label>
+                                        <mat-select appearance="outline" class="full-width"
+                                            formControlName="vehicleBodywork">
+                                            <mat-option>Seleccione tipo de carrocería</mat-option>
+                                            <ng-container *ngFor="let bodywork of bodyworkType | enumToArray">
+                                                <mat-option [value]="bodywork.value">{{
+                                                    bodywork.value | translate
+                                                    }}</mat-option>
+                                            </ng-container>
+                                            <mat-error *ngIf="
+                                                    getOffers.controls[i].get('vehicleBodywork').hasError('required')
+                                                ">
+                                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                            </mat-error>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Número de vehículos</mat-label>
+                                        <input matInput formControlName="vehicleLimit" />
+                                        <mat-error
+                                            *ngIf="getOffers.controls[i].get('vehicleLimit').hasError('required')">
+                                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="getOffers.controls[i].get('vehicleLimit').hasError('pattern')">
+                                            La cantidad de vehículos debe ser numérica
+                                        </mat-error>
+                                        <mat-error *ngIf="getOffers.controls[i].get('vehicleLimit').hasError('min')">
+                                            La cantidad de vehículos debe ser mayor a 0
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6" *ngIf="contracted || negotiable">
+                                    <mat-form-field appearance="outline" class="full-width">
+                                        <mat-label>Tarifa</mat-label>
+                                        <input matInput formControlName="proposedFare" />
+                                        <mat-error
+                                            *ngIf="getOffers.controls[i].get('proposedFare').hasError('required')">
+                                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="getOffers.controls[i].get('proposedFare').hasError('pattern')">
+                                            La tarifa debe ser numérica
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row py-1">
+                                <ng-container *ngIf="!contracted">
+                                    <div class="col-6">
+                                        <mat-form-field appearance="outline" class="full-width">
+                                            <mat-label>Tarifa máxima</mat-label>
+                                            <input matInput formControlName="maximumFare" />
+                                            <mat-error
+                                                *ngIf="getOffers.controls[i].get('maximumFare').hasError('required')">
+                                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                            </mat-error>
+                                            <mat-error
+                                                *ngIf="getOffers.controls[i].get('maximumFare').hasError('pattern')">
+                                                La tarifa máxima debe ser numérica
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <mat-divider class="py-3"></mat-divider>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAMPOS PERSONALIZADOS -->
+            <p class="text-muted font-weight-bold mb-4 h6">Campos personalizados</p>
+            <ng-container *ngIf="customFields?.length > 0">
+                <div class="row" formArrayName="customFields">
+                    <ng-container *ngFor="let customField of getCustomFields.controls; let i = index"
+                        [formGroupName]="i">
+                        <!-- CAMPO PERSONALIZADO LISTA -->
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.LIST">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <mat-select formControlName="{{ getFormControlName(customField) }}" appearance="outline"
+                                class="full-width">
+                                <mat-option value="">Seleccione la opción</mat-option>
+                                <ng-container *ngFor="let option of customFields[i].options">
+                                    <mat-option value="{{ option.value }}">{{ option.value }}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- CAMPO PERSONALIZADO NUMERICO -->
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.NUMERIC">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <input matInput class="text-center" type="number"
+                                formControlName="{{ getFormControlName(customField) }}" />
+                        </mat-form-field>
+
+                        <!-- CAMPO PERSONALIZADO TEXTO -->
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.TEXT">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <input matInput class="text-center" type="text"
+                                formControlName="{{ getFormControlName(customField) }}" />
+                        </mat-form-field>
+
+                        <!-- CAMPO PERSONALIZADO FECHA -->
+                        <!-- <mat-form-field
+                            appearance="outline"
+                            class="col-4"
+                            *ngIf="customFields[i].datatype === datatype.DATE">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+
+                            <input
+                                matInput
+                                [min]="minDate"
+                                [matDatepicker]="cf_dp"
+                                formControlName="{{ getFormControlName(customField) }}" />
+                            <mat-datepicker-toggle matSuffix [for]="cf_dp"></mat-datepicker-toggle>
+                            <mat-datepicker #cf_dp></mat-datepicker>
+                        </mat-form-field> -->
+
+                        <mat-form-field appearance="outline" class="col-md-4"
+                            *ngIf="customFields[i].datatype === datatype.DATE">
+                            <mat-label>{{ customFields[i].name }}</mat-label>
+                            <input matInput [ngxMatDatetimePicker]="picker"
+                                formControlName="{{ getFormControlName(customField) }}" [min]="minDate"
+                                [max]="maxDate" />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                                [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                                [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian">
+                            </ngx-mat-datetime-picker>
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <mat-divider class="py-3"></mat-divider>
+
+            <!-- ASIGNACION AUTOMATICA -->
+            <p class="text-muted font-weight-bold h6">Asignación automática y manual</p>
+            <div class="row py-2">
+                <div class="col-12">
+                    <mat-radio-group aria-label="Seleccione el tipo de publicación" formControlName="typePublication">
+                        <div class="form-check form-check-inline py-2"
+                            *ngFor="let publication of publicationType | enumToArray">
+                            <mat-radio-button color="primary" [value]="publication.value"
+                                [checked]="publication.value === 'PUBLICATION.TYPE.AUTOMATIC'"
+                                (change)="publicationChange($event)">
+                                {{ publication.value | translate }}
+                            </mat-radio-button>
+                            &nbsp;
+                            <mat-icon class="form-check-label">
+                                {{ publication.value === 'PUBLICATION.TYPE.AUTOMATIC' ? 'alarm_on' : 'alarm_off' }}
+                            </mat-icon>
+                        </div>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="container">
+                        <h4>Asignación automática</h4>
+                        <mat-form-field appearance="legacy" class="mr-3" style="width: 100px;">
+                            <mat-label>Horas</mat-label>
+                            <input matInput class="text-center" formControlName="waitTimeHour" />
+                            <mat-error *ngIf="f.waitTimeHour.hasError('pattern')">
+                                El tiempo debe ser numérico
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" style="width: 100px;">
+                            <mat-label>Minutos</mat-label>
+                            <input matInput class="text-center" formControlName="waitTimeMinute" />
+                            <mat-error *ngIf="f.waitTimeMinute.hasError('pattern')">
+                                El tiempo debe ser numérico
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-icon matSuffix class="ml-2">access_time</mat-icon>
+                        <p class="text-muted mt-3">* Tiempo de espera antes de la asignación automática</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="container">
+                        <h4>Tiempo tolerancia</h4>
+                        <mat-form-field appearance="legacy" class="mr-3" style="width: 100px;">
+                            <mat-label>Horas</mat-label>
+                            <input matInput class="text-center" formControlName="toleranceTimeHour" />
+                            <mat-error *ngIf="f.toleranceTimeHour.hasError('pattern')">
+                                El tiempo debe ser numérico
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" style="width: 100px;">
+                            <mat-label>Minutos</mat-label>
+                            <input matInput class="text-center" formControlName="toleranceTimeMinute" />
+                            <mat-error *ngIf="f.toleranceTimeMinute.hasError('pattern')">
+                                El tiempo debe ser numérico
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-icon matSuffix class="ml-2">access_time</mat-icon>
+                        <p class="text-muted mt-3">* Tiempo de tolerancia después de la fecha de cargue</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-divider class="py-2"></mat-divider>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button mat-flat-button type="submit" class="btn-cancelar btn-block"
+                                (click)="onSubmit(false)">
+                                <mat-icon color="white">assignment</mat-icon> Borrador
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block">
+                                <mat-icon color="white">done</mat-icon>
+                                {{ requestData.editPublication?.option.id ? 'Editar' : 'Publicar' }}
+                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit"
+                                    alt="Cargando" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-2">
+                        <button mat-flat-button type="button" class="btn-cancelar" (click)="onClose()">
+                            <mat-icon color="white">close</mat-icon> Cancelar
+                        </button>
+                    </div>
+                    <div class="col-10"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

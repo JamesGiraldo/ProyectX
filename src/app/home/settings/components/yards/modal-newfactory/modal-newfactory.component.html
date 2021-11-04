@@ -1,0 +1,184 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>{{ factoryData.data?.id ? 'Editar' : 'Crear' }} planta</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <form [formGroup]="factoryForm" (ngSubmit)="onSubmit()" novalidate>
+        <div mat-dialog-content class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>{{ 'GENERAL_WORD.NAME' | translate }}</mat-label>
+                        <input matInput formControlName="name" />
+                        <mat-error *ngIf="f.name.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Límite</mat-label>
+                        <input matInput formControlName="vehicleLimit" type="number" />
+                        <mat-error *ngIf="f.vehicleLimit.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col" *ngIf="!factoryData.data?.id">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Ubicación</mat-label>
+                        <input matInput formControlName="ubication" />
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <span class="d-flex justify-content-end">
+                        <button mat-flat-button class="bg-wo-gradient btn-block d-none d-sm-none d-md-block alto mt-1"
+                            (click)="openDialogMap()" matTooltip="Geoposicionar" matTooltipPosition="above">
+                            <mat-icon>location_on</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-flat-button class="bg-wo-gradient btn-block d-block d-sm-block d-md-none alto mt-1"
+                        (click)="openDialogMap()" matTooltip="Geoposicionar" matTooltipPosition="above">
+                        Geoposicionar
+                    </button>
+                </div>
+            </div>
+
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+
+            <div class="row">
+                <h4 class="text-muted">Porcentaje de ocupación</h4>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <h4>Baja</h4>
+                    <div class="mt-4 text-center">
+                        <h4>0%</h4>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <h4>
+                        Normal
+                    </h4>
+                    <div class="custom-slider">
+                        <ngx-slider [(value)]="occupancyMinimun" [(highValue)]="occupancyMaximun" [options]="options"
+                            (valueChange)="sliderMinimun($event)" (highValueChange)="sliderMaximun($event)">
+                        </ngx-slider>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <h4>Alta</h4>
+                    <div class="mt-4 text-center">
+                        <h4>100%</h4>
+                    </div>
+                </div>
+            </div>
+
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+
+            <div class="row">
+                <h4 class="text-muted">Horarios de enturnamiento</h4>
+                <p class="text-muted">
+                    <small style="font-size: smaller;">
+                        Para agregar los horarios de enturnamiento, debe asignar un horario inicial y uno final que no
+                        se repita ni tampoco no se cruce entre ellos.</small>
+                </p>
+            </div>
+
+            <div class="row mt-3">
+                <div formArrayName="schedules">
+                    <ng-container *ngFor="let schedule of getSchedules.controls; let i = index" [formGroupName]="i">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <span class="text-muted pt-3">Horario #{{ i + 1 }}</span>
+                            </div>
+                            <div class="col" *ngIf="i > 0">
+                                <div class="float-right">
+                                    <a class="deleteRow cursor" (click)="removeSchedule(i)">
+                                        <mat-icon>delete</mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>{{ 'GENERAL_WORD.WEEKDAY' | translate }}</mat-label>
+                                    <mat-select appearance="outline" class="w-100" formControlName="day">
+                                        <ng-container *ngFor="let item of days | enumToArray">
+                                            <mat-option [value]="item.value">{{ item.value | translate }}</mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                    <mat-error *ngIf="getSchedules.controls[i].get('day').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Horario de inicio</mat-label>
+                                    <input matInput formControlName="startTime" type="time" />
+                                    <mat-error
+                                        *ngIf="getSchedules.controls[i].get('startTime').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4 py-1">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Horario final</mat-label>
+                                    <input matInput formControlName="endTime" type="time" />
+                                    <mat-error *ngIf="getSchedules.controls[i].get('endTime').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-divider class="mt-2 mb-2"></mat-divider>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="row">
+                    <div class="col-6">
+                        <button mat-flat-button type="submit" color="primary" class="btn-block text-white p-1"
+                            (click)="addSchedule()">
+                            <mat-icon color="white">add</mat-icon> Agregar horario
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" [disabled]="submit || !range" mat-flat-button
+                            class="btn-submit btn-block p-1">
+                            <mat-icon color="white">done</mat-icon>
+                            {{ factoryData.data?.id ? 'Editar' : 'Registrar' }}
+                            <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit"
+                                alt="Cargando" />
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-2">
+                        <button mat-flat-button type="button" class="btn-cancelar" (click)="onClose()">
+                            <mat-icon color="white">close</mat-icon> Cancelar
+                        </button>
+                    </div>
+                    <div class="col-10"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

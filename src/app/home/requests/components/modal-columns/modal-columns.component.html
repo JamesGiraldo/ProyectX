@@ -1,0 +1,25 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>{{ 'GENERAL_WORD.MODIFY_COLUMNS_TITLE' | translate }}</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-2 mb-2"></mat-divider>
+
+    <div cdkDropList class="example-list mb-3" (cdkDropListDropped)="drop($event)">
+        <mat-selection-list (selectionChange)="setColumnsToDisplay($event)">
+            <mat-list-option color="primary" *ngFor="let item of columns" [value]="item" [selected]="item.isEnabled" cdkDrag>
+                <p>
+                    <mat-icon cdkDragHandle style="cursor: move;">reorder</mat-icon> {{ item.displayText }}
+                </p>
+                <mat-divider></mat-divider>
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+</div>

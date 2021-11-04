@@ -1,0 +1,142 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Crear Ruta Intervenida</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <form [formGroup]="interventedRouteForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+        <div mat-dialog-content class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Transportador/a</mat-label>
+                        <mat-select formControlName="transporterId" appearance="outline" class="w-100"
+                            (selectionChange)="onOptionsSelected($event)">
+                            <mat-option value="">Seleccione transportador/a</mat-option>
+                            <ng-container *ngFor="let company of companies">
+                                <mat-option value="{{ company.id }}">{{ company.name }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Usar ubicaciones de tarifa</mat-label>
+                        <mat-select
+                            formControlName="fare"
+                            appearance="outline"
+                            class="full-width"
+                            (selectionChange)="onFareSelected($event)"
+                        >
+                            <mat-option value="">Seleccione la tarifa</mat-option>
+                            <ng-container *ngFor="let fare of fares">
+                                <mat-option value="{{ fare.id }}">{{ fare.name }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+            </div>
+
+            <mat-divider class="mt-2 mb-2"></mat-divider>
+
+
+            <div class="row">
+                <div class="col m-2 pl-2">
+
+                    <button type="button" mat-stroked-button class="cursor btn-block" (click)="addOrigin()">
+                        Agregar nuevo origen
+                    </button>
+                </div>
+                <div class="col m-2 pl-2">
+                    <button type="button" mat-stroked-button class="cursor btn-block" (click)="addDestiny()">
+                        Agregar nuevo destino
+                    </button>
+               </div>
+            </div>
+
+            <div class="row">
+                <div class="col pl-1">
+                    <div class="row" formArrayName="origins">
+                        <ng-container *ngFor="let record of getOrigins.controls; let i = index" [formGroupName]="i">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Origen</mat-label>
+                                    <input matInput formControlName="nameOrigin" [matAutocomplete]="originLookup" />
+                                    <mat-autocomplete #originLookup="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOrigins[i] | async" [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getOrigins.controls[i].get('nameOrigin').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pt-3">
+                                <a  class="deleteRow black cursor"  (click)="removeOrigin(i)">
+                                    <mat-icon>delete</mat-icon>
+                                </a>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col pl-1">
+                    <div class="row" formArrayName="destinies">
+                        <ng-container *ngFor="let record of getDestinies.controls; let i = index" [formGroupName]="i">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Destino</mat-label>
+                                    <input matInput formControlName="nameDestiny" [matAutocomplete]="destinyLookup" />
+                                    <mat-autocomplete #destinyLookup="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredDestinies[i] | async" [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-error *ngIf="getDestinies.controls[i].get('nameDestiny').hasError('required')">
+                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pt-3">
+                                <a class="deleteRow black cursor" (click)="removeDestiny(i)">
+                                    <mat-icon>delete</mat-icon>
+                                </a>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-divider class="mt-3 mb-2"></mat-divider>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onClose()">
+                                <mat-icon color="white">close</mat-icon> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block">
+                                <mat-icon color="white">done</mat-icon> Registrar
+                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

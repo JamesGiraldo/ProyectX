@@ -1,0 +1,98 @@
+<div class="col zero">
+    <!-- Title -->
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>Detalle del veh&iacute;culo</h3>
+        <div>
+            <button mat-icon-button class="bc-transparent" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+
+    <!--  Modal content -->
+    <!-- Yard info -->
+    <div class="row between-xs">
+        <div class="col">
+            <div class="row">
+                <div class="col-2 zero">
+                    <mat-icon>apartment</mat-icon>
+                </div>
+                <div class="col-10 zero">
+                    <h5 class="header">{{ data.yard.name | titlecase }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row reverse">
+                <div class="col-4">
+                    <h5 class="header--reverse">{{ data.yard.capacity.toFixed(2) }}%</h5>
+                    <h5 class="sub-header--reverse">Ocupaci&oacute;n</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Vehicle info -->
+    <div class="row between-xs">
+        <div class="col">
+            <div class="row">
+                <div class="col-2 zero">
+                    <mat-icon>local_shipping</mat-icon>
+                </div>
+                <div class="col-10 zero">
+                    <h5 class="header">{{ controlInfo?.vehicle.type | translate | titlecase }}</h5>
+                    <h5 class="sub-header">{{ controlInfo?.vehicle.plate | uppercase }}</h5>
+                    <h5 class="sub-header">TripId: {{ data.tripId }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br />
+
+    <!-- Driver info -->
+    <div class="row between-xs">
+        <div class="col">
+            <div class="row">
+                <div class="col-2 zero">
+                    <mat-icon>person</mat-icon>
+                </div>
+                <div class="col-10 zero">
+                    <h5 class="header">{{ controlInfo?.driver.fullname | titlecase }}</h5>
+                    <h5 class="sub-header">
+                        C.C: {{ (controlInfo?.driver.idCard ? controlInfo?.driver.idCard : '') | formatDriverId }}
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br />
+
+    <!-- Records from previous stages -->
+    <div class="row">
+        <div class="col-5" *ngFor="let history of controlInfo?.history">
+            <div class="inherit-size stage-record-container">
+                <div class="col inherit-h relative">
+                    <div class="row middle-xs middle-sm middle-md middle-lg pt-2 stage-record-container__header">
+                        <span>{{ history.name.charAt(0) | uppercase }}</span>
+                        <h5 class="header">{{ history.name }}</h5>
+                    </div>
+                    <div class="list pt-3">
+                        <div class="row list__item mb-2" *ngFor="let customField of history.customFields">
+                            <b>{{ customField.name | titlecase }}:</b> &nbsp; {{ customField.value }}
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="row reverse completion-date">
+                        <i> {{ history.completedAt | formatDate }}</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

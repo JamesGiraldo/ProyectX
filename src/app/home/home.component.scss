@@ -1,0 +1,9 @@
+// src\app\home\.sccs
+@import '../../sass/variables';
+
+ .below-navbar{
+    padding-top: calc(#{$navbarHeight} + 2px);
+    width: 100%;
+    height: calc(100vh - #{$navbarHeight});
+    margin: 0;
+ }

@@ -1,0 +1,183 @@
+<mat-expansion-panel class="box-sh-none" hideToggle="true" (opened)="onOpenedOffer()" [expanded]="isOpen">
+    <mat-expansion-panel-header class="custom-p" (click)="isOpen = !isOpen">
+        <div class="row middle-lg middle-md middle-sm middle-xs col-container inherit-w">
+            <div [ngClass]="{
+                    'col-3 zero': !isGenerator,
+                    'col-2 zero': isGenerator
+                }">
+                <div class="row">
+                    <h4 class="center-title">
+                        {{ offer.vehicleType | translate }}
+                    </h4>
+                </div>
+            </div>
+            <div [ngClass]="{
+                    'col-3 zero': !isGenerator,
+                    'col-2 zero': isGenerator
+                }">
+                <div class="row">
+                    <h4 class="center-title">
+                        {{ offer.vehicleBodywork | translate }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="row">
+                    <h4 class="center-title">
+                        {{ offer.vehicleLimit }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-2 zero">
+                <div class="row">
+                    <h4 class="center-title">
+                        <span *ngIf="user === country.COLOMBIA; else peru">{{ offer.proposedFare | currency:
+                            'COP':'symbol-narrow':'1.0' }}
+                        </span>
+                        <ng-template #peru>
+                            <span>
+                                {{ offer.proposedFare | currency: 'S/ ':'symbol-narrow':'1.0' }}
+                            </span>
+                        </ng-template>
+                    </h4>
+                </div>
+            </div>
+            <div class="col-2 zero" *ngIf="isGenerator">
+                <div class="row">
+                    <h4 class="center-title">
+                        <span *ngIf="user === country.COLOMBIA; else peru">{{ offer.maximumFare | currency:
+                            'COP':'symbol-narrow':'1.0' }}
+                        </span>
+                        <ng-template #peru>
+                            <span>
+                                {{ offer.maximumFare | currency: 'S/ ':'symbol-narrow':'1.0' }}
+                            </span>
+                        </ng-template>
+                    </h4>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="row reverse">
+                    <mat-icon>{{ isOpen ? 'remove' : 'add' }}</mat-icon>
+                    <container-element style="margin: auto;" [ngSwitch]="offer.state">
+                        <!-- the same view can be shown in more than one case -->
+                        <mat-icon class="center-title active" matTooltip="Activa" matTooltipPosition="above"
+                            *ngSwitchCase="offerState.ACTIVE">
+                            pending
+                        </mat-icon>
+
+                        <mat-icon class="center-title finished" matTooltip="Finalizada" matTooltipPosition="above"
+                            *ngSwitchCase="offerState.FINISHED">
+                            check_circle
+                        </mat-icon>
+
+                        <!--default case when there are no matches -->
+                        <mat-icon class="center-title active" matTooltip="Activa" matTooltipPosition="above"
+                            *ngSwitchDefault>
+                            pending
+                        </mat-icon>
+                    </container-element>
+                </div>
+            </div>
+        </div>
+    </mat-expansion-panel-header>
+
+    <div class="table-responsive">
+        <div class="row mt-5 mb-5 between-lg between-md between-sm between-xs full-width">
+            <div class="col">
+                <div class="row middle-lg middle-md middle-sm middle-xs full-height">
+                    <div class="col" *ngFor="let type of offerType.items">
+                        <h4 class="text-center title" [ngClass]="{ 'type-active': type.isActive }"
+                            (click)="toggleStatus(type.id)">
+                            {{ type.text
+                            }}
+                            <span class="badge badge-warning ml-2" style="color: #fff;"
+                                *ngIf="type.id === 0 && !isGenerator">{{ unselected }}</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-sm mx-auto">
+            <thead style="text-align: center; background-color: #efefef;">
+                <tr>
+                    <th *ngFor="let column of columns">
+                        <h4 class="font-weight-bold fgc-gray-2"
+                            style="color: #434343; font-weight: bolder; width: 12vw; margin-left: 3vw;" *ngIf="
+                                column.name === 'HISTORY.DATE_REPORT' ||
+                                    column.name === 'HISTORY.DATE_LOAD' ||
+                                    column.name === 'HISTORY.TRANSPORTER';
+                                else driver
+                            ">
+                            {{ column.name | translate }}
+                            <br /><br /><br />
+                        </h4>
+                        <ng-template #driver>
+                            <h4 class="font-weight-bold fgc-gray-2"
+                                style="color: #434343; font-weight: bolder; width: 12vw; margin-left: 3vw;"
+                                *ngIf="column.name === 'HISTORY.DRIVER.TITLE'; else reportTitle">
+                                {{ column.name | translate }} <br />
+                                <span>&nbsp;*{{ 'HISTORY.DRIVER.NAME' | translate }}</span><br />
+                                <span>&nbsp;*{{ 'HISTORY.DRIVER.ID' | translate }}</span><br />
+                                <span>&nbsp;*{{ 'HISTORY.DRIVER.PHONE' | translate }}</span>
+                            </h4>
+                        </ng-template>
+                        <ng-template #reportTitle>
+                            <h4 class="font-weight-bold fgc-gray-2"
+                                style="color: #434343; font-weight: bolder; width: 12vw; margin-left: 3vw;"
+                                *ngIf="column.name === 'HISTORY.REPORT'; else observationTitle">
+                                {{ column.name | translate }} <br />
+                                <span>&nbsp;*{{ 'HISTORY.VEHICLE.PLATE' | translate }}</span><br />
+                                <span>&nbsp;*{{ 'HISTORY.VEHICLE.CAPACITY' | translate }}</span><br />
+                            </h4>
+                        </ng-template>
+                        <ng-template #observationTitle>
+                            <h4 class="font-weight-bold fgc-gray-2"
+                                style="color: #434343; font-weight: bolder; width: 12vw; margin-left: 3vw;"
+                                *ngIf="column.name === 'GENERAL_WORD.OBSERVATION'; else fareTitle">
+                                {{ column.name | translate }}
+                                <br /><br /><br />
+                            </h4>
+                        </ng-template>
+                        <ng-template #fareTitle>
+                            <h4 class="font-weight-bold fgc-gray-2"
+                                style="color: #434343; font-weight: bolder; width: 12vw; margin-left: 3vw;"
+                                *ngIf="column.name === 'HISTORY.FARE'">
+                                {{ column.name | translate }} <br /><br /><br />
+                            </h4>
+                        </ng-template>
+                    </th>
+
+                    <th *ngIf="columns.length > 0">
+                        <h5 style="color: #434343; font-weight: bolder; width: 10vw;"></h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="text-align: center; color: #a6a6a6 !important;">
+                <tr report-detail *ngFor="let report of reports; let rIndex = index" class="inherit-w" [report]="report"
+                    [columns]="columns" [isManual]="isManual" [historyBtn]="historyBtn"
+                    [imLast]="rIndex == reports.length - 1" (updated)="onReportUpdated($event)"></tr>
+                <tr *ngIf="reports.length === 0" style="text-align: center;">
+                    <td [attr.colspan]="colspan">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pt-3 pb-5"></div>
+    <div class="row between-lg between-md between-sm between-xs zero"
+        *ngIf="!isGenerator && historyBtn && publicationStatus === publicationStatusActive.ACTIVE">
+        <div class="col zero">
+            <button style="width: 170px;" mat-flat-button class="btn-submit stick-r" (click)="onAddClick()">
+                <mat-icon color="white">add_circle_outline</mat-icon> {{ 'GENERAL_WORD.PROPOSE' | translate }}
+            </button>
+        </div>
+    </div>
+</mat-expansion-panel>
+<mat-divider></mat-divider>

@@ -1,0 +1,135 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title *ngIf="data.type === 'accept'">Comentarios</h3>
+        <h3 mat-dialog-title *ngIf="data.type === 'reject'">¿Está seguro?</h3>
+        <h3 mat-dialog-title *ngIf="data.type === 'finish'">¿Está seguro de finalizar esta publicación?</h3>
+        <h3 mat-dialog-title *ngIf="data.type === 'cancel'">¿Está seguro de cancelar esta publicación?</h3>
+        <button mat-icon-button class="bc-transparent" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+    <div mat-dialog-content class="max-h-80vh">
+        <form [formGroup]="reasonForm" (ngSubmit)="onSubmit()" novalidate>
+            <div mat-dialog-content class="max-h-80vh">
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4">
+                        <p *ngIf="data.type === 'cancel'">
+                            Si continua con esta acción, se eliminará: (1) La publicación. (2) Los reportes de vehículos
+                            propuestos en esta publicación. (3) Ofertas recibidas en esta publicación. (4) Los viajes en
+                            ruta.
+                            <br />
+                            Esta acción no tiene reversa.
+                        </p>
+                        <p *ngIf="data.type === 'reject'">
+                            Una vez rechazada esta publicación, desaparecerá del módulo de generadoras. Si aún desea
+                            hacerlo, por favor indique a continuación el motivo de su decisión:
+                        </p>
+                        <p>Indique un motivo:</p>
+                        <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            class="example-radio-group"
+                            formControlName="reason"
+                            (change)="reasonChange($event)"
+                            *ngIf="data.type === 'cancel'"
+                        >
+                            <mat-radio-button
+                                class="example-radio-button primary"
+                                color="primary"
+                                *ngFor="let reason of reasons | slice: 0:5; let i = index"
+                                [value]="reason"
+                            >
+                                {{ reason | titlecase }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+
+                        <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            class="example-radio-group"
+                            formControlName="reason"
+                            (change)="reasonChange($event)"
+                            *ngIf="data.type === 'finish'"
+                        >
+                            <mat-radio-button
+                                class="example-radio-button primary"
+                                color="primary"
+                                *ngFor="let reason of reasons | slice: 5:8; let i = index"
+                                [value]="reason"
+                            >
+                                {{ reason | titlecase }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+
+                        <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            class="example-radio-group"
+                            formControlName="reason"
+                            (change)="reasonChange($event)"
+                            *ngIf="data.type === 'reject'"
+                        >
+                            <mat-radio-button
+                                class="example-radio-button primary"
+                                color="primary"
+                                *ngFor="let reason of reasons | slice: 8:11; let i = index"
+                                [value]="reason"
+                            >
+                                {{ reason | titlecase }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <mat-form-field
+                            appearance="outline"
+                            class="full-width"
+                            *ngIf="fieldOtherEnabled || data.type === 'accept'"
+                        >
+                            <textarea matInput matInput formControlName="description"></textarea>
+                            <mat-error *ngIf="f.description.hasError('required')">
+                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-error *ngIf="f.reason.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs full-width">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row zero between-lg between-md between-sm between-xs full-width">
+                        <div>
+                            <button
+                                style="width: 170px;"
+                                mat-flat-button
+                                type="button"
+                                class="btn-cancelar full-width"
+                                (click)="onClose()"
+                            >
+                                <mat-icon color="white">close</mat-icon> Cancelar
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                style="width: 230px;"
+                                type="submit"
+                                [disabled]="submit"
+                                mat-flat-button
+                                class="btn-submit full-width"
+                            >
+                                <mat-icon color="white">done</mat-icon> Sí,
+                                {{
+                                    data.type === 'cancel'
+                                        ? 'cancelar'
+                                        : data.type === 'finish'
+                                        ? 'finalizar'
+                                        : data.type === 'reject'
+                                        ? 'rechazar'
+                                        : 'aceptar'
+                                }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

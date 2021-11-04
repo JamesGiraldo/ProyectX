@@ -1,0 +1,123 @@
+@import 'src/sass/list';
+@import 'src/sass/modal';
+
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}
+
+.spacer {
+    padding: 40px 0;
+}
+
+.mat-stepper-horizontal h4 {
+    color: #656565;
+}
+
+.mat-stepper-horizontal mat-icon {
+    color: white;
+}
+
+.body-stepper {
+    border: 2px solid #b6bbbf;
+    border-radius: 5px;
+    padding: 10px;
+    height: auto;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.mat-step-header .mat-step-icon {
+    background-color: #ededed !important;
+}
+
+/* History */
+h5 {
+    margin: 0;
+    text-align: left;
+
+    &.header {
+        font-size: 16px;
+
+        &--reverse {
+            font-size: 16px;
+            text-align: left;
+        }
+    }
+
+    &.sub-header {
+        color: #434343;
+        font-size: 12px;
+
+        &--reverse {
+            color: #434343;
+            font-size: 12px;
+            text-align: left;
+        }
+    }
+}
+
+.stage-record-container {
+    border: 2px solid #e5e5e5;
+    border-radius: 4px;
+
+    &__header {
+        color: #000;
+        font-size: 16px;
+        flex-grow: 1;
+
+        h5 {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+
+        span {
+            margin-right: 5px;
+            border-radius: 4px;
+            padding: 3px;
+            min-width: 26px;
+            min-height: 26px;
+            max-height: 26px;
+            max-height: 26px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #e5e5e5;
+            color: #000;
+        }
+    }
+}
+
+.list {
+    &__item {
+        background-color: #e5e5e5;
+        border-radius: 4px;
+        padding: 5px;
+        padding-left: 8px;
+    }
+}
+
+.search-bar {
+    height: 44px;
+    width: 100%;
+}
+
+.completion-date {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: calc(100% - 30px);
+    font-size: 14px;
+    color: #b5b5b5;
+    text-align: center;
+    align-self: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.relative {
+    position: relative;
+}
+
+.rojo {
+    height: 100%;
+    width: 100px;
+}

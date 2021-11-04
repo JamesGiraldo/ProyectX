@@ -1,0 +1,4 @@
+<app-generadora *ngIf="isGenerator; else showTransportadora"></app-generadora>
+<ng-template #showTransportadora>
+    <app-transportadora></app-transportadora>
+</ng-template>

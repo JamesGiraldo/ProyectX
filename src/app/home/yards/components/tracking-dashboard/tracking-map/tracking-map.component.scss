@@ -1,0 +1,44 @@
+#map {
+    width: 100%;
+    height: 550px;
+}
+
+.marker {
+    background-image: url('../../../../../../assets/mapbox-icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 100%;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+small {
+    color: #656565;
+}
+
+.border-asign {
+    padding: 10px 10px 20px 10px;
+    border: 2px solid #cecdcd;
+    border-radius: 5px;
+}
+
+.letter {
+    padding: 3px 7px;
+    background: #cecdcd;
+    border-radius: 3px;
+}
+
+.ing-sal {
+    background: #dfdede;
+    border-radius: 3px;
+    padding: 2px 5px;
+}

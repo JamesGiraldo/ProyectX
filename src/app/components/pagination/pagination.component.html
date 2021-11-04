@@ -1,0 +1,59 @@
+<nav aria-label="Page navigation example" *ngIf="elementPages">
+    <ul class="pagination">
+        <li class="page-item disabled cursor-blocked" *ngIf="page == 1">
+            <span class="page-link d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                >&laquo; {{ 'PAGINATION.PREVIOUS' | translate }}</span
+            >
+            <span class="page-link d-block d-sm-none">&laquo;</span>
+        </li>
+        <li class="page-item" *ngIf="page > 1">
+            <a
+                class="page-link d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                (click)="anterior()"
+                style="cursor: pointer; color: #007bff;"
+                >&laquo; {{ 'PAGINATION.PREVIOUS' | translate }}</a
+            >
+            <a
+                class="page-link d-block d-sm-none"
+                (click)="anterior()"
+                matTooltip="Anterior"
+                style="cursor: pointer; color: #007bff;"
+                >&laquo;</a
+            >
+        </li>
+        <li class="page-item active">
+            <a class="page-link" style="color: #fff !important;"
+                >{{ 'PAGINATION.CURRENT.PAGE' | translate }} {{ page }} {{ 'PAGINATION.CURRENT.OF' | translate }}
+                {{ totalPages }}</a
+            >
+        </li>
+        <li class="page-item" *ngIf="totalPages > page">
+            <a
+                class="page-link d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                (click)="siguiente()"
+                style="cursor: pointer; color: #007bff;"
+            >
+                {{ 'PAGINATION.NEXT' | translate }} &raquo;</a
+            >
+            <a class="page-link d-block d-sm-none" (click)="siguiente()" style="cursor: pointer; color: #007bff;">
+                &raquo;</a
+            >
+        </li>
+        <li class="page-item disabled cursor-blocked" *ngIf="totalPages == page">
+            <span class="page-link d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                >{{ 'PAGINATION.NEXT' | translate }} &raquo;</span
+            >
+            <span class="page-link d-block d-sm-none" matTooltip="Siguiente">&raquo;</span>
+        </li>
+
+        <select class="ml-4" (change)="onOptionsSelected($event.target.value)" *ngIf="!isTracking">
+            <option value="12">12</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="0">Todas</option>
+        </select>
+    </ul>
+    <p *ngIf="elementPages" class="text-muted">
+        {{ 'PAGINATION.RESULTS' | translate }} <b>{{ elementPages }}</b>
+    </p>
+</nav>

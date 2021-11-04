@@ -1,0 +1,99 @@
+<div class="row mt-3 zero between-lg between-md between-sm between-xs inherit-w">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <h2 class="font-weight-bold">{{ 'BLACKLIST.CONFIGURATION_TITLE' | translate }}</h2>
+        <p class="mt-2">
+            {{ 'BLACKLIST.CONFIGURATION_BODY' | translate }}
+        </p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <span class="d-flex justify-content-end">
+            <app-search (search)="searchData($event)" style="width: 100%;"></app-search>
+        </span>
+    </div>
+</div>
+<div class="row mt-3 mb-5">
+    <form [formGroup]="blacklistForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="legacy" class="mr-3">
+                    <mat-label>{{ 'GENERAL_WORD.PLATE_VEHICLE' | translate }}</mat-label>
+                    <input matInput formControlName="vehiclePlate" maxlength="6" class="uppercase" />
+                    <mat-error *ngIf="f.vehiclePlate.hasError('pattern')">
+                        La placa no tiene el formato correspondiente
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="legacy" class="mr-3">
+                    <mat-label>{{ 'GENERAL_WORD.CC' | translate }}</mat-label>
+                    <input matInput formControlName="driverIdCard" maxlength="10" minlength="7" />
+                    <mat-error *ngIf="f.driverIdCard.hasError('minlength')">
+                        El número de identificación debe contener mín. 7 y máx. 10 números
+                    </mat-error>
+                    <mat-error *ngIf="f.driverIdCard.hasError('pattern')">
+                        El número de identificación debe ser numérico
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="legacy" class="mr-3">
+                    <mat-label>{{ 'GENERAL_WORD.REASON' | translate }}</mat-label>
+                    <input matInput formControlName="reason" />
+                    <mat-error *ngIf="f.reason.hasError('required')">
+                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <div class="row zero w-100">
+                    <div>
+                        <button type="submit" [disabled]="submit" mat-flat-button color="primary" class="btn-block text-white widthButton">
+                            <mat-icon>save</mat-icon> {{ 'GENERAL_WORD.SAVE' | translate }}
+                            <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="container-fluid table-responsive">
+    <table class="table">
+        <thead class="thead-light">
+            <tr class="">
+                <th scope="col" class="text-center">
+                    <h5 class="headerSize">{{ 'GENERAL_WORD.PLATE_VEHICLE' | translate }}</h5>
+                </th>
+                <th scope="col" class="text-center">
+                    <h5 class="headerSize">{{ 'GENERAL_WORD.CC'     | translate }}</h5>
+                </th>
+                <th scope="col" class="text-center">
+                    <h5 class="headerSize">{{ 'GENERAL_WORD.REASON' | translate }}</h5>
+                </th>
+                <th scope="col" class="text-center pr-2">
+                    <h5 class="headerSize">{{ 'GENERAL_WORD.DELETE' | translate }}</h5>
+                </th>
+            </tr>
+        </thead>
+        <tbody  class="bodyColor">
+            <tr blacklist-detail *ngFor="let blacklist of blacklists" class="text-center" [blacklist]="blacklist" (removed)="onBlacklistRemoved($event)"></tr>
+            <tr *ngIf="blacklists.length === 0" class="text-center">
+                <td colspan="4">
+                    <span class="p-tb-20 text-muted h5 font-weight-bold">
+                        {{ 'GENERAL_WORD.EMPTY' | translate }}
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row mt-3">
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30">
+        <app-pagination (pageEmitter)="goToPage($event)" (limitEmitter)="getCurrentElements($event)" [page]="page"
+            [totalPages]="totalPages" [elementPages]="elementPages">
+        </app-pagination>
+    </div>
+</div>

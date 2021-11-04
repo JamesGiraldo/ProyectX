@@ -1,0 +1,36 @@
+h5 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.title {
+    &__icon {
+        height: 100%;
+
+        width: 20%;
+    }
+
+    &__text {
+        height: auto;
+        font-size: 18px;
+        text-align: left;
+        padding: 5px 0;
+        width: calc(80% - 8px);
+    }
+}
+
+.description {
+    margin: 0;
+    padding: 10px;
+    height: 100%;
+    width: calc(100% - 20px);
+    font-size: 100%;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.box-sh-none {
+    box-shadow: none;
+    padding: 5px 0;
+    border: 1px solid #ededed;
+}

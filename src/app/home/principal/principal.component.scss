@@ -1,0 +1,95 @@
+// src\app\home\principal\.sccs
+@import 'src/sass/variables';
+
+$titleHeight: 52px;
+
+.menu {
+    padding-bottom: 30px;
+    h4 {
+        color: #8a8a8a;
+        text-align: start;
+        margin: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    h4:hover {
+        color: #737373;
+    }
+}
+.subtitle {
+    .title {
+        color: #737373;
+        font-weight: bold;
+        text-align: start;
+        margin-bottom: 0;
+        font-size: 2.3em;
+        //padding-left: 3rem;
+        line-height: 43px;
+    }
+}
+
+.box {
+    background-color: black;
+    height: 100%;
+}
+
+.blue {
+    background-color: blue;
+    height: 100%;
+}
+
+.page-container {
+    height: calc(calc(100vh - #{$navbarHeight}) - 2px);
+}
+
+.h-100p {
+    height: 100%;
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 5px 5px 5px rgba(188, 188, 188, 0.5);
+    -moz-box-shadow: 0px 5px 5px 5px rgba(188, 188, 188, 0.5);
+    box-shadow: 0px 5px 5px 5px rgba(188, 188, 188, 0.5);
+}
+
+.status-active {
+    color: #737373;
+    font-weight: bold;
+    border-bottom: solid $orange 2px;
+}
+
+.outer-circle {
+    height: $titleHeight;
+    width: $titleHeight;
+    background-color: $orange;
+    position: relative;
+    border-radius: $titleHeight;
+
+    .middle-circle {
+        height: calc(#{$titleHeight} - 4px);
+        width: calc(#{$titleHeight} - 4px);
+        background-color: white;
+        top: 2px;
+        left: 2px;
+        position: relative;
+        border-radius: $titleHeight;
+
+        .front-circle {
+            height: calc(#{$titleHeight} - 8px);
+            width: calc(#{$titleHeight} - 8px);
+            background-color: $orange;
+            top: 2px;
+            left: 2px;
+            position: relative;
+            border-radius: $titleHeight;
+
+            .circle-text {
+                color: white;
+                position: relative;
+                top: calc(calc(#{$titleHeight}) / 4);
+                font-size: 1.75em;
+            }
+        }
+    }
+}

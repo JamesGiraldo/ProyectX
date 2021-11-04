@@ -1,0 +1,29 @@
+@import 'src/sass/list';
+@import 'src/sass/detail';
+@import 'src/sass/variables';
+
+.align-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+h5 {
+    font-size: 15px;
+}
+
+thead th {
+    padding: 10px 0;
+}
+
+thead th:first-child {
+    border-radius: 10px 0 0 10px;
+}
+thead th:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.search-bar {
+    width: 70% !important;
+}

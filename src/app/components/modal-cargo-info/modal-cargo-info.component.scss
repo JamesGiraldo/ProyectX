@@ -1,0 +1,88 @@
+@import 'src/sass/modal';
+@import 'src/sass/sizes';
+
+a.delete:hover {
+    color: red;
+}
+
+.colorArrow_right {
+    color: #434343;
+}
+
+h3 {
+    margin: 0;
+}
+
+h4 {
+    color: #535353;
+
+    &.title {
+        color: #535353;
+        font-weight: 600;
+        height: auto;
+    }
+}
+
+.title-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title-icon {
+    color: #535353;
+}
+
+.stackable {
+    display: block !important;
+}
+
+.i-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.v-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.txt-al-start {
+    text-align: start;
+}
+
+.box-sh-none {
+    box-shadow: none;
+}
+
+.sub-container {
+    background-color: #efefef;
+    border-radius: 10px;
+}
+
+.separation {
+    margin: 0 auto;
+    width: 99%;
+}
+
+.fgc-gray-1 {
+    color: #a6a6a6;
+}
+
+.fgc-gray-2 {
+    color: #656565;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.custom-flex {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,14 @@
+<td>
+    <h5 class="text-center">{{ blacklist.vehiclePlate ? (blacklist.vehiclePlate | uppercase) : 'NA' }}</h5>
+</td>
+<td>
+    <h5 class="text-center">{{ blacklist.driverIdCard ? blacklist.driverIdCard : 'NA' }}</h5>
+</td>
+<td>
+    <h5 class="text-center">{{ blacklist.reason | titlecase }}</h5>
+</td>
+<td>
+    <h5 class="text-center">
+        <mat-icon class="delete" (click)="onRemoveClicked()" matTooltip="Eliminar">delete </mat-icon>
+    </h5>
+</td>

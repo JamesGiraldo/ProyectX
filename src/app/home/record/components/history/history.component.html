@@ -1,0 +1,91 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h3>{{ 'HISTORY.TITLE' | translate }}</h3>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end" *ngIf="isGenerator">
+            <button mat-button class="btn-black" (click)="onDownload()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 22px;">cloud_download
+                </mat-icon>
+                {{ 'GENERAL_WORD.DOWNLOAD' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="range-bar">
+                <mat-label>{{ 'GENERAL_WORD.RANGE' | translate }}</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Fecha inicio" />
+                    <input matEndDate formControlName="end" placeholder="Fecha final" (dateChange)="getRange($event)" />
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+
+                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Fecha inicial inválida
+                </mat-error>
+                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha final inválida</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col"></div>
+        <div class="col-md-4">
+            <app-search (search)="searchData($event)"></app-search>
+        </div>
+    </div>
+
+    <mat-divider class="mb-3"></mat-divider>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th colspan="col" *ngFor="let column of columns">
+                        <div class="d-flex mr-2 theaderWidth">
+                            <h5 class="float-right headerSize m-2 w-100">{{ column.name | translate }}</h5>
+                            <span  class="float-left"  *ngIf="
+                                    column.name == 'HEADER_TABLE.LOAD_DATE' ||
+                                    column.name == 'HEADER_TABLE.DATE_PUBLISHED' ||
+                                    column.name == 'HEADER_TABLE.LOAD' ||
+                                    column.name == 'HEADER_TABLE.MODALITY'
+                                ">
+                                <mat-icon *ngIf="!statusOrder; else asc" matSuffix class="orderby"
+                                    matTooltip="Ordenar por {{ column.tooltip }} Desc" matTooltipPosition="above"
+                                    id="{{ column.name }}" (click)="sortData($event)">arrow_downward</mat-icon>
+                                <ng-template #asc>
+                                    <mat-icon matSuffix class="orderby"
+                                        matTooltip="Ordenar por {{ column.tooltip }} Asc" matTooltipPosition="above"
+                                        id="{{ column.name }}" (click)="sortData($event)">arrow_upward</mat-icon>
+                                </ng-template>
+                            </span>
+                        </div>
+                    </th>
+                    <th *ngIf="columns.length > 0">
+                        <h5 class="headerSize">
+                            <mat-icon matTooltip="Estado / Ofertas">
+                                info
+                            </mat-icon>
+                        </h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bodyColor">
+                <tr history-detail *ngFor="let record of history" [record]="record" [columns]="columns" class="w-100"></tr>
+                <tr *ngIf="history.length === 0" class="text-center">
+                    <td [attr.colspan]="colspan">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30" *ngIf="history.length > 0">
+        <app-pagination (pageEmitter)="goToPage($event)" (limitEmitter)="getCurrentElements($event)" [page]="page"
+            [totalPages]="totalPages" [elementPages]="elementPages"></app-pagination>
+    </div>
+</div>

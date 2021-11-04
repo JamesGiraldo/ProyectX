@@ -1,0 +1,167 @@
+<mat-expansion-panel (opened)="getFaresOfTransporter()" class="box-sh-none">
+    <mat-expansion-panel-header>
+        <mat-panel-title class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fgc-gray-1">
+            {{ fare.transporterName | titlecase }}
+        </mat-panel-title>
+        <mat-panel-description class="col-lg-7 col-md-7 col-sm-7 col-xs-7 fgc-gray-1">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ fare.count }}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row conatiner-fluid" *ngIf="fares.length > 0">
+        <div class="col">
+            <div class="row sub-container" *ngFor="let fare of fares">
+                <div class="col">
+                    <div class="row mt-3">
+                        <div class="col sub-container inner">
+                            <div class="row col-container pt-3">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">
+                                            {{ 'GENERAL_WORD.ORIGIN' | translate }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero"></div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
+                                    <div class="row center-lg center-md center-sm center-xs zero">
+                                        <h4 class="font-weight-bold fgc-gray-2">
+                                            {{ 'GENERAL_WORD.DESTINY' | translate }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <mat-divider class="mt-1 mb-3"></mat-divider>
+
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
+                                    <h4 class="stackable fgc-gray-1" *ngFor="let origin of fare.origins">
+                                        {{ origin.name | titlecase }}
+                                    </h4>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 i-container fgc-gray-1">
+                                    <mat-icon class="arrow-right">arrow_right_alt</mat-icon>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
+                                    <h4 class="stackable fgc-gray-1" *ngFor="let destiny of fare.destinies">
+                                        {{ destiny.name | titlecase }}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <mat-divider class="mt-1 mb-3"></mat-divider>
+
+                    <div class="container-fluid table-responsive">
+                        <table mat-table [dataSource]="fare.records" class="table">
+                            <ng-container matColumnDef="vehicleType">
+                               <thead>
+                                    <tr>
+                                        <th mat-header-cell *matHeaderCellDef class=" border-r10 fgc-gray-2 zero-m-p text-center">
+                                            {{ 'VEHICLE.TYPE.TITLE' | translate }}
+                                        </th>
+                                    </tr>
+                               </thead>
+                               <tbody class="bodyColor">
+                                    <tr class="text-center">
+                                        <td mat-cell *matCellDef="let element" class="zero-m-p text-center">
+                                            {{ element.vehicleType | translate }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </ng-container>
+                            <ng-container matColumnDef="tripPrice">
+                                <thead>
+                                    <tr>
+                                        <th mat-header-cell *matHeaderCellDef class=" fgc-gray-2 text-center">
+                                            {{ 'TRIP.MODALITY.TRIP' | translate }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bodyColor">
+                                    <tr class="text-center">
+                                        <td mat-cell *matCellDef="let element" class="zero-m-p text-center">
+                                            <span *ngIf="user === country.COLOMBIA; else peru">
+                                                {{ element.tripPrice | currency: 'COP':'symbol-narrow':'1.0' }}
+                                            </span>
+                                            <ng-template #peru>
+                                                <span>
+                                                    {{ element.tripPrice | currency: 'S/ ':'symbol-narrow':'1.0' }}
+                                                </span>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </ng-container>
+                            <ng-container matColumnDef="roundTripPrice">
+                                <thead>
+                                    <tr>
+                                        <th mat-header-cell *matHeaderCellDef class=" fgc-gray-2 text-center">
+                                            {{ 'TRIP.MODALITY.ROUND_TRIP' | translate }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bodyColor">
+                                    <tr class="text-center">
+                                        <td mat-cell *matCellDef="let element" class="zero-m-p text-center">
+                                            <span *ngIf="user === country.COLOMBIA; else peru">
+                                                {{ element.roundTripPrice | currency: 'COP':'symbol-narrow':'1.0' }}
+                                            </span>
+                                            <ng-template #peru>
+                                                <span>
+                                                    {{ element.roundTripPrice | currency: 'S/ ':'symbol-narrow':'1.0' }}
+                                                </span>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </ng-container>
+                            <ng-container matColumnDef="tonnagePrice">
+                                <thead>
+                                    <tr>
+                                        <th mat-header-cell *matHeaderCellDef class=" fgc-gray-2 text-center">
+                                            {{ 'TRIP.MODALITY.TONNAGE' | translate }}
+                                        </th>
+                                      </tr>
+                                </thead>
+                                <tbody class="bodyColor">
+                                    <tr class="text-center">
+                                        <td mat-cell *matCellDef="let element" class="zero-m-p text-center">
+                                            <span *ngIf="user === country.COLOMBIA; else peru">
+                                                {{ element.tonnagePrice | currency: 'COP':'symbol-narrow':'1.0' }}
+                                            </span>
+                                            <ng-template #peru>
+                                                <span>
+                                                    {{ element.tonnagePrice | currency: 'S/ ':'symbol-narrow':'1.0' }}
+                                                </span>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="fgc-gray-1 zero-m-p"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="fgc-gray-1 zero-m-p"></tr>
+                        </table>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <button mat-raised-button color="warn" class="m-1 float-right" (click)="removeFare(fare)">
+                                Eliminar
+                            </button>
+                            <button mat-raised-button color="primary" class="m-1 float-right" (click)="editFare(fare)">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-raised-button color="warn" class="mt-3 mb-2 button" (click)="removeAllFare()">
+                Eliminar todas las tarifas
+            </button>
+        </div>
+    </div>
+</mat-expansion-panel>
+<mat-divider class="mt-3 mb-3"></mat-divider>

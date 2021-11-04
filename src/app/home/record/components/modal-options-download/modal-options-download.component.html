@@ -1,0 +1,81 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>Generar Reporte de Historiales</h3>
+        <div>
+            <button mat-icon-button class="bc-transparent" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+    <div class="max-h-80vh">
+        <div class="row zero between-lg between-md between-sm between-xs">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="mb-4 texto">
+                    Haciendo clic en el siguiente campo, deberá elegir un rango de fechas que será tenido en cuenta a la
+                    hora de generar un reporte.
+                </p>
+                <mat-form-field appearance="fill" class="range-bar-modal">
+                    <mat-label>{{ 'GENERAL_WORD.RANGE' | translate }}</mat-label>
+                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                        <input matStartDate formControlName="start" placeholder="Fecha inicio" />
+                        <input matEndDate formControlName="end" placeholder="Fecha final" (dateChange)="getRange()" />
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+
+                    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+                        >Fecha inicial inválida</mat-error
+                    >
+                    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha final inválida</mat-error>
+                </mat-form-field>
+                <p class="mb-3 mt-3 text-center">
+                    <mat-radio-group
+                        aria-label="Select an option"
+                        color="primary"
+                        [(ngModel)]="optionDownload"
+                        (change)="handleChange(optionDownload)"
+                    >
+                        <mat-radio-button value="request">Solicitudes</mat-radio-button>
+                        <mat-radio-button value="trip">Estados</mat-radio-button>
+                    </mat-radio-group>
+                </p>
+            </div>
+        </div>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+    <div class="row zero between-lg between-md between-sm between-xs full-width">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row zero between-lg between-md between-sm between-xs full-width">
+                <div>
+                    <button
+                        style="width: 170px;"
+                        mat-flat-button
+                        type="button"
+                        class="btn-cancelar full-width"
+                        (click)="onClose()"
+                    >
+                        <mat-icon color="white">close</mat-icon> Cancelar
+                    </button>
+                </div>
+                <div>
+                    <button
+                        style="width: 100%;"
+                        type="button"
+                        (click)="onDownload()"
+                        [disabled]="
+                            !submit ||
+                            ((loadedRequests === null || loadedRequests < 1000) &&
+                                (loadedTrips === null || loadedTrips < 1000))
+                        "
+                        mat-flat-button
+                        class="btn-submit full-width"
+                    >
+                        <mat-icon color="white">download</mat-icon>
+                        Generar Excel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

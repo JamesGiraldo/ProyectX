@@ -1,0 +1,36 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>
+            {{ videoData?.title | uppercase }} {{ videoData?.company.name | uppercase }} <br /><small class="text-muted"
+                >Complete la consulta, viendo el vídeo a continuación</small
+            >
+        </h3>
+        <div>
+            <button mat-icon-button class="bc-transparent" (click)="onClose(false)">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <div class="col-12">
+            <video class="video" id="video" width="100%" (ended)="videoEnd()" #videoPlayer>
+                <source src="{{ (videoData?.files)[0].fileUrl }}" type="video/mp4" />
+                <source src="{{ (videoData?.files)[0].fileUrl }}" type="video/mp4" />
+            </video>
+            <ng-container [counter]="counter" [interval]="interval" (value)="value = $event" *ngIf="isLabel">
+                <label style="font-size: 16px;"
+                    >El vídeo comenzará en <b>{{ value }}</b></label
+                >
+            </ng-container>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="!isVisible">
+        <div class="col-12 text-center">
+            <button style="width: 100%; color: #fff;" mat-flat-button color="primary" (click)="onSubmit(true)">
+                Completar formulario
+            </button>
+        </div>
+    </div>
+</div>

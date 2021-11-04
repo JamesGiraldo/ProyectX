@@ -1,0 +1,379 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>{{ nameForm }}</h3>
+        <button mat-icon-button class="bc-transparent" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+    <form [formGroup]="inspectionForm" enctype="multipart/form-data">
+        <div class="max-h-80vh">
+            <div class="vehicle">
+                <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                    <div class="col-12 mb-2">
+                        <h4
+                            class="font-weight-bold"
+                            style="font-size: 18px; background-color: #fbaf3b; padding: 3px 15px; border-radius: 5px;"
+                        >
+                            DATOS DEL VEHÍCULO
+                        </h4>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-8">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Empresa transportadora</mat-label>
+                            <input
+                                matInput
+                                formControlName="transporter"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Placa</mat-label>
+                            <input
+                                matInput
+                                formControlName="plate"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Modelo</mat-label>
+                            <input
+                                matInput
+                                formControlName="model"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Marca</mat-label>
+                            <input
+                                matInput
+                                formControlName="brand"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Capacidad de tonelaje</mat-label>
+                            <input
+                                matInput
+                                formControlName="capacity"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Tarjeta de propiedad</mat-label>
+                            <input
+                                matInput
+                                formControlName="card_property"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Número SOAT</mat-label>
+                            <input
+                                matInput
+                                formControlName="num_soat"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Vencimiento SOAT</mat-label>
+                            <input
+                                matInput
+                                formControlName="date_soat"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Número vencimiento tecnomecánica</mat-label>
+                            <input
+                                matInput
+                                formControlName="num_tecno"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Vencimiento revisión</mat-label>
+                            <input
+                                matInput
+                                formControlName="date_tecno"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <mat-divider class="pb-3"></mat-divider>
+            <div class="driver">
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-12 mb-2">
+                        <h4
+                            class="font-weight-bold"
+                            style="font-size: 18px; background-color: #fbaf3b; padding: 3px 15px; border-radius: 5px;"
+                        >
+                            DATOS DEL CONDUCTOR
+                        </h4>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-8">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Nombre completo</mat-label>
+                            <input
+                                matInput
+                                formControlName="fullname"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Cédula</mat-label>
+                            <input
+                                matInput
+                                formControlName="cc"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Fecha expedición licencia tránsito</mat-label>
+                            <input
+                                matInput
+                                formControlName="date_license"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Número</mat-label>
+                            <input
+                                matInput
+                                formControlName="num"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Categoría</mat-label>
+                            <input
+                                matInput
+                                formControlName="category"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Teléfono</mat-label>
+                            <input
+                                matInput
+                                formControlName="phone"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">EPS</mat-label>
+                            <input
+                                matInput
+                                formControlName="eps"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">ARL</mat-label>
+                            <input
+                                matInput
+                                formControlName="arl"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Fondo de pensiones</mat-label>
+                            <input
+                                matInput
+                                formControlName="found"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-md-7">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Nombre contacto de emergencia</mat-label>
+                            <input
+                                matInput
+                                formControlName="name_contact"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-5">
+                        <mat-form-field appearance="outline" class="header">
+                            <mat-label class="font-weight-bold">Teléfono</mat-label>
+                            <input
+                                matInput
+                                formControlName="phone_contact"
+                                style="text-transform: uppercase; text-align: center;"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <mat-divider class="pb-3"></mat-divider>
+            <div class="inspection">
+                <div class="row zero between-lg between-md between-sm between-xs">
+                    <div class="col-12">
+                        <h4
+                            class="font-weight-bold"
+                            style="font-size: 18px; background-color: #fbaf3b; padding: 3px 15px; border-radius: 5px;"
+                        >
+                            INSPECCIÓN DEL VEHÍCULO
+                        </h4>
+                        <h4 class="text-right font-weight-bold mr-5">OBSERVACIONES</h4>
+                    </div>
+                </div>
+
+                <div
+                    class="row zero between-lg between-md between-sm between-xs"
+                    *ngFor="let response of formatPrincipal"
+                >
+                    <div class="col-md-12">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                {{ response.item?.description | titlecase }}
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div style="padding: 15px 0;"></div>
+                                        <div
+                                            *ngIf="response.item?.dataType === 'TYPE.RADIO_BUTTON'; else booleanAnswer"
+                                        >
+                                            <h4 class="font-weight-bold" *ngIf="response.value === 1">Cumple</h4>
+                                            <h4 class="font-weight-bold" *ngIf="response.value === 2">No Cumple</h4>
+                                            <h4 class="font-weight-bold" *ngIf="response.value === 3">No Aplica</h4>
+                                        </div>
+
+                                        <ng-template #booleanAnswer>
+                                            <h4 class="font-weight-bold" *ngIf="response.value === 1">Si</h4>
+                                            <h4 class="font-weight-bold" *ngIf="response.value === 0">No</h4>
+                                        </ng-template>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p
+                                            style="padding: 15px 0;"
+                                            *ngIf="response.item?.dataType === 'TYPE.RADIO_BUTTON'"
+                                        >
+                                            {{ response?.observation | titlecase }}
+                                        </p>
+                                        <p style="padding: 15px 0;" *ngIf="response.item?.dataType === 'TYPE.BOOLEAN'">
+                                            <span class="font-weight-bold">Notas: </span
+                                            >{{ response.item?.note | titlecase }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-divider></mat-divider>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signatures -->
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-12 mb-2">
+                    <h4
+                        class="font-weight-bold"
+                        style="font-size: 18px; background-color: #fbaf3b; padding: 3px 15px; border-radius: 5px;"
+                    >
+                        FIRMAS
+                    </h4>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-3 pb-5">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="font-weight-bold">FIRMA DE QUIEN REALIZÓ LA INSPECCIÓN</mat-label>
+                        <input
+                            matInput
+                            formControlName="generatorName"
+                            style="text-transform: uppercase; text-align: center;"
+                        />
+                    </mat-form-field>
+                    <br />
+                    <img src="{{ fileGenerator.url }}" alt="Firma Generador" *ngIf="fileGenerator" />
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="font-weight-bold">FIRMA DEL CONDUCTOR</mat-label>
+                        <input
+                            matInput
+                            formControlName="driverName"
+                            style="text-transform: uppercase; text-align: center;"
+                        />
+                    </mat-form-field>
+                    <br />
+                    <img src="{{ fileDriver.url }}" alt="Firma Conductor" *ngIf="fileDriver" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row zero between-lg between-md between-sm between-xs full-width">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row zero between-lg between-md between-sm between-xs full-width">
+                    <div class="col-md-4">
+                        <button
+                            style="width: 200px;"
+                            mat-flat-button
+                            type="button"
+                            class="btn-cancelar full-width"
+                            (click)="openInfo()"
+                        >
+                            <mat-icon color="white">info</mat-icon> Base legal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

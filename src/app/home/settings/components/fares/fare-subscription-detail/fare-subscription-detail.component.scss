@@ -1,0 +1,33 @@
+.box-sh-none {
+    box-shadow: none;
+}
+
+.test {
+    background-color: #efefef;
+}
+
+.border-r5 {
+    border-radius: 5px;
+}
+
+.border-r10 {
+    border-radius: 10px;
+}
+
+.fgc-gray-1 {
+    color: #a6a6a6;
+}
+
+.fgc-gray-2 {
+    color: #656565;
+}
+
+tr.fgc-gray-1 {
+    td {
+        &:first-child {
+            color: #656565;
+            font-weight: 500;
+        }
+        color: #a6a6a6;
+    }
+}

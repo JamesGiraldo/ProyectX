@@ -1,0 +1,18 @@
+@import 'src/sass/list';
+
+.irarriba{
+    position: fixed;
+    bottom: 10%;
+    left: 89%;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 50px;
+}
+
+.alto{
+    height: 50px;
+}
+
+.titleBody{
+    width: 70%;
+}

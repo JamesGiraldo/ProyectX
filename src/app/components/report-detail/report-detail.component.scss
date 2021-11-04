@@ -1,0 +1,33 @@
+@import 'src/sass/detail';
+@import 'src/sass/sizes';
+
+span {
+    display: block;
+    text-align: start;
+}
+
+.accept {
+    color: #4caf50;
+}
+
+.fgc-gray-1 {
+    color: #a6a6a6;
+}
+
+.rejectOrCancel {
+    color: #e33241;
+}
+
+.view {
+    cursor: pointer;
+    color: rgba($color: #656565, $alpha: 0.9) !important;
+
+    &:hover {
+        color: #2196f3 !important;
+    }
+}
+
+h5 {
+    font-size: 15px;
+    margin-top: 12px;
+}

@@ -1,0 +1,461 @@
+{
+    "AA_CONFIGURATION": {
+        "CONFIGURATION_BODY": "Cuando la configuración de asignación automática está activa todas las publicaciones realizadas serán asignadas automáticamente por tarifa y fecha en el tiempo indicado.",
+        "CONFIGURATION_TITLE": "Configuración de asignación automática",
+        "ENABLE": "Activar tiempo de espera",
+        "FILTER": {
+            "BODY": "Filtros de decisión, siempre debe de haber al menos un filtro activo.",
+            "TYPE": {
+                "FARE_VALUE": "Tarifa",
+                "INTERVENTED_ROUTES": "Ruta intervenida",
+                "RESPONSE_TIME": "Tiempo de respuesta",
+                "TOLERANCE_TIME": " Tiempo de tolerancia"
+            }
+        },
+        "TITLE": "Asignación automática"
+    },
+    "BLACKLIST": {
+        "CONFIGURATION_BODY": "Agregue la placa del vehículo o la cédula de los conductores que están vetados para trabajar con esta empresa.",
+        "CONFIGURATION_TITLE": "Falla de servicio",
+        "PLURAL": "Falla de servicio",
+        "SINGULAR": "Falla de servicio"
+    },
+    "COMPANY": {
+        "OWNERSHIP": {
+            "LOYAL": "Fidelizado",
+            "NOT_LOYAL": "No fidelizado",
+            "OWNED": "Propio"
+        },
+        "PAYMENT_METHOD": {
+            "CREDIT_CARD": "Tarjeta de crédito",
+            "DEBIT_CARD": "Tarjeta débito",
+            "PAY_U": "Pay U",
+            "PSE": "PSE"
+        },
+        "TYPE": {
+            "GENERATOR": "Generadora de carga",
+            "TRANSPORTER": "Transportadora"
+        },
+        "EXTERNAL_VEHICLE": {
+            "ASSIGMENT": "Asignación de vehículos externos"
+        },
+        "AS_TRANSPORTER": "Publicar como transportadora"
+    },
+    "CUSTOMER SERVICE": {
+        "TITLE": "Servicio al cliente"
+    },
+    "RECEPTION OF REQUESTS": {
+        "TITLE": "Recepción de solicitudes"
+    },
+    "ADJUST VALIDITY": {
+        "TITLE": "Parametrizar vigencia"
+    },
+    "CONFIG": "Configuraciones",
+    "CUSTOM_FIELD": {
+        "CONFIGURATION_BODY": "En este modulo puede agregar campos personalizados a los diferentes formularios del aplicativo, cada campo con su respectivo nombre y tipo.",
+        "CONFIGURATION_TITLE": "Configuración de campos personalizados",
+        "MODULE": {
+            "PUBLICATION": "Publicaciones",
+            "TRIP_REPORT": "Reportes de viaje",
+            "VEHICLE_REPORT": "Reportes de vehículo",
+            "YARD_CONTROL": "Control de patios"
+        },
+        "PLURAL": "Campos personalizados",
+        "SINGULAR": "Campo personalizado",
+        "TYPE": {
+            "NUMERIC": "Numerico",
+            "TEXT": "Texto",
+            "DATE": "Fecha",
+            "LIST": "Lista"
+        }
+    },
+    "DRIVER": {
+        "TITLE": "Conductores",
+        "BTN_DRIVER": "Registrar conductor"
+    },
+    "FARE": {
+        "CONFIGURATION_BODY": "Al crear una tabla de tarifas para una transportadora, se personalizarán los precios para esta según: origen(es) - destino(s), tipo de vehículo y la modalidad de viaje.",
+        "CONFIGURATION_TITLE": "Configuración de tarifas",
+        "PLURAL": "Tarifas",
+        "SINGULAR": "Tarifa",
+        "SUBSCRIPTION": {
+            "TITLE": "Transportadoras Suscritas"
+        },
+        "TYPE": {
+            "CONTRACTED": "Contratada",
+            "FARE_TABLE": "Tabla de tarifas",
+            "NEGOTIABLE": "Negociable"
+        }
+    },
+    "FILE": {
+        "TYPE": {
+            "CUSTOM": "Personalizado",
+            "ID": "Identificacion",
+            "INSURANCE": "Seguro",
+            "LICENSE": "Licencia",
+            "OWNERSHIP_CARD": "Tarjeta de propiedad",
+            "REM_REGISTER": "Registro REM",
+            "SOAT": "SOAT",
+            "SOCIAL_SECURITY": "Seguridad social",
+            "TECNOMECANICA": "Tecnomecanica"
+        }
+    },
+    "GENERAL_WORD": {
+        "ACTIONS": "Acciones",
+        "ADD": "Añadir",
+        "ASSIGNED_DRIVER": "Conductor asignado",
+        "ATTACH": "Adjuntar",
+        "CANCEL": "Cancelar",
+        "CAPACITY": "Capacidad",
+        "MASSIVE": "Cargue masivo",
+        "CC": "Cédula de ciudadanía",
+        "CLOSE": "Cerrar",
+        "COLOR": "Color",
+        "DATE": "Fecha",
+        "DELETE": "Eliminar",
+        "DEPARTURE": "Salida",
+        "DESTINY": "Destino(s)",
+        "DOCUMENTS": "Documentos",
+        "DOWNLOAD": "Descargar",
+        "DRAFT": "Publicaciones borrador",
+        "DRIVER": "Conductor",
+        "EMAIL": "Correo electrónico",
+        "EMPTY": "No hay información para mostrar",
+        "EMPTY_ROUTE": "No hay origen(es) - destino(s)",
+        "ENTRY": "Ingreso",
+        "FARE": "Tarifa",
+        "FARES": "Tarifas",
+        "FILTER": "Filltar",
+        "FORMAT": "Formatos de muestra",
+        "FORMAT_DOWNLOAD": "Descargar formato de explicación",
+        "FORMAT_EXAMPLE": "Descargar formato de ejemplo",
+        "GENERATOR": "Generadora",
+        "HOUR": "Horas",
+        "IDENTIFICATION": "Identificación",
+        "LASTNAME": "Apellido",
+        "LOAD": "Cargar",
+        "LOGIN": "Iniciar sesión",
+        "MANDATORY": "Campo requerido",
+        "MINUTE": "Minutos",
+        "MODULE": "Módulo",
+        "NAME": "Nombre",
+        "NA": "No Aplica",
+        "NO_FIELDS": "No hay campos configurados para esta etapa",
+        "OBSERVATION": "Observaciones",
+        "OFFER": "Oferta",
+        "OFFERS": "Ofertas",
+        "OPTION": "Opción",
+        "ORDER": "Orden",
+        "ORIGIN": "Origen(es)",
+        "PASSWORD": "Contraseña",
+        "PROPOSE": "Proponer",
+        "PLATE": "Placa",
+        "PLATE_VEHICLE": "Placa del vehículo",
+        "PUBLICATIONS": "Publicaciones",
+        "PUBLISH": "Publicar a ",
+        "PUBLISH_TO_ALL": "Publicar",
+        "QUANTITY_REQUIRED": "Cantidad requerida",
+        "RANGE": "Rango de fechas",
+        "REASON": "Razones",
+        "REGISTER": "Registrar",
+        "RELATION": "Relación",
+        "REMOVE": "Remover",
+        "ROUTE": "Origen(es) - destino(s)",
+        "SAVE": "Guardar",
+        "SEARCH": "Buscar",
+        "SEE_ALL": "Ver Todos",
+        "SET_COLUMNS": "Configurar columnas",
+        "MODIFY_COLUMNS_TITLE": "Configurar orden de columnas",
+        "STAGE": "Etapa",
+        "TRANSPORTER": "Transportadora",
+        "TRIP": "Viaje",
+        "TRIPS": "Viajes, Estados o Cargas",
+        "TYPE": "Tipo",
+        "UPDATE": "Actualizar",
+        "UPLOAD": "Subir archivo",
+        "USER": "Usuario",
+        "VEHICLE": "vehículos",
+        "WAIT": "Sea paciente, por favor espere. Este proceso puede tomar algo de tiempo...",
+        "WATCH": "Ver",
+        "WEEKDAY":"Día semana"
+    },
+    "HEADER_TABLE": {
+        "NAME": "Nombre",
+        "EMAIL": "Correo",
+        "PHONE": "Teléfono",
+        "RATING": "Puntuación",
+        "TYPE": "Tipo",
+        "LOAD_DATE": "Fecha Cargue",
+        "DATE_PUBLISHED": "Fecha Publicación",
+        "LOAD": "Carga",
+        "MODALITY": "Modalidad",
+        "PUBLISHED_BY": "Publicado por",
+        "ACTIONS": "Acciones",
+        "BODYWORK": "Carrocería",
+        "QUANTITY": "Cantidad",
+        "FARE": "Tarifa",
+        "FARE_MAX": "Tarifa Máxima",
+        "CAPACITY": "Capacidad",
+        "DESCRIPTION": "Descripción"
+    },
+    "HOME": {
+        "SELECT": "Change language",
+        "TITLE": "Hello Angular with ngx-translate!"
+    },
+    "BLOCKAGES": {
+        "PLURAL": "Bloqueos temporales",
+        "REPORT": "Reportes de vehículos",
+        "ASSIGNAMENT": "Asignación de viajes",
+        "BODYREPORT": "En esta sección podrás configurar los ajustes de un bloqueo temporal o tiempo de espera en el que una empresa de transporte no podrá realizar reportes de vehículos a empresa.",
+        "BODYASSIGNAMENT": "En esta sección podrás configurar un tiempo minimo de diferencia, entre la ultima asignación de viaje hecha a un vehículo dentro de cargoApp, y la proxima asignación que tu como empresa le haras a dicho vehículo."
+    },
+    "INTERVENTED_ROUTE": {
+        "CONFIGURATION_BODY": "Al crear una ruta intervenida para una transportadora según origen(es) - destino(s), se le dara preferencia a esta a la hora de realizar la asignación automatica en caso de tener el filtro de rutas intervendias activo.",
+        "CONFIGURATION_TITLE": "Configuración de rutas intervenidas",
+        "PLURAL": "Rutas intervenidas",
+        "SINGULAR": "Ruta intervenida"
+    },
+    "LOAD": {
+        "TYPE": {
+            "CONTENTED_20": "Contenerizada 20",
+            "CONTENTED_40": "Contenerizada 40",
+            "BULK": "Granel",
+            "PALLETIZED": "Paletizada",
+            "DRIES": "Seca",
+            "PIPELINE": "Tubería",
+            "LIQUID": "Líquida"
+        }
+    },
+    "MODAL": {
+        "CUSTOM_FIELD": {
+            "ERROR": {
+                "MODULE": "El módulo del campo personalizado es requerido",
+                "NAME": "El nombre del campo personalizado es requerido",
+                "OPTION": "El valor de la opcion es requerido",
+                "STAGE": "El tipo del campo personalizado es requerido",
+                "TYPE": "El tipo del campo personalizado es requerido"
+            },
+            "SELECT": {
+                "MODULE": "Seleccione el módulo",
+                "TYPE": "Seleccione el tipo",
+                "STAGE": "Seleccione la etapa"
+            },
+            "TITLE": "Crear Campo Personalizado"
+        }
+    },
+    "NAVBAR": {
+        "LANGUAJE": "Cambiar lenguaje",
+        "MENU1": "Ver Perfil",
+        "MENU2": "Configuración",
+        "MENU3": "Cerrar sesión",
+        "TITLE": "Vehículos",
+        "TITLE1": "Inicio",
+        "TITLE2": "Transportadoras",
+        "TITLE3": "Solicitudes",
+        "TITLE4": "Estados",
+        "TITLE7": "Cargas",
+        "TITLE5": "Historial",
+        "TITLE6": "Estadísticas",
+        "TITLE8": "Conductores",
+        "TITLE9": "Flota",
+        "TITLE10": "Control de patios",
+        "REFRESH": {
+            "TITLE": "Actualización disponible",
+            "BODY": "Hemos detectado una nueva versión de la plataforma.",
+            "ACTION": " Click aquí para actualizar"
+        }
+    },
+    "OPERATIONAL_GROUP": {
+        "CONFIGURATION_BODY": "En este modulo puede configurar que contenido los usuarios de la compañia pueden ver con respecto al resto de los usuarios la compañia.",
+        "CONFIGURATION_TITLE": "Configuración de grupos operacionales",
+        "PLURAL": "Grupos operacionales",
+        "SINGULAR": "Grupo operacional"
+    },
+    "PAGINATION": {
+        "PREVIOUS": "Anterior",
+        "CURRENT": {
+            "PAGE": "Pág.",
+            "OF": "de"
+        },
+        "NEXT": "Siguiente",
+        "RESULTS": "Resultados en la página:"
+    },
+    "PUBLICATION": {
+        "TYPE": {
+            "MANUAL": "Manual",
+            "AUTOMATIC": "Asignación automática"
+        }
+    },
+    "STADISTIC": {
+        "TITLE": "KPI - Estadísticas"
+    },
+    "STATE": {
+        "ACCEPTED": "Aceptado",
+        "ACTIVE": "Activo",
+        "AT_DESTINY": "En destino",
+        "AT_ORIGIN": "En origen",
+        "AT_PLACE": "Llegó",
+        "CANCELLED": "Cancelado",
+        "COMPLETED": "Completado",
+        "DETELED": "Eliminado",
+        "FINISHED": "Finalizado",
+        "HAS_NOT_MADE_PAYMENT": "No ha realizado pago",
+        "INACTIVE": "Inactivo",
+        "LOADED": "Cargado",
+        "LEAVED": "Salió",
+        "NOT_ARRIVED": "No ha llegado",
+        "NOT_STARTED": "No iniciado",
+        "NOT_VISIBLE": "Invisible",
+        "ON_ROUTE_TO_ORIGIN": "En ruta a origen",
+        "ON_ROUTE_TO_DESTINY": "En ruta a destino",
+        "REJECTED": "Rechazado",
+        "UNLOADING": "Descargando",
+        "UNSELECTED": "Reportes realizados sin seleccionar",
+        "WAITING_LOAD": "Carga en espera"
+    },
+    "TRANSPORTER": {
+        "TITLE": "Lista de empresas de transporte",
+        "LOYAL": "Fidelizadas",
+        "ALL": "Todas",
+        "LOYALTY_COMPANIES": "Fidelizar empresas",
+        "INFO": "Por favor, asocie los campos de la columna izquierda con los datos que le correspondan, tomados de las listas desplegables ubicadas a la derecha. Recuerde, que puede asignar la opción NO APLICA si así lo requiere. Los campos marcados con (*) son obligatorios.",
+        "FIELD_MODAL": {
+            "TYPE": "Tipo De Viaje",
+            "PARCEL": "¿Es Servicio De Paquetería?",
+            "CUSTOMER": "Clientes",
+            "REQUEST_ID": "Id de la solicitud",
+            "FARE_TYPE": "Tipo de tarifa",
+            "MODE_TRAVEL": "Modalidad del viaje",
+            "CARGO_DESCRIPTION": "Descripción de la carga",
+            "CARGO_TYPE": "Tipo de carga",
+            "LENGTH_CARGO": "Longitud de la carga",
+            "HEIGHT_CARGO": "Altura de la carga",
+            "WIDTH_CARGO": "Anchura de la carga",
+            "LOAD_VOLUME": "Volumen de la carga",
+            "WEIGHT_LOAD": "Peso de la carga",
+            "TYPE_VEHICLE": "Tipo de vehículo",
+            "NUMBER_VEHICLES": "N° de vehículos",
+            "CARROCERIA": "Carrocería",
+            "MAX_RATE": "Tarifa máxima",
+            "CITY_ORIGIN": "Ciudad/municipio de origen",
+            "PLACE_LOAD": "Lugar de cargue",
+            "DATE_LOAD": "Fecha cargue",
+            "CITY_DESTINATION": "Ciudad/municipio de destino",
+            "PLACE_UNLOAD": "Lugar de descargue",
+            "DATE_UNLOAD": "Fecha descargue"
+        },
+        "SEARCH_COMPANY": "Buscar empresa",
+        "MSG_SEARCH": "La transportadora es requerida para fidelizar",
+        "BTN_SEACRH": "Fidelizar"
+    },
+    "REQUEST": {
+        "TITLE": "Lista de solicitudes"
+    },
+    "TRIP": {
+        "MODALITY": {
+            "TONNAGE": "Por tonelada",
+            "TRIP": "Por viaje (ida)",
+            "ROUND_TRIP": "Por viaje (ida y vuelta)"
+        },
+        "TYPE": {
+            "NATIONAL": "Nacional",
+            "URBAN": "Urbano"
+        }
+    },
+    "HISTORY": {
+        "REPORT": "Reporte",
+        "TITLE": "Historial de publicaciones",
+        "DATE_REPORT": "Fecha reporte",
+        "DATE_LOAD": "Fecha cargue",
+        "TRANSPORTER": "Transportadora",
+        "DRIVER": {
+            "TITLE": "Conductor",
+            "NAME": "Nombre",
+            "ID": "Cédula",
+            "PHONE": "Teléfono"
+        },
+        "VEHICLE": {
+            "PLATE": "Placa",
+            "CAPACITY": "Capacidad"
+        },
+        "FARE": "Tarifa"
+    },
+    "USER": {
+        "TYPE": {
+            "COMPANY_ADMIN": "Administrador de la compañia",
+            "DRIVER": "Conductor",
+            "MANAGER": "Gerencial",
+            "OPERATIVE": "Operacional",
+            "SUPER_ADMIN": "Administrador del aplicativo",
+            "SUPERVISOR": "Supervisor"
+        }
+    },
+    "VEHICLE": {
+        "TITLE": "Vehículos",
+        "BTN_VEHICLE": "Registrar vehículo",
+        "BODYWORK_TYPE": {
+            "CONTAINER_SHIP": "Portacontenedores",
+            "DOES_NOT_APPLY": "No aplica",
+            "HOPPER": "Tolva",
+            "IRON": "Plancha",
+            "NURSE": "Nodriza",
+            "REFRIGERATED_VAN": "Fúrgon refrigerado",
+            "STAKE_BODY": "Estacas",
+            "TANK": "Tanque",
+            "VAN": "Fúrgon"
+        },
+        "TYPE": {
+            "TITLE": "Tipo de vehículo",
+            "TURBOCHARGE": "Turbo",
+            "SIMPLE": "Sencillo",
+            "FOUR_WHEEL_DRIVE": "Doble troque",
+            "TRUNKING_RIG_MINI": "Mini mula",
+            "TRUNKING_RIG": "Tractomula",
+            "LOW_BOY_TRUCK": "Camabaja"
+        }
+    },
+    "WEEKDAY": {
+        "MONDAY": "Lunes",
+        "TUESDAY": "Martes",
+        "WEDNESDAY": "Miércoles",
+        "THURSDAY": "Jueves",
+        "FRIDAY": "Viernes",
+        "SATURDAY": "Sábado",
+        "SUNDAY": "Domingo"
+    },
+    "YARDS": {
+        "TITLE": "Control de patios",
+        "OPERATIONS": "Operación",
+        "TRACKING": "Tablero de seguimiento",
+        "REPORTS": "Reportes",
+        "SCHEDULE": "Horarios de turno",
+        "CONFIGURATION_TITLE": "Configuraciones de control de patios",
+        "CONFIGURATION_BODY": "",
+        "FACTORY": "Planta",
+        "LIMIT": "Límite vehículos",
+        "PERCENTAGE": "Porcentaje de ocupación",
+        "ESTIMATED": "Tiempo estimado",
+        "AVERAGE": "Tiempo promedio"
+    },
+    "REPORTS": {
+        "TITLE": "Validación de reportes",
+        "CONFIGURATION_TITLE": "Validación de reportes",
+        "CONFIGURATION_BODY": "",
+        "REQUIRED_FILES": "Archivos requeridos",
+        "BLOCKAGE_TRANPORTER": "Bloquear transportadora después de aceptar servicio",
+        "DENY_COMPLIMENTS": "No permitir reportes de transportadoras con viajes no cumplidos",
+        "ESTIMATED_DAYS": "Estimado de días",
+        "POSTULATED": "Notificación de vehículos postulados"
+    },
+    "GENERAL": {
+        "TITLE": "Configuraciones generales",
+        "CONFIGURATION_BODY": "Límite máximo de años permitidos para postulación de vehículos",
+        "LIMIT": "Límite máximo de años",
+        "REPORT_UNSELETED": "Permitir mostrar a la transportadora ver la cantidad de reportes no seleccionados.",
+        "MINUTES_BETWEEN_YARDS":"Minutos de holgura",
+        "MINUTES_BETWEEN_YARDS_BODY":"Minutos de holgura para asignación de turnos en más de una planta.",
+        "MINUTES_NEXT_SHIFT":"Minutos de espera",
+        "MINUTES_NEXT_SHIFT_BODY":"Minutos de espera para asignación del siguiente turno.",
+        "VERIFY_COURSE_SECURITY":"Verificación de vigencia de curso de seguridad"
+    }
+}

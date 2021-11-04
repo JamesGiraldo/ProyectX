@@ -1,0 +1,148 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>{{ timeVehicles?.id ? 'Editar' : 'Agregar' }} tiempos por vehículos</h3>
+        <button mat-icon-button class="bc-transparent" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+    <form [formGroup]="vehicleTimesForm" (ngSubmit)="onSubmit()" novalidate>
+        <div mat-dialog-content class="max-h-80vh">
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-3">
+                    <label class="text-muted font-weight-bold">Turbo</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Minutos</mat-label>
+                        <input matInput formControlName="turbo" type="number" /><mat-icon matSuffix>schedule</mat-icon>
+                        <mat-error *ngIf="f.turbo.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-3">
+                    <label class="text-muted font-weight-bold">Sencillo</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Minutos</mat-label>
+                        <input matInput formControlName="simple" type="number" /><mat-icon matSuffix>schedule</mat-icon>
+                        <mat-error *ngIf="f.simple.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-3">
+                    <label class="text-muted font-weight-bold">Doble Troque</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Minutos</mat-label>
+                        <input matInput formControlName="fourWheelDrive" type="number" /><mat-icon matSuffix
+                            >schedule</mat-icon
+                        >
+                        <mat-error *ngIf="f.fourWheelDrive.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-3">
+                    <label class="text-muted font-weight-bold">Mini mula</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Minutos</mat-label>
+                        <input matInput formControlName="trunkingRigMini" type="number" /><mat-icon matSuffix
+                            >schedule</mat-icon
+                        >
+                        <mat-error *ngIf="f.trunkingRigMini.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-3">
+                    <label class="text-muted font-weight-bold">Tractomula</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Minutos</mat-label>
+                        <input matInput formControlName="trunkingRig" type="number" /><mat-icon matSuffix
+                            >schedule</mat-icon
+                        >
+                        <mat-error *ngIf="f.trunkingRig.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-3">
+                    <label class="text-muted font-weight-bold">Camabaja</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Minutos</mat-label>
+                        <input matInput formControlName="lowBoyTruck" type="number" /><mat-icon matSuffix
+                            >schedule</mat-icon
+                        >
+                        <mat-error *ngIf="f.lowBoyTruck.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+        <div class="row zero between-lg between-md between-sm between-xs full-width">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div mat-dialog-actions>
+                    <div class="row zero between-lg between-md between-sm between-xs full-width">
+                        <div>
+                            <button
+                                style="width: 100%;"
+                                mat-flat-button
+                                type="button"
+                                class="btn-cancelar full-width"
+                                (click)="onClose()"
+                            >
+                                <mat-icon color="white">close</mat-icon> Cancelar
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                style="width: 100%;"
+                                type="submit"
+                                [disabled]="submit"
+                                mat-flat-button
+                                class="btn-submit full-width"
+                            >
+                                <mat-icon color="white">done</mat-icon>
+                                {{ timeVehicles?.id ? 'Editar' : 'Guardar' }}
+                                <img
+                                    src="../../../../../../assets/loading.gif"
+                                    class="ml-1"
+                                    *ngIf="submit"
+                                    alt="Cargando"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

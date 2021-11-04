@@ -1,0 +1,37 @@
+<mat-expansion-panel class="box-sh-none inherit-w py-2" (opened)="getStages()">
+    <mat-expansion-panel-header class="pt-3 pb-3" style="height: 60px;">
+        <mat-panel-title class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fgc-gray-1">
+            <div class="row inherit-w middle-xs">
+                <mat-icon class="mr-2 title title__icon d-none d-sm-none d-md-block">apartment</mat-icon>
+                <h5 class="title title__text">{{ yard.name | titlecase }}</h5>
+            </div>
+        </mat-panel-title>
+        <mat-panel-description class="col-lg-7 col-md-7 col-sm-7 col-xs-7 fgc-gray-1">
+            <p class="description">
+                <span
+                    class="badge badge-success pl-3 pr-3 pt-1 pb-1 mr-2"
+                    *ngIf="yard.capacity >= 0 && yard.capacity <= yard.occupancyMinimun"
+                    >Bajo</span
+                >
+                <span
+                    class="badge badge-warning pl-3 pr-3 pt-1 pb-1 mr-2"
+                    *ngIf="yard.capacity > yard.occupancyMinimun && yard.capacity <= yard.occupancyMaximun"
+                    style="color: #fff;"
+                    >Normal</span
+                >
+                <span
+                    class="badge badge-danger pl-3 pr-3 pt-1 pb-1 mr-2"
+                    *ngIf="yard.capacity > yard.occupancyMaximun && yard.capacity <= 100"
+                    >Alto</span
+                >
+                Ocupaci&oacute;n: {{ yard.capacity.toFixed(2) }}%
+            </p>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="col-12">
+        <mat-divider class="mt-2 mb-3"></mat-divider>
+        <div class="row inherit-w" *ngFor="let stage of stages">
+            <app-stage-detail class="inherit-w" [yard]="yard" [stage]="stage"></app-stage-detail>
+        </div>
+    </div>
+</mat-expansion-panel>

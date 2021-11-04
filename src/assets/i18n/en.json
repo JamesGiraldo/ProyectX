@@ -1,0 +1,461 @@
+{
+    "AA_CONFIGURATION": {
+        "CONFIGURATION_BODY": "When the automatic assignment is enabled all the created publications are going to be assigned automatically by the following fields:",
+        "CONFIGURATION_TITLE": "Automatic assignment configuration",
+        "ENABLE": "Enable wait time",
+        "FILTER": {
+            "BODY": "Decision filters, there must be at least one active filter.",
+            "TYPE": {
+                "FARE_VALUE": "Fare value",
+                "INTERVENTED_ROUTES": "Intervented route",
+                "RESPONSE_TIME": "Response time",
+                "TOLERANCE_TIME": " Tolerance time"
+            }
+        },
+        "TITLE": "Automatic assignment"
+    },
+    "BLACKLIST": {
+        "CONFIGURATION_BODY": "Add the license plate of the vehicle or the ID of the drivers who are banned from working with this company.",
+        "CONFIGURATION_TITLE": "Service failure",
+        "PLURAL": "Service failure",
+        "SINGULAR": "Service failure"
+    },
+    "COMPANY": {
+        "OWNERSHIP": {
+            "LOYAL": "Loyal",
+            "NOT_LOYAL": "Not loyal",
+            "OWNED": "Owned"
+        },
+        "PAYMENT_METHOD": {
+            "CREDIT_CARD": "Credit card",
+            "DEBIT_CARD": "Debit card",
+            "PAY_U": "Pay U",
+            "PSE": "PSE"
+        },
+        "TYPE": {
+            "GENERATOR": "Generator",
+            "TRANSPORTER": "Transporter"
+        },
+        "EXTERNAL_VEHICLE": {
+            "ASSIGMENT": "External vehicle assignment"
+        },
+        "AS_TRANSPORTER": "Publish as transporter"
+    },
+    "CUSTOMER SERVICE": {
+        "TITLE": "Customer service"
+    },
+    "RECEPTION OF REQUESTS": {
+        "TITLE": "Reception of requests"
+    },
+    "ADJUST VALIDITY": {
+        "TITLE": "Adjust validity"
+    },
+    "CONFIG": "Settings",
+    "CUSTOM_FIELD": {
+        "CONFIGURATION_BODY": "In this module you can add custom fields to the different forms of this app, each custom field has a name and type.",
+        "CONFIGURATION_TITLE": "Custom fields configuration",
+        "MODULE": {
+            "PUBLICATION": "Publications",
+            "TRIP_REPORT": "Trip reports",
+            "VEHICLE_REPORT": "Vehicle reports",
+            "YARD_CONTROL": "Yard control"
+        },
+        "PLURAL": "Custom fields",
+        "SINGULAR": "Custom field",
+        "TYPE": {
+            "NUMERIC": "Numeric",
+            "TEXT": "Text",
+            "DATE": "Date",
+            "LIST": "List"
+        }
+    },
+    "DRIVER": {
+        "TITLE": "Drivers",
+        "BTN_DRIVER": "Register driver"
+    },
+    "FARE": {
+        "CONFIGURATION_BODY": "When creating a fare for a transporter, you can define custom prices for this transporter by: origins(s) - destiny(ies), vehicle type and trip modality.",
+        "CONFIGURATION_TITLE": "Fare configuration",
+        "PLURAL": "Fares",
+        "SINGULAR": "Fare",
+        "SUBSCRIPTION": {
+            "TITLE": "Subscribed Transporters"
+        },
+        "TYPE": {
+            "CONTRACTED": "Contracted",
+            "FARE_TABLE": "Fare table",
+            "NEGOTIABLE": "Negotiable"
+        }
+    },
+    "FILE": {
+        "TYPE": {
+            "CUSTOM": "Custom",
+            "ID": "Identification",
+            "INSURANCE": "Seguro",
+            "LICENSE": "License",
+            "OWNERSHIP_CARD": "Ownsership card",
+            "REM_REGISTER": "REM Register",
+            "SOAT": "SOAT",
+            "SOCIAL_SECURITY": "Social security",
+            "TECNOMECANICA": "Technomechanical"
+        }
+    },
+    "GENERAL_WORD": {
+        "ACTIONS": "Acciones",
+        "ADD": "Add",
+        "ASSIGNED_DRIVER": "Assigned driver",
+        "ATTACH": "Attach",
+        "CANCEL": "Cancel",
+        "CAPACITY": "Capacity",
+        "MASSIVE": "Massive upload",
+        "CC": "Citizenship card",
+        "CLOSE": "Close",
+        "COLOR": "Color",
+        "DATE": "Date",
+        "DELETE": "Delete",
+        "DEPARTURE": "Departure",
+        "DESTINY": "Destiny(ies)",
+        "DOCUMENTS": "Documents",
+        "DOWNLOAD": "Download",
+        "DRAFT": "Draft publications",
+        "DRIVER": "Driver",
+        "EMAIL": "Email",
+        "EMPTY": "There are no records available.",
+        "EMPTY_ROUTE": "There are no origin(s) - destiny(ies)",
+        "ENTRY": "Entry",
+        "FARE": "Fare",
+        "FARES": "Fares",
+        "FILTER": "Filter",
+        "FORMAT": "Sample formats",
+        "FORMAT_DOWNLOAD": "Download explanation format",
+        "FORMAT_EXAMPLE": "Download example format",
+        "HOUR": "Hours",
+        "IDENTIFICATION": "Identification",
+        "GENERATOR": "Generator",
+        "LASTNAME": "Lastname",
+        "LOAD": "Load",
+        "LOGIN": "Login",
+        "MANDATORY": "Required field",
+        "MINUTE": "Minutes",
+        "MODULE": "Module",
+        "NAME": "Name",
+        "NA": "Not Applicable",
+        "NO_FIELDS": "There are no custom fields related to this particular stage",
+        "OBSERVATION": "Observations",
+        "OFFER": "Offer",
+        "OFFERS": "Offers",
+        "OPTION": "Option",
+        "ORDER": "Order",
+        "ORIGIN": "Origin(s)",
+        "PASSWORD": "Password",
+        "PROPOSE": "Propose",
+        "PLATE": "Plate",
+        "PLATE_VEHICLE": "Vehicle plate",
+        "PUBLICATIONS": "Publications",
+        "PUBLISH": "Publish to ",
+        "PUBLISH_TO_ALL": "Publish",
+        "QUANTITY_REQUIRED": "Quantity required",
+        "RANGE": "Date range",
+        "REASON": "Reasons",
+        "REGISTER": "Register",
+        "RELATION": "Relationship",
+        "REMOVE": "Remove",
+        "ROUTE": "Origin(s) - destiny(ies)",
+        "SAVE": "Save",
+        "SEARCH": "Search",
+        "SEE_ALL": "See All",
+        "SET_COLUMNS": "Set columns",
+        "MODIFY_COLUMNS_TITLE": "Configure column order",
+        "STAGE": "Stage",
+        "TRANSPORTER": "Transporter",
+        "TRIP": "Trip",
+        "TRIPS": "Trips, Status or Loads",
+        "TYPE": "Type",
+        "UPDATE": "Update",
+        "UPLOAD": "Upload file",
+        "USER": "User",
+        "VEHICLE": "vehicles",
+        "WAIT": "Be patient, please wait. This process may take some time...",
+        "WATCH": "Watch",
+        "WEEKDAY":"Day of week"
+    },
+    "HEADER_TABLE": {
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "RATING": "Rating",
+        "TYPE": "Type",
+        "LOAD_DATE": "Date Load",
+        "DATE_PUBLISHED": "Date Published",
+        "LOAD": "Load",
+        "MODALITY": "Modality",
+        "PUBLISHED_BY": "Published by",
+        "ACTIONS": "Actions",
+        "BODYWORK": "Bodywork",
+        "QUANTITY": "Quantity",
+        "FARE": "Fare",
+        "FARE_MAX": "Max. Fare",
+        "CAPACITY": "Capacity",
+        "DESCRIPTION": "Description"
+    },
+    "HOME": {
+        "SELECT": "Change language",
+        "TITLE": "Hello Angular with ngx-translate!"
+    },
+    "BLOCKAGES": {
+        "PLURAL": "Temporary blockages",
+        "REPORT": "Report vehicles",
+        "ASSIGNAMENT": "Assignament to trips",
+        "BODYREPORT": "In this section you can set up the temporal locks or wait time in a transport enterprise will cannot perform reports vehicles to generator enterprise.",
+        "BODYASSIGNAMENT": "In this section you can set up a minimal time of difference between the last assigned trip performed to a vehicle inside of cargoApp, and the next assignment that your enterprise the will perform to this vehicle."
+    },
+    "INTERVENTED_ROUTE": {
+        "CONFIGURATION_BODY": "When creating an intervented route for a transporter by origin(s) - destiny(ies), gives preference to that specific transporter upon automatic assignment if the corresponding intervented route filter is active in your configuration.",
+        "CONFIGURATION_TITLE": "Intervented routes configuration",
+        "PLURAL": "Intervented routes",
+        "SINGULAR": "Intervented route"
+    },
+    "LOAD": {
+        "TYPE": {
+            "CONTENTED_20": "Contented 20",
+            "CONTENTED_40": "Contented 40",
+            "BULK": "Bulk",
+            "PALLETIZED": "Palletized",
+            "DRIES": "Dries",
+            "PIPELINE": "Pipeline",
+            "LIQUID": "Liquid"
+        }
+    },
+    "MODAL": {
+        "CUSTOM_FIELD": {
+            "ERROR": {
+                "MODULE": "The module field is required",
+                "NAME": "The name field is required",
+                "OPTION": "The option field is required",
+                "STAGE": "The option field is required",
+                "TYPE": "The type field is required"
+            },
+            "SELECT": {
+                "MODULE": "Select the module",
+                "TYPE": "Select the type",
+                "STAGE": "Select the stage"
+            },
+            "TITLE": "Create Custom Field"
+        }
+    },
+    "NAVBAR": {
+        "LANGUAJE": "Change language",
+        "MENU1": "Profile",
+        "MENU2": "Settings",
+        "MENU3": "Logout",
+        "TITLE": "Vehicles",
+        "TITLE1": "Home",
+        "TITLE2": "Transporters",
+        "TITLE3": "Request",
+        "TITLE4": "Status",
+        "TITLE7": "Loads",
+        "TITLE5": "History",
+        "TITLE6": "Stadistics",
+        "TITLE8": "Drivers",
+        "TITLE9": "Fleet",
+        "TITLE10": "Yards",
+        "REFRESH": {
+            "TITLE": "Update available",
+            "BODY": "We have detected a new version of the platform.",
+            "ACTION": "Click here to update"
+        }
+    },
+    "OPERATIONAL_GROUP": {
+        "CONFIGURATION_BODY": "In this module you can set the viewing rights for each user within your company.",
+        "CONFIGURATION_TITLE": "Operational group configuration",
+        "PLURAL": "Operational groups",
+        "SINGULAR": "Operational groups"
+    },
+    "PAGINATION": {
+        "PREVIOUS": "Previous",
+        "CURRENT": {
+            "PAGE": "Page",
+            "OF": "of"
+        },
+        "NEXT": "Next",
+        "RESULTS": "Results on page:"
+    },
+    "PUBLICATION": {
+        "TYPE": {
+            "MANUAL": "Manual",
+            "AUTOMATIC": "Automatic assignment"
+        }
+    },
+    "STADISTIC": {
+        "TITLE": "KPI - Stadistic"
+    },
+    "STATE": {
+        "ACCEPTED": "Accepted",
+        "ACTIVE": "Active",
+        "AT_DESTINY": "At destiny",
+        "AT_ORIGIN": "At origin",
+        "AT_PLACE": "At place",
+        "CANCELLED": "Cancelled",
+        "COMPLETED": "Completed",
+        "DETELED": "Deleted",
+        "FINISHED": "Finished",
+        "HAS_NOT_MADE_PAYMENT": "Has not made payment",
+        "INACTIVE": "Inactive",
+        "LEAVED": "Leaved",
+        "LOADED": "Loaded",
+        "NOT_ARRIVED": "Not arrived",
+        "NOT_STARTED": "Not started",
+        "NOT_VISIBLE": "Not visible",
+        "ON_ROUTE_TO_ORIGIN": "On route to origin",
+        "ON_ROUTE_TO_DESTINY": "On route to destiny",
+        "REJECTED": "Rejected",
+        "UNLOADING": "Unloading",
+        "UNSELECTED": "Unselected reports",
+        "WAITING_LOAD": "Waiting load"
+    },
+    "TRANSPORTER": {
+        "TITLE": "List of transport companies",
+        "LOYAL": "Loyal",
+        "ALL": "All",
+        "LOYALTY_COMPANIES": "Loyalty to companies",
+        "INFO": "Please associate the fields in the left column with the corresponding data taken from the drop-down lists on the right. Remember, you can assign the option NOT APPLICABLE if required. The fields marked with (*) are mandatory.",
+        "FIELD_MODAL": {
+            "TYPE": "Type of trip",
+            "PARCEL": "Is it a parcel service?",
+            "CUSTOMER": "Customers",
+            "REQUEST_ID": "Request ID",
+            "FARE_TYPE": "Type of fare",
+            "MODE_TRAVEL": "Mode of travel",
+            "CARGO_DESCRIPTION": "Cargo description",
+            "CARGO_TYPE": "Type of cargo",
+            "LENGTH_CARGO": "Cargo length",
+            "HEIGHT_CARGO": "Cargo height",
+            "WIDTH_CARGO": "Width of cargo",
+            "LOAD_VOLUME": "Load volume",
+            "WEIGHT_LOAD": "Load weight",
+            "TYPE_VEHICLE": "Vehicle type",
+            "NUMBER_VEHICLES": "No. of vehicles",
+            "CARROCERIA": "Vehicle body",
+            "MAX_RATE": "Maximum rate",
+            "CITY_ORIGIN": "City/municipality of origin",
+            "PLACE_LOAD": "Place of load",
+            "DATE_LOAD": "Load date",
+            "CITY_DESTINATION": "City/municipality of destination",
+            "PLACE_UNLOAD": "Place of unload",
+            "DATE_UNLOAD": "Date of unload"
+        },
+        "SEARCH_COMPANY": "Search company",
+        "MSG_SEARCH": "The transporter is required to loyalty",
+        "BTN_SEACRH": "Loyalty"
+    },
+    "REQUEST": {
+        "TITLE": "List of requests"
+    },
+    "TRIP": {
+        "MODALITY": {
+            "TONNAGE": "By tonnage",
+            "TRIP": "By trip (one way)",
+            "ROUND_TRIP": "By round trip"
+        },
+        "TYPE": {
+            "NATIONAL": "National",
+            "URBAN": "Urban"
+        }
+    },
+    "HISTORY": {
+        "REPORT": "Report",
+        "TITLE": "Publication history",
+        "DATE_REPORT": "Date report",
+        "DATE_LOAD": "Date load",
+        "TRANSPORTER": "Transporter",
+        "DRIVER": {
+            "TITLE": "Driver",
+            "NAME": "Name",
+            "ID": "Identification",
+            "PHONE": "Phone"
+        },
+        "VEHICLE": {
+            "PLATE": "Plate",
+            "CAPACITY": "Capacity"
+        },
+        "FARE": "Fare"
+    },
+    "USER": {
+        "TYPE": {
+            "COMPANY_ADMIN": "Company admin",
+            "DRIVER": "Driver",
+            "MANAGER": "Manager",
+            "OPERATIVE": "Operative",
+            "SUPER_ADMIN": "App admin",
+            "SUPERVISOR": "Supervisor"
+        }
+    },
+    "VEHICLE": {
+        "TITLE": "Vehicles",
+        "BTN_VEHICLE": "Register vehicle",
+        "BODYWORK_TYPE": {
+            "CONTAINER_SHIP": "Container ship",
+            "DOES_NOT_APPLY": "Does not apply",
+            "HOPPER": "Hopper",
+            "IRON": "Iron",
+            "NURSE": "nurse",
+            "REFRIGERATED_VAN": "Refrigerated van",
+            "STAKE_BODY": "Stake body",
+            "TANK": "Tank",
+            "VAN": "Van"
+        },
+        "TYPE": {
+            "TITLE": "Vehicle type",
+            "TURBOCHARGE": "Turbo",
+            "SIMPLE": "Simple",
+            "FOUR_WHEEL_DRIVE": "Four wheel drive",
+            "TRUNKING_RIG_MINI": "Trunking rig mini",
+            "TRUNKING_RIG": "Trunking rig",
+            "LOW_BOY_TRUCK": "Lowboy truck"
+        }
+    },
+    "WEEKDAY": {
+        "MONDAY": "Monday",
+        "TUESDAY": "Tuesday",
+        "WEDNESDAY": "Wednesday",
+        "THURSDAY": "Thursday",
+        "FRIDAY": "Friday",
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday"
+    },
+    "YARDS": {
+        "TITLE": "Yard control",
+        "OPERATIONS": "Operation",
+        "TRACKING": "Tracking dashboard",
+        "REPORTS": "Reports",
+        "SCHEDULE": "Shift schedules",
+        "CONFIGURATION_TITLE": "Yard control settings",
+        "CONFIGURATION_BODY": "",
+        "FACTORY": "Factory",
+        "LIMIT": "Vehicle limit",
+        "PERCENTAGE": "Cccupancy percentage",
+        "ESTIMATED": "Estimated time",
+        "AVERAGE": "Average time"
+    },
+    "REPORTS": {
+        "TITLE": "Report validations",
+        "CONFIGURATION_TITLE": "Report validations",
+        "CONFIGURATION_BODY": "",
+        "REQUIRED_FILES": "Required files",
+        "BLOCKAGE_TRANPORTER": "Lock transporter after accepting service",
+        "DENY_COMPLIMENTS": "Deny reports from transporters with unfulfilled trips",
+        "ESTIMATED_DAYS": "Estimated days",
+        "POSTULATED": "Notification of postulated vehicles"
+    },
+    "GENERAL": {
+        "TITLE": "General settings",
+        "CONFIGURATION_BODY": "Maximum age limit allowed for vehicle applications",
+        "LIMIT": "Maximum limit years",
+        "REPORT_UNSELETED": "Allow the transporter to see the number of unselected reports.",
+        "MINUTES_BETWEEN_YARDS":"Minutes of slack",
+        "MINUTES_BETWEEN_YARDS_BODY":"Slack minutes for shift assignment in more than one plant.",
+        "MINUTES_NEXT_SHIFT":"Waiting minutes",
+        "MINUTES_NEXT_SHIFT_BODY":"Waiting minutes for next shift assignment.",
+        "VERIFY_COURSE_SECURITY":"Verification of safety course validity."
+    }
+}

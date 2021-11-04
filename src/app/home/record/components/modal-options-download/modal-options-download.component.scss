@@ -1,0 +1,17 @@
+@import 'src/sass/modal';
+
+.range-bar-modal {
+    width: 100%;
+}
+
+p {
+    font-size: 15px;
+}
+
+.texto {
+    font-style: italic;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}

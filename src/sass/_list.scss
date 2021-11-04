@@ -1,0 +1,71 @@
+@import './variables';
+
+h3 {
+    color: #434343;
+    font-weight: bold;
+    text-align: start;
+    height: 40px;
+    font-size: 30px;
+    margin-bottom: 0;
+}
+
+h4 {
+    color: #434343;
+    //font-weight: bold;
+    text-align: start;
+    margin-right: 15px;
+    font-size: 16px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.active {
+    color: $orange;
+}
+
+.bg-wo-gradient {
+    color: white;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #fdd86d 0%, #fbaf3b 100%);
+}
+
+.card {
+    //background-color: black;
+    height: 260px;
+    margin-bottom: 25px;
+}
+
+.col-container {
+    background-color: #efefef;
+    border-radius: 10px;
+    height: 60px;
+
+    h5 {
+        font-size: 15px;
+        letter-spacing: 0;
+        color: #656565;
+        font-weight: bold;
+        margin: 0;
+        margin-left: 5px;
+        display: inline-block;
+    }
+}
+
+.divider-thin {
+    color: #ededed;
+    height: 1px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.type-active {
+    color: #737373;
+    font-weight: bold;
+    border-bottom: solid $orange 2px;
+}

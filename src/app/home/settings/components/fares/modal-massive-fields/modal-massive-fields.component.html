@@ -1,0 +1,346 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Cargue masivo de tarifas</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+    <form [formGroup]="massiveForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="text-center">
+                        Por favor, asocie los campos de la columna izquierda con los datos que le correspondan, tomados
+                        de las listas desplegables ubicadas a la derecha. Recuerde, que puede asignar la opción NO
+                        APLICA si así lo requiere. Los campos marcados con (<span class="text-danger">*</span>) son
+                        obligatorios
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mt-3">
+                    Transportador(a)
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select formControlName="transporterId" appearance="outline" class="full-width">
+                            <mat-option value="N/A">Seleccione transportador/a</mat-option>
+                            <ng-container *ngFor="let company of companies">
+                                <mat-option value="{{ company.id }}">{{ company.name }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mt-3">
+                    Origen(es) (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="origins" multiple>
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.origins.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mt-3">
+                    Destino(s) (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="destinies" multiple>
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.destinies.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <!-- Turbo -->
+            <div class="row">
+                <div class="col float-letf">Turbo</div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="turboTrip">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida y vuelta)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="turboRound">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por tonelada</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="turboTonnage">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-1 mb-3"></mat-divider>
+            <!-- Simple -->
+            <div class="row">
+                <div class="col float-letf">
+                    Sencillo
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="simpleTrip">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida y vuelta)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="simpleRound">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por tonelada</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="simpleTonnage">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-1 mb-3"></mat-divider>
+            <!-- Doble -->
+            <div class="row">
+                <div class="col float-letf">
+                    Dobletroque
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="troqueTrip">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida y vuelta)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="troqueRound">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por tonelada</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="troqueTonnage">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-1 mb-3"></mat-divider>
+            <!-- Mini -->
+            <div class="row">
+                <div class="col float-letf">
+                    Minimula
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="miniTrip">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida y vuelta)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="miniRound">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por tonelada</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="miniTonnage">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-1 mb-3"></mat-divider>
+            <!-- Tracto -->
+            <div class="row">
+                <div class="col float-letf">
+                    Tractomula
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Por viaje (Ida)</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="tractoTrip">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Por viaje (Ida y vuelta)</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="tractoRound">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Por tonelada</mat-label>
+                        <mat-select appearance="outline" class="full-width" formControlName="tractoTonnage">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-1 mb-3"></mat-divider>
+            <!-- Cama -->
+            <div class="row">
+                <div class="col float-letf">
+                    Camabaja
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="camaTrip">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por viaje (Ida y vuelta)</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="camaRound">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Por tonelada</mat-label>
+                        <mat-select appearance="outline" class="w-100" formControlName="camaTonnage">
+                            <mat-option value="N/A">No Aplica</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider class="mt-1 mb-3"></mat-divider>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block">
+                                <mat-icon color="white">done</mat-icon>
+                                Registrar
+                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                            </button>
+                            <span *ngIf="submit" class="alert alert-warning ml-3">{{ 'GENERAL_WORD.WAIT' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

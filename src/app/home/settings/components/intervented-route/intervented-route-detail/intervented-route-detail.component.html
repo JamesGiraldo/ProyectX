@@ -1,0 +1,40 @@
+<div class="responsive">
+    <div class="full-size line">
+        <div class="row middle-lg middle-md middle-sm middle-xs data-container">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 p-tb-20">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <h5>{{ interventedRoute.transporter.name | titlecase }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
+                        <h5 class="stackable" *ngFor="let origin of interventedRoute.origins">
+                            {{ origin.name }}
+                        </h5>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 i-container">
+                        <mat-icon style="color: #434343;">arrow_right_alt</mat-icon>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
+                        <h5 *ngFor="let destiny of interventedRoute.destinies">
+                            {{ destiny.name }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <h5>{{ interventedRoute.createdAt | formatDate }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <!-- <mat-icon (click)="openDialog()" style="cursor: pointer;">remove_red_eye</mat-icon> -->
+                    <mat-icon class="delete" (click)="removeInterventedRoute(interventedRoute.id)">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+</div>

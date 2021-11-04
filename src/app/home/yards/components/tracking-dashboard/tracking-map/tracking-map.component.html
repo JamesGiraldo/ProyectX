@@ -1,0 +1,10 @@
+<div class="row mt-2 mb-5">
+    <div class="col-md-7">
+        <div id='map' class="mt-2"></div>
+    </div>
+    <div class="col-md-5">
+        <div class="row w-100 mt-2" *ngFor="let yard of yards">
+            <app-track-detail class="w-100" [yard]="yard"></app-track-detail>
+        </div>
+    </div>
+</div>

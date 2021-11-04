@@ -1,0 +1,43 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Modificación de solicitud</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div mat-dialog-content class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <p>¿Desea editar la información de la solicitud?</p>
+                <button mat-raised-button (click)="openDialog()" [disabled]="disabled">EDITAR</button>
+            </div>
+        </div>
+        <mat-divider class="mt-3 mb-3" *ngIf="requestData.state === 'STATE.ACTIVE'"></mat-divider>
+        <div class="row" *ngIf="requestData.state === 'STATE.ACTIVE'">
+            <div class="col">
+                <p>¿Desea finalizar la carga?</p>
+                <button mat-raised-button class="mr-2" (click)="onClose()">NO</button>
+                <button mat-raised-button (click)="openDialogFinish()">SI</button>
+            </div>
+        </div>
+        <mat-divider class="mt-3 mb-3"
+            *ngIf="requestData.state === 'STATE.ACTIVE' || requestData.state === 'STATE.FINISHED'"></mat-divider>
+        <div class="row"
+            *ngIf="requestData.state === 'STATE.ACTIVE' || requestData.state === 'STATE.FINISHED'">
+            <div class="col">
+                <p>¿Desea cancelar la carga?</p>
+                <p>Cancelar la publicación y todos sus viajes en proceso.</p>
+                <button mat-raised-button class="mr-2" (click)="onClose()">NO</button>
+                <button mat-raised-button (click)="openDialogCancel()">SI</button>
+            </div>
+        </div>
+        <mat-divider class="mt-3 mb-3"></mat-divider>
+    </div>
+</div>

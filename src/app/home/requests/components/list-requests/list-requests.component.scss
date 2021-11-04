@@ -1,0 +1,92 @@
+@import 'src/sass/list';
+@import 'src/sass/detail';
+@import 'src/sass/variables';
+
+h5 {
+    font-size: 15px;
+}
+
+.center-title {
+    margin: auto !important;
+}
+
+.search-bar {
+    height: 44px;
+    width: 100%;
+    //float: right;
+}
+
+.orderby {
+    cursor: pointer;
+    color: rgb(182, 182, 182);
+
+    &:hover {
+        color: dimgray;
+    }
+}
+
+.icon {
+    color: #a6a6a6 !important;
+}
+
+.view {
+    cursor: pointer;
+    color: rgba($color: #656565, $alpha: 0.9) !important;
+
+    &:hover {
+        color: #2196f3 !important;
+    }
+}
+
+.edit {
+    cursor: pointer;
+    &:hover {
+        color: $orange !important;
+    }
+}
+
+.delete {
+    cursor: pointer;
+    &:hover {
+        color: $delete_color !important;
+    }
+}
+
+.center-title {
+    margin: auto !important;
+}
+
+.align-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.pop-up {
+    cursor: pointer;
+    color: #a6a6a6;
+    text-decoration: none;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #a6a6a6;
+        visibility: hidden;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transition: all 0.3s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
+    }
+
+    &:hover:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+}

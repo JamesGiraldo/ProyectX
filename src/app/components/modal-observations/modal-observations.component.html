@@ -1,0 +1,30 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <div class="title-flex">
+            <h3 mat-dialog-title>
+                {{ 'GENERAL_WORD.OBSERVATION' | translate }}
+            </h3>
+        </div>
+        <button
+            mat-icon-button
+            class="bc-transparent"
+            matTooltip="Cerrar"
+            matTooltipPosition="above"
+            (click)="onClose()"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+
+    <div class="row">
+        <div class="col-12">
+            <p *ngIf="dataDescription === null; else noObservations" class="text-muted h6 text-center">
+                No hay observaciones reportadas!
+            </p>
+            <ng-template #noObservations>
+                <p class="text-muted">{{ dataDescription | titlecase }}</p></ng-template
+            >
+        </div>
+    </div>
+</div>

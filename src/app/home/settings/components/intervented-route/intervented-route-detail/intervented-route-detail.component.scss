@@ -1,0 +1,19 @@
+@import 'src/sass/detail';
+@import 'src/sass/sizes';
+
+.stackable {
+    display: block !important;
+}
+
+.i-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.v-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

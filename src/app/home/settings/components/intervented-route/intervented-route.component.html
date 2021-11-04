@@ -1,0 +1,54 @@
+<div class="col mt-3">
+    <div class="row">
+        <div class="col">
+            <h2 mat-dialog-title>{{ 'INTERVENTED_ROUTE.CONFIGURATION_TITLE' | translate }}</h2>
+        </div>
+        <div class="col-1">
+            <button mat-flat-button class="bg-wo-gradient heightButton float-right" (click)="openDialog()"
+                    matTooltip="Añadir" matTooltipPosition="above">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="mt-2 widthSubtitle"> {{ 'INTERVENTED_ROUTE.CONFIGURATION_BODY' | translate }} </p>
+        </div>
+    </div>
+</div>
+
+<div class="row center-lg center-md center-sm center-xs full-width mt-3 mb-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row middle-lg middle-md middle-sm middle-xs zero col-container">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5>{{ colNames[0] | translate }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5>{{ colNames[1] | translate }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5>{{ colNames[2] | translate }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5></h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngFor="let interventedRoute of displayRoutes; let i = index">
+            <app-intervented-route-detail class="full-width" [interventedRoute]="interventedRoute"
+                (remove)="removeInterventedRoute(interventedRoute.id)"></app-intervented-route-detail>
+        </div>
+
+        <p *ngIf="empty" class="p-tb-20 text-muted h5">
+            {{ 'GENERAL_WORD.EMPTY' | translate }}
+        </p>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+@import 'src/sass/modal';
+@import 'src/sass/list';
+
+.center-title {
+    margin: auto !important;
+}
+
+.col-container {
+    background-color: #efefef;
+    border-radius: 10px;
+    height: 60px;
+    h4 {
+        font-size: 15px;
+        letter-spacing: 0;
+        color: #656565;
+        font-weight: bold;
+        margin: 0;
+        display: inline-block;
+    }
+}

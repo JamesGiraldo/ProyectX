@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>{{ 'REQUEST.TITLE' | translate }}</h3>
+        </div>
+        <div class="col-1">
+            <button mat-flat-button class="bg-wo-gradient float-right"
+                matTooltip="{{ 'GENERAL_WORD.SET_COLUMNS' | translate }}" (click)="setColumns()">
+                <mat-icon>settings</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="row middle-lg middle-md middle-sm middle-xs full-height">
+                <div class="col" *ngFor="let type of publicationType.items">
+                    <h4 class="text-center" [ngClass]="{ 'type-active': type.isActive }"
+                        (click)="toggleStatus(type.id)">
+                        {{ type.text }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="range-bar">
+                <mat-label>{{ 'GENERAL_WORD.RANGE' | translate }}</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Fecha inicio" />
+                    <input matEndDate formControlName="end" placeholder="Fecha final" (dateChange)="getRange($event)" />
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+
+                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Fecha inicial inválida
+                </mat-error>
+                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha final inválida</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <app-search (search)="searchData($event)"></app-search>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field class="search-bar" appearance="outline">
+                <mat-label>Filtro</mat-label>
+                <mat-select appearance="outline" [formControl]="filter">
+                    <ng-container *ngFor="let filter of filters">
+                        <mat-option [value]="filter.key">{{ filter.value }}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="container-fluid table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" *ngFor="let column of columns">
+                        <div class="d-flex theaderWidth">
+                            <h5 class="float-right headerSize">{{ column.name }}</h5>
+                            <div class="float-left" *ngIf="
+                                column.name == 'Descripcion de la carga' ||
+                                column.name == 'Fecha de publicación' ||
+                                column.name == 'Fecha de cargue' ||
+                                column.name == 'Clientes' ||
+                                column.name == 'Origen' ||
+                                column.name == 'Lugar de cargue' ">
+                                <mat-icon *ngIf="!statusOrder; else asc" matSuffix class="orderby" id="{{ column.name }}"
+                                    (click)="sortData($event)" matTooltip="Ordenar por {{ column.name }} Desc"
+                                    matTooltipPosition="above">arrow_downward</mat-icon>
+                                <ng-template #asc>
+                                    <mat-icon matSuffix class="orderby" id="{{ column.name }}" (click)="sortData($event)"
+                                        matTooltip="Ordenar por {{ column.name }}" matTooltipPosition="above">arrow_upward
+                                    </mat-icon>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </th>
+                    <th *ngIf="totalColumns > 0 && state !== 'STATE.CANCELED'">
+                        <h5 class="headerSize">
+                            {{ 'HEADER_TABLE.ACTIONS' | translate }}
+                        </h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bodyColor">
+                <tr *ngFor="let request of requests" request-detail [request]="request" [columns]="columns"
+                    [state]="state" (onRemove)="remove($event)" (onUpdate)="onUpdate($event)" class="w-100"></tr>
+                <tr *ngIf="requests.length === 0" class="text-center">
+                    <td [attr.colspan]="colspan" colspan="">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30" *ngIf="totalColumns > 0">
+        <app-pagination (pageEmitter)="goToPage($event, index)" (limitEmitter)="getCurrentElements($event)"
+            [page]="page" [totalPages]="totalPages" [elementPages]="elementPages"></app-pagination>
+    </div>
+</div>

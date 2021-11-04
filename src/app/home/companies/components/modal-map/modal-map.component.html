@@ -1,0 +1,47 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Geolocalización del Lugar de Cargue/Descargue</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="py-2"></mat-divider>
+
+    <div class="container">
+        <div mat-dialog-content>
+            <div id="geocoder" class="geocoder"></div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <mat-divider class="py-3 mt-3"></mat-divider>
+
+    <div class="row zero between-lg between-md between-sm between-xs full-width">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row zero between-lg between-md between-sm between-xs full-width">
+                <div class="col-6">
+                    <div class="py-1">
+                        <button mat-flat-button type="button"
+                            class="btn-cancelar btn-block" (click)="onClose()" >
+                            <mat-icon color="white">close</mat-icon> Cancelar
+                        </button>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="py-1">
+                        <button type="submit" [disabled]="submit" mat-flat-button
+                            (click)="onSubmit()" class="btn-submit btn-block" >
+                            <mat-icon color="white">done</mat-icon>
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="row mt-3 mb-3">
+    <div class="row zero between-lg between-md between-sm between-xs inherit-w">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <h2 class="font-weight-bold">
+                {{ 'CUSTOM_FIELD.CONFIGURATION_TITLE' | translate }}
+            </h2>
+            <p class="mt-2">
+                {{ 'CUSTOM_FIELD.CONFIGURATION_BODY' | translate }}
+            </p>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <span class="d-flex justify-content-end"><button mat-flat-button
+                    class="bg-wo-gradient d-none d-sm-none d-md-block alto float-right" (click)="onOpenModal()"
+                    matTooltip="Añadir" matTooltipPosition="above">
+                    <mat-icon>add_circle</mat-icon>
+                </button></span>
+
+            <button mat-flat-button class="bg-wo-gradient d-block d-sm-block d-md-none alto float-right" (click)="onOpenModal()"
+                matTooltip="Añadir" matTooltipPosition="above">
+                Crear campo personalizado
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid table-responsive">
+    <table class="table">
+        <thead class="thead-light">
+            <tr class="">
+                <th scope="col" class="text-center" *ngFor="let column of colNames">
+                    <h5 class="headerSize">{{ column | translate }}</h5>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bodyColor">
+            <tr custom-field-detail *ngFor="let customField of customFields" [customField]="customField"
+                (remove)="onCustomFieldRemove($event)" (update)="onUpdate()" class="w-100 text-center">
+            </tr>
+            <tr *ngIf="customFields.length === 0" class="text-center">
+                <td colspan="5">
+                    <span class="p-tb-20 text-muted h5 font-weight-bold">
+                        {{ 'GENERAL_WORD.EMPTY' | translate }}
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row mt-3">
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30">
+        <app-pagination (pageEmitter)="goToPage($event)" (limitEmitter)="getCurrentElements($event)" [page]="page" [totalPages]="totalPages" [elementPages]="elementPages">
+        </app-pagination>
+    </div>
+</div>

@@ -1,0 +1,212 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title *ngIf="!tripData.cancel && (!isGenerator || tripData.data?.myTransporter)">
+                Crear reporte de estado
+            </h3>
+            <h3 mat-dialog-title *ngIf="tripData.cancel && isGenerator">Rechazar cumplido</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <form [formGroup]="orderReportForm" enctype="multipart/form-data" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+        <div *ngIf="!tripData.cancel && (!isGenerator || tripData.data?.myTransporter)">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Estado del servicio</mat-label>
+                        <mat-select formControlName="statusReport" appearance="outline" class="full-width"
+                            (selectionChange)="onStateSelected($event)">
+                            <mat-option>Seleccione propiedad</mat-option>
+                            <ng-container *ngFor="let report of reportStatus | enumToArray">
+                                <mat-option [value]="report.value">{{ report.value | translate }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.statusReport.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col" *ngIf="kilo">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Tonelaje</mat-label>
+                        <input matInput min="1" minlength="1" type="number" formControlName="loadedTonnage" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col padding-left">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Ubicación actual</mat-label>
+                                <input matInput formControlName="location" />
+                                <mat-error *ngIf="f.location.hasError('required')">
+                                    {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-1 d-content">
+                            <button mat-icon-button type="button" (click)="openDialogMap()" class="mt-2 bg-wo-gradient float-right"
+                                matTooltip="Geoposicionar" matTooltipPosition="above">
+                                <mat-icon>location_on</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Tiempo estimado de llegada</mat-label>
+                        <input matInput type="text" min="1" minlength="1" formControlName="estimated" maxlength="14" />
+                        <mat-error *ngIf="f.estimated.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="f.estimated.hasError('maxlength')">
+                            La longitud debe ser menor a 15
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" *ngIf="origin">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Origen</mat-label>
+                        <mat-select formControlName="originId" appearance="outline" class="full-width">
+                            <mat-option>Seleccione origen</mat-option>
+                            <ng-container *ngFor="let origin of origins">
+                                <mat-option [value]="origin.publicationOriginId">
+                                    {{origin.publicationOrigin.name}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.originId.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6" *ngIf="destiny">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Destino</mat-label>
+                        <mat-select formControlName="destinyId" appearance="outline" class="full-width">
+                            <mat-option>Seleccione destino</mat-option>
+                            <ng-container *ngFor="let destiny of destinities">
+                                <mat-option [value]="destiny.publicationDestinyId">
+                                    {{destiny.publicationDestiny.name}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.destinyId.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-5" *ngIf="dateHour">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha y hora de descargue</mat-label>
+                        <input matInput [ngxMatDatetimePicker]="picker" [min]="minDate" [max]="maxDate"
+                            formControlName="dateLoad" />
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian">
+                        </ngx-mat-datetime-picker>
+                        <mat-error *ngIf="f.dateLoad.hasError('matStartDateInvalid')">
+                            El formato de fecha es inválido
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-7">
+                    <button type="button" mat-flat-button class="bg-wo-gradient full-width b-h"
+                        (click)="reportFile.click()">
+                        <mat-icon color="white">insert_drive_file</mat-icon>
+                        <mat-divider vertical class="v-divider"></mat-divider> Adjuntar archivo *
+                    </button>
+                    <input hidden type="file" (change)="onFileSelected($event)" #reportFile id="reportFile"
+                        formControlName="reportFile" />
+                    <mat-error *ngIf="reportFileHasLoaded" class="success">
+                        Se ha cargado {{ reportFileName }} correctamente
+                    </mat-error>
+                    <mat-error *ngIf="reportFileHasLoaded === false" class="danger">
+                        Ha ocurrido un problema al subir el archivo {{ reportFileName }}
+                    </mat-error>
+                    <mat-error *ngIf="f.reportFile.hasError('required')">
+                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                    </mat-error>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Observaciones</mat-label>
+                        <textarea matInput formControlName="comments" style="resize: none;"></textarea>
+                        <mat-error *ngIf="f.comments.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" *ngIf="list">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Lista de carga</mat-label>
+                        <textarea matInput style="resize: none;"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-h-80vh" *ngIf="isGenerator && tripData.cancel">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Observaciones</mat-label>
+                        <textarea matInput formControlName="comments" rows="5" style="resize: none;"></textarea>
+                        <mat-error *ngIf="f.comments.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider class="mt-3 mb-3"></mat-divider>
+
+        <div class="row zero between-lg between-md between-sm between-xs full-width">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row zero between-lg between-md between-sm between-xs full-width">
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onClose()">
+                                <mat-icon color="white">close</mat-icon> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button *ngIf="!tripData.cancel; else cancelCompliment" type="submit" [disabled]="submit"
+                                    mat-flat-button class="btn-submit btn-block">
+                                <mat-icon color="white">done</mat-icon>
+                                {{ submit ? 'Reportando estado...' : 'Guardar' }}
+                            </button>
+                            <ng-template #cancelCompliment>
+                                <button type="submit" [disabled]="submit" mat-flat-button
+                                    class="btn-submit btn-block">
+                                    <mat-icon color="white">done</mat-icon>
+                                    {{ submit ? 'Cancelando cumplido' : 'Rechazar cumplido' }}
+                                </button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

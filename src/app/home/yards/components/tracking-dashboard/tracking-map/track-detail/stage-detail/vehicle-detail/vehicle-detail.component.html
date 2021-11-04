@@ -1,0 +1,27 @@
+<div class="inherit-w vehicle-card table-responsive alto">
+    <div class="row between-xs">
+        <div class="col">
+            <div class="row inherit-h">
+                <div class="col-2 center-i zero">
+                    <div class="row inherit-h middle-xs">
+                        <mat-icon>
+                            local_shipping
+                        </mat-icon>
+                    </div>
+                </div>
+                <div class="col-10 inherit-h zero pl-3">
+                    <h5 class="header">{{ vehicle.type | translate | titlecase }}</h5>
+                    <h5 class="sub-header">Placa: {{ vehicle.plate | uppercase }}</h5>
+                    <h5 class="sub-header">Solicitud: {{ vehicle.loadCode | uppercase }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row reverse">
+                <button mat-icon-button>
+                    <mat-icon (click)="handleViewVehicleControl()">visibility</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

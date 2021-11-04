@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h3>{{ 'STADISTIC.TITLE' | translate }}</h3>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button mat-button class="btn-black">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 22px;"
+                    >cloud_download
+                </mat-icon>
+                {{ 'GENERAL_WORD.DOWNLOAD' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="divider-thin"></mat-divider>
+    <div class="row zero mt-5">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="card">
+                <div class="row bottom-lg bottom-md bottom-sm bottom-xs not-chart">
+                    <div class="col">
+                        <h3>
+                            <mat-icon fontSet="material-icons-round" class="icon-title">arrow_upward</mat-icon>
+                        </h3>
+                        <h3 class="title">Cargues efectivos/</h3>
+                        <h3 class="title">Total carros solicitados</h3>
+                    </div>
+                </div>
+                <div class="row not-chart">
+                    <div class="col">
+                        <h3>32.8%</h3>
+                        <h4>Cargues efectivos: 81</h4>
+                        <h4>Cargues solicitados: 247 &nbsp; &nbsp;</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="card">
+                <div class="row bottom-lg bottom-md bottom-sm bottom-xs not-chart">
+                    <div class="col">
+                        <h3>
+                            <mat-icon fontSet="material-icons-round" class="icon-title">directions_car</mat-icon>
+                        </h3>
+                        <h3 class="title">Carros ofertados/</h3>
+                        <h3 class="title">Total carros solicitados &nbsp;</h3>
+                    </div>
+                </div>
+                <div class="row not-chart">
+                    <div class="col">
+                        <h3>64.4%</h3>
+                        <h4>Cargues ofertados: 159</h4>
+                        <h4>Total carros solicitados: 247</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="card">
+                <div class="row chart-title">
+                    <h3>Servicios asignados por empresa</h3>
+                </div>
+                <div class="chart">
+                    <canvas
+                        baseChart
+                        [data]="pieChartData"
+                        [labels]="pieChartLabels"
+                        [chartType]="pieChartType"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins"
+                        [colors]="pieChartColors"
+                        [legend]="pieChartLegend"
+                    >
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

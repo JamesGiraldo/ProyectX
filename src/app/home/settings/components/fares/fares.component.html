@@ -1,0 +1,68 @@
+<mat-icon class="title-icon irarriba" matTooltip="Ir arriba" color="primary" matTooltipPosition="above" *ngIf="isShow" (click)="gotoTop()">
+    arrow_circle_up
+</mat-icon>
+
+<div class="row mt-3">
+    <div class="col">
+        <div class="row">
+            <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
+                <h2 class="font-weight-bold">
+                    {{ 'FARE.CONFIGURATION_TITLE' | translate }}
+                </h2>
+                <p class="mt-4 titleBody">
+                    {{ 'FARE.CONFIGURATION_BODY' | translate }}
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+               <div class="row">
+                   <div class="col">
+                        <app-search (search)="searchData($event)"></app-search>
+                   </div>
+                   <div class="col d-content">
+                    <button mat-flat-button class="bg-wo-gradient m-1 alto" (click)="openDialog()"
+                        matTooltip="Añadir" matTooltipPosition="above">
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                    <button mat-flat-button class="bg-wo-gradient m-1 alto"
+                        (click)="openDialogMassive()" matTooltip="Cargue masivo" matTooltipPosition="above">
+                        <mat-icon>assignment</mat-icon>
+                    </button>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 mb-5">
+    <div class="col">
+        <div class="row middle-lg middle-md middle-sm middle-xs zero col-container">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                <div class="row zero">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <h5>{{ 'GENERAL_WORD.TRANSPORTER' | translate }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5>{{ 'GENERAL_WORD.FARES' | translate }}</h5>
+                </div>
+            </div>
+        </div>
+
+        <mat-accordion *ngFor="let fare of fares">
+            <app-fare-detail [fare]="fare" (remove)="onFareDetailRemoved($event)"></app-fare-detail>
+        </mat-accordion>
+
+        <p *ngIf="fares.length === 0" class="p-tb-20 text-muted h5  text-center">
+            {{ 'GENERAL_WORD.EMPTY' | translate }}
+        </p>
+    </div>
+
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30">
+        <app-pagination (pageEmitter)="goToPage($event)" (limitEmitter)="getCurrentElements($event)" [page]="page"
+            [totalPages]="totalPages" [elementPages]="elementPages"></app-pagination>
+    </div>
+</div>

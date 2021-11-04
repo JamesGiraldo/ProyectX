@@ -1,0 +1,221 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+// Flexbox Grid
+@import './sass/flexbox-grid';
+
+@import './sass/sizes';
+@import './sass/margins';
+@import './sass/borders';
+@import './sass/paddings';
+
+// BOOTSTRAP
+@import '~bootstrap/scss/bootstrap';
+
+// FONT
+@import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
+
+// MATERIAL ICONS
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$cargoApp-Frontend-V2-primary: mat-palette($mat-yellow, 700);
+$cargoApp-Frontend-V2-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$cargoApp-Frontend-V2-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$cargoApp-Frontend-V2-theme: mat-light-theme(
+    $cargoApp-Frontend-V2-primary,
+    $cargoApp-Frontend-V2-accent,
+    $cargoApp-Frontend-V2-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($cargoApp-Frontend-V2-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+}
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif !important;
+    border: none;
+    padding: 0;
+    .row {
+        margin: 0;
+    }
+}
+div {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+.container {
+    margin-top: 30px;
+}
+.zero {
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+.zero-m-p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.no-padding {
+    padding: 0;
+}
+.clickable {
+    cursor: pointer;
+}
+
+.add-ln-breaks {
+    white-space: pre-line;
+}
+
+.range-bar {
+    width: 70%;
+}
+
+.edit {
+    cursor: pointer;
+}
+
+/**
+###########################################################
+                        CARDS
+###########################################################
+*/
+.card-map {
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.1);
+    padding: 50px 40px 30px 40px;
+}
+
+/**
+###########################################################
+                        BUTTONS
+###########################################################
+*/
+.btn-black {
+    border-radius: 2px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.trucks-on-route {
+    height: 24px;
+    width: 136px;
+    color: #ffffff;
+    font-family: 'Circular Std';
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 24px;
+}
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    padding: 0;
+    height: 100vh;
+    background-color: #f7f8fc;
+}
+div {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+.zero {
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+.clickable {
+    cursor: pointer;
+}
+
+.title {
+    height: 38px;
+    color: #434343;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 38px;
+}
+
+.delete {
+    color: #434343;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: red;
+}
+
+.info {
+    color: #434343;
+    cursor: pointer;
+
+    &:hover {
+        color: rgb(15, 76, 129);
+    }
+}
+
+
+/* ========= */
+
+a {
+    text-decoration: none !important;
+}
+a:hover {
+    text-decoration: none !important;
+}
+
+.d-content{
+    display: contents;
+}
+.cursor{
+    cursor: pointer !important;
+}
+
+.black{
+    color: black;
+}
+
+.deleteRow{
+    color: black;
+}
+
+.headerSize{
+    color: #434343 !important;
+    font-weight: bolder !important;
+    font-size: 15px !important;
+}
+.theaderWidth{
+    width: max-content !important;
+}
+.bodyColor{
+    color: #a7a7a7 !important;
+}
+
+.deleteRow:hover {
+    color: rgb(255, 77, 77) !important;
+}

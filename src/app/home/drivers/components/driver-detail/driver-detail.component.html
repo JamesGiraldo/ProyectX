@@ -1,0 +1,40 @@
+<td *ngFor="let col of columns">
+    <h5 *ngIf="col.name == 'GENERAL_WORD.RELATION'">
+        {{
+        driver.companyOwnerships
+        ? (driver.companyOwnerships[0].ownership | translate)
+        : (ownership.LOYAL | translate)
+        }}
+    </h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.NAME'">
+        {{ driverName | titlecase }}
+    </h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.IDENTIFICATION'">
+        {{ driver.idCard }}
+    </h5>
+    <h5 *ngIf="col.name == 'HEADER_TABLE.PHONE'">
+        {{ driver.phone | na }}
+    </h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.DOCUMENTS'">
+        <span class="cursor badge badge-pill badge-success pt-1 pb-1" matTooltip="Ver archivos cargados"
+            matTooltipPosition="above" (click)="openDialogDetailsFiles('driver')">
+            Ver documentos
+        </span>
+    </h5>
+    <h5 *ngIf="col.name == 'HEADER_TABLE.RATING'">
+        <span *ngFor="let rating of ratings" matTooltip="{{ driver.rating }}">
+            <mat-icon color="primary">{{ rating }}</mat-icon>
+        </span>
+    </h5>
+</td>
+
+<td *ngIf="columns.length > 0">
+    <div class="col-3">
+        <h5>
+            <mat-icon class="edit" (click)="openDialog()" matTooltip="Editar">edit</mat-icon>
+        </h5>
+    </div>
+    <!--  <div class="col-3">
+        <mat-icon class="delete" (click)="removeDriver(driver)" matTooltip="Eliminar">delete</mat-icon>
+    </div>-->
+</td>

@@ -1,0 +1,48 @@
+@import 'src/sass/variables';
+
+form {
+    position: relative;
+}
+
+h2 {
+    text-align: left;
+    font-size: 4vh;
+    color: #4b4b4b;
+}
+
+a {
+    color: $orange;
+}
+
+.at-the-end {
+    position: absolute;
+    left: 0;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.box {
+    background-color: black;
+}
+
+.error {
+    color: red;
+}
+
+.highligth {
+    background-color: #fff;
+}
+
+.input-label {
+    font-size: 2vh;
+    line-height: 2vh;
+    color: #545454;
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 5px 5px 5px rgba(188, 188, 188, 0.5);
+    -moz-box-shadow: 0px 5px 5px 5px rgba(188, 188, 188, 0.5);
+    box-shadow: 0px 5px 5px 5px rgba(188, 188, 188, 0.5);
+}

@@ -1,0 +1,14 @@
+@import 'src/sass/list';
+
+.center-title {
+    margin: auto !important;
+}
+
+.orderby {
+    cursor: pointer;
+    color: rgb(182, 182, 182);
+
+    &:hover {
+        color: dimgray;
+    }
+}

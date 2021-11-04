@@ -1,0 +1,73 @@
+import { User } from './user';
+import { PublicationType, TripType, TripModality, FareType, PublicationStatus } from '../enums';
+import { PublicationOrigin } from './publication-origin';
+import { PublicationDestiny } from './publication-destiny';
+import { Load } from './load';
+import { Offer } from './offer';
+import { RequestedTransporter } from './requested-transporter';
+import { CustomField } from './custom-field';
+
+export class Publication {
+    public id: number;
+    public generatorUserId: number;
+    public isParcelService: boolean;
+    public isVisible: boolean;
+    public type: PublicationType;
+    public tripType: TripType;
+    public tripModality: TripModality;
+    public fareType: FareType;
+    public state: PublicationStatus;
+    public reasonFinishCode: number;
+    public reasonCancellationCode: number;
+    public requestId: string;
+    public fareTableName: string;
+    public client: string;
+    public description: string;
+    public reasonFinish: string;
+    public reasonCancellation: string;
+    public waitTime: string;
+    public toleranceTime: string;
+    public date: string;
+    public createdAt: string;
+    public updatedAt: string;
+    public generatorUser: User;
+    public origins: PublicationOrigin[];
+    public destinies: PublicationDestiny[];
+    public load: Load;
+    public offers: Offer[];
+    public customFields: CustomField[];
+    public requests: RequestedTransporter[];
+    //public trips: Trip[];
+
+    constructor(item?: Publication) {
+        this.id = item && item.id ? item.id : null;
+        this.generatorUserId = item && item.generatorUserId ? item.generatorUserId : null;
+        this.isParcelService = item && item.isParcelService ? item.isParcelService : null;
+        this.isVisible = item && item.isVisible ? item.isVisible : null;
+        this.type = item && item.type ? item.type : null;
+        this.tripType = item && item.tripType ? item.tripType : null;
+        this.tripModality = item && item.tripModality ? item.tripModality : null;
+        this.fareType = item && item.fareType ? item.fareType : null;
+        this.state = item && item.state ? item.state : null;
+        this.reasonFinishCode = item && item.reasonFinishCode ? item.reasonFinishCode : null;
+        this.reasonCancellationCode = item && item.reasonCancellationCode ? item.reasonCancellationCode : null;
+        this.requestId = item && item.requestId ? item.requestId : null;
+        this.fareTableName = item && item.fareTableName ? item.fareTableName : null;
+        this.client = item && item.client ? item.client : null;
+        this.description = item && item.description ? item.description : null;
+        this.reasonFinish = item && item.reasonFinish ? item.reasonFinish : null;
+        this.reasonCancellation = item && item.reasonCancellation ? item.reasonCancellation : null;
+        this.waitTime = item && item.waitTime ? item.waitTime : null;
+        this.toleranceTime = item && item.toleranceTime ? item.toleranceTime : null;
+        this.date = item && item.date ? item.date : null;
+        this.createdAt = item && item.createdAt ? item.createdAt : null;
+        this.updatedAt = item && item.updatedAt ? item.updatedAt : null;
+        this.generatorUser = item && item.generatorUser ? item.generatorUser : null;
+        this.origins = item && item.origins ? item.origins : null;
+        this.destinies = item && item.destinies ? item.destinies : null;
+        this.load = item && item.load ? item.load : null;
+        this.offers = item && item.offers ? item.offers : null;
+        this.requests = item && item.requests ? item.requests : null;
+        //public trips: Trip[];
+    }
+}

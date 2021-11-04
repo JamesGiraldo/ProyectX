@@ -1,0 +1,87 @@
+form {
+    position: relative;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #545454;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #545454;
+}
+
+.at-the-end {
+    position: absolute;
+    right: 10px;
+    margin: auto;
+}
+
+.bc-transparent {
+    background-color: transparent;
+}
+
+.bc-transparent:hover {
+    background-color: transparent;
+}
+
+.bc-transparent:focus {
+    outline: none !important;
+    background-color: #fff;
+}
+
+.bg-wo-gradient {
+    color: white;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #fdd86d 0%, #fbaf3b 100%);
+}
+
+.btn-cancelar {
+    border: 1px solid #bebebe !important;
+    color: #bebebe !important;
+}
+
+.btn-submit {
+    background-color: #434343;
+    border: 1px solid #434343;
+    color: #fff;
+}
+
+.b-h {
+    margin-top: 3px;
+    height: 52px;
+}
+
+.error {
+    color: red;
+    text-align: end;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.primary {
+    color: #ffffff;
+}
+
+.max-h-75vh {
+    max-height: 75vh;
+}
+
+.v-divider {
+    height: 15px;
+    display: inline-block;
+    margin: 0 5px;
+    background-color: #fff;
+}
+
+.success {
+    margin-right: 10.5px;
+    font-size: 10.5px;
+    color: #28a745;
+    text-align: end;
+}

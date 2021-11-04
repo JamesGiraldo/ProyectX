@@ -1,0 +1,36 @@
+<td>
+    <h5>
+        {{ shift.yard?.name | titlecase }}
+    </h5>
+</td>
+<td>
+    <h5>
+        {{ shift.trip.publication.load?.code | titlecase }}
+    </h5>
+</td>
+<td>
+    <h5 *ngIf="shift.trip.driver?.firstName; else noName">
+        {{ shift.trip.driver?.firstName | titlecase }} {{ shift.trip.driver?.lastName | titlecase }}
+    </h5>
+    <ng-template #noName><h5>--- NA ---</h5></ng-template>
+</td>
+<td>
+    <h5>
+        {{ shift.trip.vehicle?.plate | uppercase }}
+    </h5>
+</td>
+<td>
+    <h5>
+        {{ formatTime(shift.entry) }}
+    </h5>
+</td>
+<td>
+    <h5>
+        {{ formatTime(shift.departure) }}
+    </h5>
+</td>
+<td>
+    <h5>
+        <mat-icon class="edit" (click)="openDialogReschedule()" matTooltip="Reprogramar horario">schedule</mat-icon>
+    </h5>
+</td>

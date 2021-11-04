@@ -1,0 +1,103 @@
+<div class="row center-lg center-md center-sm center-xs highligth vh-100 zero" style="min-width: 300px;">
+    <div class="col-lg-8 col-md-9 col-sm-11 col-xs-12">
+        <div class="vh-80 m-t-10 m-b-10 shadow br-15">
+            <div class="row zero">
+                <!-- FORM SIDE -->
+                <!-- <div class="col vh-80 br-l-15" [ngClass]="{'half-w': !hideImage}" [ngClass]="{'inherit-w': hideImage}"> -->
+                <div class="col vh-80 br-l-15 {{ hideImage ? 'inherit-w' : 'half-w' }}">
+                    <div class="zero vh-5"></div>
+                    <!-- LOGO -->
+                    <div class="row center-lg center-md center-sm center-xs zero">
+                        <div class="col-lg-8 col-md-9 col-sm-11 col-xs-12 zero vh-10">
+                            <img src="../../../assets/logo.svg" alt="CargoApp Logo" class="vh-10" />
+                        </div>
+                    </div>
+                    <div class="zero vh-5"></div>
+                    <div class="row center-lg center-md center-sm center-xs zero">
+                        <div class="col-lg-10 col-md-10 col-sm-11 col-xs-11 zero">
+                            <div class="zero vh-60">
+                                <h2 class="zero vh-5">Iniciar Sesión</h2>
+
+                                <!-- LOGIN FORM -->
+                                <!-- <form ngNoForm (ngSubmit)="onFormSubmit()"> -->
+                                <form
+                                    [formGroup]="login"
+                                    (ngSubmit)="onSubmit()"
+                                    class="vh-50 m-t-5"
+                                    novalidate
+                                    autocomplete="off"
+                                >
+                                    <div class="row zero inherit-w vh-5">
+                                        <mat-form-field appearance="legacy" class="inherit-w vh-2">
+                                            <mat-label class="input-label vh-2">Correo electrónico</mat-label>
+                                            <input
+                                                matInput
+                                                placeholder="Correo electrónico"
+                                                formControlName="email"
+                                                class="vh-2"
+                                                required
+                                                [errorStateMatcher]="matcher"
+                                            />
+                                            <mat-error *ngIf="errors.email">
+                                                {{ errors.email }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="zero vh-5"></div>
+                                    <div class="row zero inherit-w">
+                                        <mat-form-field appearance="legacy" class="inherit-w">
+                                            <mat-label class="input-label vh-2">Contraseña</mat-label>
+                                            <input
+                                                matInput
+                                                placeholder="Contraseña"
+                                                [type]="hidePwd ? 'password' : 'text'"
+                                                formControlName="password"
+                                                class="vh-2"
+                                                required
+                                                [errorStateMatcher]="matcher"
+                                            />
+                                            <mat-icon matSuffix (click)="hidePwd = !hidePwd" class="clickable">{{
+                                                hidePwd ? 'visibility_off' : 'visibility'
+                                            }}</mat-icon>
+                                            <mat-error *ngIf="errors.password">
+                                                {{ errors.password }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="zero vh-5"></div>
+                                    <button
+                                        mat-flat-button
+                                        color="primary"
+                                        type="submit"
+                                        [disabled]="loading"
+                                        class="inherit-w at-the-end"
+                                        style="color: #fff;"
+                                    >
+                                        INICIAR SESIÓN
+                                        <img
+                                            src="../../../assets/loading.gif"
+                                            class="m-l-2"
+                                            *ngIf="loading"
+                                            alt="Cargando"
+                                        />
+                                    </button>
+                                    <div class="row mt-5">
+                                        <a [routerLink]="['/passwordRecovery']">Recuperar contraseña</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- TRUCK IMAGE -->
+                <div class="col vh-80 half-w p-0" *ngIf="!hideImage">
+                    <img
+                        src="../../../assets/login-truck-image.jpg"
+                        alt="Photo taken by Taylor unsplash user: @xoutcastx"
+                        class="inherit-size br-r-15"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

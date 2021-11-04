@@ -1,0 +1,19 @@
+<mat-expansion-panel class="box-sh-none w-100mt-1 mb-1" (opened)="getVehicles()">
+    <mat-expansion-panel-header class="mt-2 mb-2">
+        <mat-panel-title class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fgc-gray-1">
+            <div class="row w-100 middle-xs">
+                <h6 class="title">
+                    ({{ stage.order.toString().padStart(2, '0') }}) {{ stage.name | titlecase }}
+                </h6>
+            </div>
+        </mat-panel-title>
+        <mat-panel-description class="col-lg-7 col-md-7 col-sm-7 col-xs-7 fgc-gray-1">
+            <p class="description">Veh&iacute;culos: {{ stage.vehicleCount }}</p>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="col-12">
+        <div class="row" *ngFor="let vehicle of vehicles">
+            <app-vehicle-detail class="w-100 alto" [yard]="yard" [vehicle]="vehicle"></app-vehicle-detail>
+        </div>
+    </div>
+</mat-expansion-panel>

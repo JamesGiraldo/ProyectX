@@ -1,0 +1,24 @@
+h5 {
+    margin: 0;
+    text-align: left;
+
+    &.header {
+        font-size: 15px;
+    }
+
+    &.sub-header {
+        color: #434343;
+        font-size: 12px;
+    }
+}
+
+.vehicle-card {
+    height: 70px;
+}
+
+.center-i {
+    justify-content: center;
+}
+.alto{
+    height: 100px;
+}

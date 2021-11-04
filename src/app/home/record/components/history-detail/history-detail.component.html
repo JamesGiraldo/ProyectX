@@ -1,0 +1,61 @@
+<td *ngFor="let col of columns">
+    <h5 class="widthActions" *ngIf="col.name == 'HEADER_TABLE.TYPE'">
+        <mat-icon class="icon" matTooltip="Nacional" matTooltipPosition="above"
+            *ngIf="record.tripType === tripType.NATIONAL; else localIcon">
+            map
+        </mat-icon>
+        <ng-template #localIcon>
+            <mat-icon class="icon" matTooltip="Local" matTooltipPosition="above">local_shipping</mat-icon>
+        </ng-template>
+        &nbsp;
+        <mat-icon class="icon" matTooltip="Asignacion automatica" matTooltipPosition="above"
+            *ngIf="record.type === publicationType.AUTOMATIC; else manualIcon">
+            alarm_on
+        </mat-icon>
+        <ng-template #manualIcon>
+            <mat-icon class="icon" matTooltip="Manual" matTooltipPosition="above">
+                alarm_off
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <h5 class="widthActions" *ngIf="col.name == 'HEADER_TABLE.LOAD_DATE'">
+        {{ record.date | formatDate }}
+    </h5>
+    <h5 class="widthActions" *ngIf="col.name == 'HEADER_TABLE.DATE_PUBLISHED'">
+        {{ record.createdAt | formatDate }}
+    </h5>
+    <h5 *ngIf="col.name == 'HEADER_TABLE.LOAD'" class="js-center pop-up widthActions" (click)="onDescriptionClick()">
+        {{ record.load.description | na | titlecase }}
+    </h5>
+    <h5 class="widthActions" *ngIf="col.name == 'HEADER_TABLE.MODALITY'">
+        {{ record.tripModality | translate }}
+    </h5>
+    <h5 class="widthActions" *ngIf="col.name == 'HEADER_TABLE.PUBLISHED_BY'">
+        {{ publisher }}
+    </h5>
+</td>
+
+<td *ngIf="columns.length > 0">
+    <h5 class="widthActions">
+        <container-element style="margin: auto;" [ngSwitch]="record.state">
+            <mat-icon class="center-title active m-1" matTooltip="Activa" matTooltipPosition="above" *ngSwitchCase="publicationState.ACTIVE">
+                pending
+            </mat-icon>
+
+            <mat-icon class="center-title cancelled m-1" matTooltip="Cancelada" matTooltipPosition="above" *ngSwitchCase="publicationState.CANCELED">
+                unpublished
+            </mat-icon>
+
+            <mat-icon class="center-title finished m-1" matTooltip="Finalizada" matTooltipPosition="above" *ngSwitchCase="publicationState.FINISHED">
+                check_circle
+            </mat-icon>
+
+            <mat-icon class="center-title active m-1" matTooltip="Activa" matTooltipPosition="above" *ngSwitchDefault>
+                pending
+            </mat-icon>
+        </container-element>
+        <mat-icon class="clickable icon view m-1" matTooltip="Ver ofertas" matTooltipPosition="above" (click)="onViewOffersClick()">
+            visibility
+        </mat-icon>
+    </h5>
+</td>

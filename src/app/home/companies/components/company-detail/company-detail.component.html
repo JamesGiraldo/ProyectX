@@ -1,0 +1,17 @@
+<!-- LIST VIEW -->
+<td class="text-center ">
+    <mat-checkbox class="example-margin primary" color="primary" [checked]="selected"
+        (change)="onCheckboxChanged($event)">
+    </mat-checkbox>
+</td>
+<td><p class="bodyColor theaderWidth">{{ company.name  | titlecase }}</p></td>
+<td><p class="bodyColor theaderWidth">{{ company.email | lowercase }}</p></td>
+<td><p class="bodyColor theaderWidth">{{ company.phone }}</p></td>
+<td class="d-flex">
+    <div *ngFor="let rating of ratings" matTooltip="{{ company.rating }}">
+        <mat-icon color="primary">{{ rating }}</mat-icon>
+    </div>
+</td>
+<td>
+    <mat-icon class="delete bodyColor" (click)="removeLoyalTransporter()">delete</mat-icon>
+</td>

@@ -1,0 +1,122 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h3>{{ 'TRANSPORTER.TITLE' | translate }}</h3>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end mt-4">
+            <button mat-flat-button class="bg-wo-gradient mr-2" matTooltip="{{ 'GENERAL_WORD.MASSIVE' | translate }}"
+                (click)="openDialogMassive(companyType.items[0].isActive)">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+            <button mat-flat-button class="bg-wo-gradient mr-2" matTooltip="{{ 'COMPANY.AS_TRANSPORTER' | translate }}"
+                (click)="openDialogAsTranporter()">
+                <mat-icon>local_shipping</mat-icon>
+            </button>
+            <button mat-flat-button class="bg-wo-gradient mr-2"
+                matTooltip="{{ 'TRANSPORTER.LOYALTY_COMPANIES' | translate }}" (click)="openDialogLoyal()">
+                <mat-icon>assignment</mat-icon>
+            </button>
+            <!-- <button mat-flat-button class="bg-wo-gradient" matTooltip="Crear empresa" (click)="openDialogCreate()">
+                <mat-icon>add_circle</mat-icon>
+            </button> -->
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="row mt-4 mb-4 between-lg between-md between-sm between-xs full-width">
+        <div class="col-md-6">
+            <div class="row middle-lg middle-md middle-sm middle-xs full-height">
+                <div class="col" *ngFor="let type of companyType.items">
+                    <h4 [ngClass]="{ 'type-active': type.isActive }" (click)="toggleStatus(type.id)">
+                        {{ type.text }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end mt-4">
+            <button mat-flat-button class="bg-wo-gradient" [disabled]="disable"
+                (click)="openDialogPublication(companyType.items[0].isActive)">
+                <span *ngIf="companyType.items[0].isActive; else noLoyal">
+                    {{ 'GENERAL_WORD.PUBLISH' | translate }}{{ 'TRANSPORTER.LOYAL' | translate }}
+                    <span *ngIf="selectedTransporters.length > 0">
+                        {{ companyType.items[0].isActive ? transportersToRequest : companiesToRequest }}</span>
+                </span>
+                <ng-template #noLoyal>
+                    <span>
+                        {{ 'GENERAL_WORD.PUBLISH' | translate }}{{ 'TRANSPORTER.ALL' | translate }}
+                        <span *ngIf="selectedCompanies.length > 0">
+                            {{ companyType.items[1].isActive ? transportersToRequest : companiesToRequest }}</span>
+                    </span>
+                </ng-template>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center">
+                        <mat-checkbox class="example-margin primary headerSize" color="primary" [checked]="globalCheck"
+                            (change)="onCheckboxChanged($event)"></mat-checkbox>
+                    </th>
+                    <th scope="col">
+                        <div class="d-flex">
+                            <h5 class="float-right headerSize">{{ 'HEADER_TABLE.NAME' | translate }}</h5>
+                            <div class="float-left">
+                                <mat-icon *ngIf="!statusOrder; else asc" matSuffix class="orderby" id="name"
+                                    (click)="sortByField($event)" matTooltip="Ordenar por nombre Desc"
+                                    matTooltipPosition="above">arrow_downward</mat-icon>
+                                <ng-template #asc>
+                                    <mat-icon matSuffix class="orderby" id="name" (click)="sortByField($event)"
+                                        matTooltip="Ordenar por nombre Asc" matTooltipPosition="above">arrow_upward
+                                    </mat-icon>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </th>
+                    <th scope="col"><h5 class="headerSize">{{ 'HEADER_TABLE.EMAIL' | translate }}</h5></th>
+                    <th scope="col"><h5 class="headerSize">{{ 'HEADER_TABLE.PHONE' | translate }}</h5></th>
+                    <th scope="col"><h5 class="headerSize">{{ 'HEADER_TABLE.RATING' | translate }}</h5></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="!loyalty">
+                    <tr *ngFor="let company of companies">
+                        <app-company-detail class="d-content" [company]="company" [selected]="globalCheck"
+                            (toggle)="onCompanyDetailToggle($event)" (remove)="onCompanyDetailRemove(company.id)">
+                        </app-company-detail>
+                    </tr>
+                    <tr *ngIf="companies.length === 0">
+                        <td colspan="6">
+                            <p class="text-center h5">
+                                {{ 'GENERAL_WORD.EMPTY' | translate }}
+                            </p>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="loyalty">
+                    <tr *ngFor="let transporter of transporters">
+                        <app-company-detail class="d-content" [company]="transporter" [selected]="globalCheck"
+                            (toggle)="onCompanyDetailToggle($event)" (remove)="onCompanyDetailRemove(transporter.id)">
+                        </app-company-detail>
+                    </tr>
+                    <tr *ngIf="transporters.length === 0">
+                        <td colspan="6">
+                            <p class="text-center h5">
+                                {{ 'GENERAL_WORD.EMPTY' | translate }}
+                            </p>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30">
+        <app-pagination (pageEmitter)="goToPage($event)" (limitEmitter)="getCurrentElements($event)" [page]="page"
+            [totalPages]="totalPages" [elementPages]="elementPages"></app-pagination>
+    </div>
+</div>

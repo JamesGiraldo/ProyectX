@@ -1,0 +1,35 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>{{ 'TRANSPORTER.LOYALTY_COMPANIES' | translate }}</h3>
+        <button mat-icon-button class="bc-transparent" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+    <div mat-dialog-content class="max-h-80vh">
+        <form [formGroup]="transporterForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row between-lg between-md between-sm between-xs full-width">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>{{ 'TRANSPORTER.SEARCH_COMPANY' | translate }}</mat-label>
+                    <input type="text" matInput formControlName="transporterId" [matAutocomplete]="auto" />
+                    <mat-icon matSuffix>search</mat-icon>
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let transporter of filteredTransporters | async" [value]="transporter">
+                            {{ transporter.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="f.transporterId.hasError('required')">
+                        {{ 'TRANSPORTER.MSG_SEARCH' | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit full-width">
+                    <mat-icon color="white">done</mat-icon>
+                    {{ 'TRANSPORTER.BTN_SEACRH' | translate }}
+                    <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

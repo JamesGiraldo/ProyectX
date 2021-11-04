@@ -1,0 +1,27 @@
+<td>
+    <h5>{{ customField.name | titlecase }}</h5>
+</td>
+<td>
+    <h5 matTooltip="{{ getListOptions() }}" matTooltipPosition="right" matTooltipClass="add-ln-breaks">
+        {{ customField.datatype | translate }}
+    </h5>
+</td>
+<td>
+    <h5>{{ customField.module | translate }}</h5>
+</td>
+<td>
+    <h5>{{ customField.controlStage ? customField.controlStage : ('N/A' | translate) }}</h5>
+</td>
+<td>
+    <div class="row center-lg center-md center-sm center-xs"
+        *ngIf="customField.module === module.YARD_CONTROL; else na">
+        <mat-icon class="edit" (click)="editCustomField()">edit</mat-icon>
+        <mat-icon class="delete" (click)="removeCustomField()">delete</mat-icon>
+    </div>
+    <ng-template #na>
+        <div class="row center-lg center-md center-sm center-xs">
+            <mat-icon style="color: #bababa;">edit</mat-icon>
+            <mat-icon style="color: #bababa;">delete</mat-icon>
+        </div>
+    </ng-template>
+</td>

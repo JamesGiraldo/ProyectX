@@ -1,0 +1,163 @@
+<td *ngFor="let col of columns">
+    <h5 *ngIf="col.name == 'HISTORY.DATE_REPORT'">
+        {{ report.createdAt | formatDate }}
+    </h5>
+    <h5 *ngIf="col.name == 'HISTORY.DATE_LOAD'">{{ report.loadDate | formatDate }}</h5>
+    <h5 *ngIf="col.name == 'HISTORY.TRANSPORTER'">
+        {{ report.transporterUser.company.name | titlecase }}
+    </h5>
+    <h5 *ngIf="col.name == 'HISTORY.DRIVER.TITLE'">
+        {{ report.driverName }}
+        <mat-divider></mat-divider>
+        {{ report.driverIdCard }}
+        <mat-divider></mat-divider>
+        {{ report.driverPhone }}
+    </h5>
+    <h5 *ngIf="col.name == 'HISTORY.REPORT'">
+        {{ report.vehiclePlate | uppercase }}
+        <mat-divider></mat-divider>
+        {{ report.vehicleCapacity }}
+    </h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.OBSERVATION'">
+        {{ report.observation ? (report.observation | titlecase) : 'No hay observaciones reportadas!' }}
+    </h5>
+    <h5 *ngIf="col.name == 'HISTORY.FARE' && user === country.COLOMBIA">
+        {{ report.fareValue | currency: 'COP':'symbol-narrow':'1.0' }}
+    </h5>
+    <h5 *ngIf="col.name == 'HISTORY.FARE' && user === country.PERU">
+        {{ report.fareValue | currency: 'S/ ':'symbol-narrow':'1.0' }}
+    </h5>
+</td>
+<td *ngIf="columns.length > 0 && historyBtn">
+    <div class="row center-lg center-md center-sm center-xs">
+        <div class="col" *ngIf="isGenerator && accept; else justCancel">
+            <div class="row between-lg between-md between-sm between-xs">
+                <h5>
+                    <mat-icon
+                        class="clickable accept"
+                        matTooltip="Aceptar"
+                        matTooltipPosition="above"
+                        (click)="onAcceptClick()"
+                    >
+                        done
+                    </mat-icon>
+                    <mat-icon
+                        class="clickable rejectOrCancel"
+                        matTooltip="Rechazar"
+                        matTooltipPosition="above"
+                        (click)="onRejectClick()"
+                    >
+                        clear
+                    </mat-icon>
+                </h5>
+            </div>
+        </div>
+        <ng-template #justCancel>
+            <h5>
+                <mat-icon
+                    *ngIf="reject"
+                    class="clickable rejectOrCancel"
+                    matTooltip="Cancelar"
+                    matTooltipPosition="above"
+                    (click)="onCancelClick()"
+                >
+                    clear
+                </mat-icon>
+            </h5>
+        </ng-template>
+    </div>
+</td>
+
+<!-- <div class="responsive full-size">
+    <div class="full-size line">
+        <div class="row middle-lg middle-md middle-sm middle-xs data-container">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5 class="fgc-gray-1">{{ report.createdAt | formatDate }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5 class="fgc-gray-1">{{ report.loadDate | formatDate }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5 class="fgc-gray-1">{{ report.transporterUser.company.name | titlecase }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5 class="fgc-gray-1">{{ report.driverName }}</h5>
+                    <mat-divider></mat-divider>
+                    <h5 class="fgc-gray-1">{{ report.driverIdCard }}</h5>
+                    <mat-divider></mat-divider>
+                    <h5 class="fgc-gray-1">{{ report.driverPhone }}</h5>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 zero">
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5 class="fgc-gray-1">{{ report.vehiclePlate | uppercase }}</h5>
+                    <mat-divider></mat-divider>
+                    <h5 class="fgc-gray-1">{{ report.vehicleCapacity }}</h5>
+                </div>
+            </div>
+            <div
+                [ngClass]="{
+                    'col-lg-1 col-md-1 col-sm-1 col-xs-1 zero': historyBtn === true,
+                    'col-lg-2 col-md-2 col-sm-2 col-xs-2 zero': historyBtn === false || reject === false
+                }"
+            >
+                <div class="row center-lg center-md center-sm center-xs zero">
+                    <h5 class="fgc-gray-1">{{ report.fareValue }}</h5>
+                </div>
+            </div>
+            <div class="col zero">
+                <mat-icon
+                    class="icon view"
+                    (click)="seeObservations()"
+                    style="cursor: pointer;"
+                    matTooltip="Ver observaciones"
+                    matTooltipPosition="above"
+                    >visibility</mat-icon
+                >
+            </div>
+            <div class="col zero" *ngIf="historyBtn">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <div class="col" *ngIf="isGenerator && accept; else justCancel">
+                        <div class="row between-lg between-md between-sm between-xs">
+                            <mat-icon
+                                class="clickable accept"
+                                matTooltip="Aceptar"
+                                matTooltipPosition="above"
+                                (click)="onAcceptClick()"
+                            >
+                                done
+                            </mat-icon>
+                            <mat-icon
+                                class="clickable rejectOrCancel"
+                                matTooltip="Rechazar"
+                                matTooltipPosition="above"
+                                (click)="onRejectClick()"
+                            >
+                                clear
+                            </mat-icon>
+                        </div>
+                    </div>
+                    <ng-template #justCancel>
+                        <mat-icon
+                            *ngIf="reject"
+                            class="clickable rejectOrCancel"
+                            matTooltip="Cancelar"
+                            matTooltipPosition="above"
+                            (click)="onCancelClick()"
+                        >
+                            clear
+                        </mat-icon>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <mat-divider *ngIf="!imLast"></mat-divider>
+    </div>
+</div> -->

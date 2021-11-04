@@ -1,0 +1,32 @@
+<td *ngFor="let col of columns">
+    <h5 *ngIf="col.name == 'GENERAL_WORD.RELATION'">
+        {{ ownershipValue | translate }}
+    </h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.PLATE'">{{ vehicle.plate | uppercase }}</h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.TYPE'">{{ vehicle.vehicleType.value | translate }}</h5>
+    <h5 *ngIf="col.name == 'HEADER_TABLE.CAPACITY'">{{ vehicle.capacity }}</h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.DOCUMENTS'">
+        <span
+            class="badge badge-pill badge-success pt-1 pb-1"
+            matTooltip="Ver archivos cargados"
+            matTooltipPosition="above"
+            (click)="openDialogDetailsFiles('vehicle')"
+            style="cursor: pointer;"
+        >
+            Ver documentos
+        </span>
+    </h5>
+    <h5 *ngIf="col.name == 'GENERAL_WORD.ASSIGNED_DRIVER'">
+        {{ getDriverName() | titlecase }}
+    </h5>
+</td>
+<td *ngIf="columns.length > 0">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h5>
+            <mat-icon class="edit" (click)="openDialog()">edit</mat-icon>
+        </h5>
+    </div>
+    <!--  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <mat-icon class="delete" (click)="removeVehicle(vehicle)">delete</mat-icon>
+    </div> -->
+</td>

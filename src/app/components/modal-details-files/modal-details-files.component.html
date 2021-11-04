@@ -1,0 +1,133 @@
+<div class="col zero">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Archivos cargados del {{ fileDetailsData.data.type === 'driver' ? 'conductor' :
+                'vehículo' }}</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button matTooltip="Cerrar" class="bc-transparent float-right" matTooltipPosition="above"
+                (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="max-h-80vh">
+        <!-- Driver -->
+        <div *ngFor="let fileDrive of driverFiles" class="py-3 ">
+           <div class="row "*ngIf="fileDetailsData.data.type === 'driver'" >
+                <div class="col">
+                    <p class="text-muted"><strong>Descripción: </strong>{{ fileDrive.description | titlecase }}</p>
+                </div>
+                <div class="col">
+                    <p class="text-muted"><strong>Fecha de expiración: </strong>{{ fileDrive.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                </div>
+                <div class="col-2">
+                    <button  *ngIf="!isGenerator" mat-icon-button [disabled]="submit" (click)="deleteFile(fileDrive)" class="btn btn-danger btn-block float-right">
+                        <mat-icon matTooltip="Eliminar archivo actual" matTooltipPosition="above">delete</mat-icon>
+                    </button>
+                </div>
+           </div>
+           <div class="row mt-2">
+               <div class="col">
+                <button mat-flat-button class="bg-wo-gradient w-100 b-h m-1" (click)="preview(fileDrive)">
+                    <mat-icon color="white">insert_drive_file</mat-icon>
+                    <mat-divider vertical class="v-divider"></mat-divider>
+                    <span *ngIf="fileDrive.fileType === driverFileType.CUSTOM; else id">PERSONALIZADO</span>
+                    <ng-template #id><span *ngIf="fileDrive.fileType === driverFileType.ID; else license">
+                            CÉDULA
+                        </span></ng-template>
+                    <ng-template #license><span *ngIf="fileDrive.fileType === driverFileType.LICENSE; else security">
+                            LICENCIA DE CONDUCCIÓN
+                        </span></ng-template>
+                    <ng-template #security><span>SEGURIDAD SOCIAL</span></ng-template>
+                </button>
+               </div>
+           </div>
+        </div>
+        <!-- Vehicle -->
+        <div *ngFor="let fileVehicle of vehicleFiles" class="py-3 ">
+            <div class="row" *ngIf="fileDetailsData.data.type === 'vehicle'">
+                 <div class="col">
+                     <p class="text-muted"><strong>Descripción:</strong>{{ fileVehicle.description | titlecase }}</p>
+                 </div>
+                 <div class="col">
+                     <p class="text-muted"><strong>Fecha de expiración: </strong>{{ fileVehicle.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                 </div>
+                 <div class="col-2">
+                     <button mat-icon-button [disabled]="submit" (click)="deleteFile(fileVehicle)" class="btn btn-danger btn-block float-right">
+                         <mat-icon matTooltip="Eliminar archivo actual" matTooltipPosition="above">delete</mat-icon>
+                     </button>
+                 </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <button mat-flat-button class="bg-wo-gradient w-100 b-h" (click)="preview(fileVehicle)">
+                        <mat-icon color="white">insert_drive_file</mat-icon>
+                        <mat-divider vertical class="v-divider"></mat-divider>
+                        <span *ngIf="fileVehicle.fileType === vehicleFileType.CUSTOM; else ownership">PERSONALIZADO</span>
+                        <ng-template #ownership><span *ngIf="fileVehicle.fileType === vehicleFileType.OWNERSHIP_CARD; else soat">
+                                TARJETA DE PROPIEDAD
+                            </span></ng-template>
+                        <ng-template #soat><span *ngIf="fileVehicle.fileType === vehicleFileType.SOAT; else tecno">SOAT</span></ng-template>
+                        <ng-template #tecno><span *ngIf="fileVehicle.fileType === vehicleFileType.TECNOMECANICA; else insurance">
+                                TECNOMECÁNICA
+                            </span></ng-template>
+                        <ng-template #insurance><span>SEGURO</span></ng-template>
+                    </button>
+                </div>
+            </div>
+         </div>
+
+        <div class="row text-center" *ngIf="submit">
+            <div class="col-md-12 mt-1">
+                <div class="alert alert-warning" role="alert">
+                    Eliminando archivo...
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="
+                (fileDetailsData.data.type === 'driver' && driverFiles.length === 0) ||
+                (fileDetailsData.data.type === 'vehicle' && vehicleFiles.length === 0)
+            ">
+            <div class="col-md-12 text-center">
+                <p class="p-tb-20 text-muted h5">
+                    {{ 'GENERAL_WORD.EMPTY' | translate }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" *ngIf="isGenerator">
+        <div class="col-md-12 mt-3">
+            <form [formGroup]="fileForm">
+                <mat-slide-toggle color="primary" class="font-weight-bold"
+                    (change)="changeVerify(fileDetailsData.data.type)" formControlName="verifyCheck"
+                    [disabled]="fileDetailsData.data.type === 'driver' ? tripDriverDisabled : tripVehicleDisabled">
+                    Archivos de
+                    {{ fileDetailsData.data.type === 'driver' ? 'conductor' : 'vehículo' }}
+                    verificados
+                </mat-slide-toggle>
+            </form>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="row w-100">
+                <div class="col">
+                    <div class="py-1">
+                        <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onClose()">
+                            <mat-icon color="white">close</mat-icon> Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

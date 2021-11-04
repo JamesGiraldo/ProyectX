@@ -1,0 +1,42 @@
+// src\app\home\layout\navbar\.sccs
+@import 'src/sass/variables';
+
+.navbar {
+    min-height: $navbarHeight;
+    background-color: white;
+    box-shadow: 0 0 13px 0 rgba(139, 139, 139, 0.5);
+    width: 100%;
+    color: black;
+    position: absolute;
+    overflow: hidden;
+    z-index: 100;
+}
+.logo {
+    max-width: 230px;
+    text-align: center;
+    vertical-align: middle;
+    img {
+        height: 57px;
+        width: 113px;
+    }
+}
+.active {
+    color: #fbaf3b !important;
+    background-color: #fbae3b60;
+    font-weight: 500 !important;
+    img {
+        color: #fbaf3b !important;
+    }
+}
+.menu-icon {
+    height: 100%;
+    font-size: 20px;
+}
+
+.nav-item a {
+    font-size: 1.2rem;
+}
+
+.refresh {
+    width: 100%;
+}

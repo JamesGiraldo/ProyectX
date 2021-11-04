@@ -1,0 +1,109 @@
+<td *ngFor="let col of columns" class="text-center">
+    <h5 *ngIf="col.name == 'Tipo de viaje'">
+        <mat-icon class="icon" matTooltip="Nacional" matTooltipPosition="above"
+            *ngIf="request['Tipo de viaje'] === tripType.NATIONAL; else localIcon">
+            map
+        </mat-icon>
+        <ng-template #localIcon>
+            <mat-icon class="icon" matTooltip="Local" matTooltipPosition="above">local_shipping</mat-icon>
+        </ng-template>
+    </h5>
+    <h5 *ngIf="col.name == 'Modalidad'">
+        <mat-icon class="icon" matTooltip="Tonelaje" matTooltipPosition="above"
+            *ngIf="request['Modalidad'] === tripmodality.TONNAGE; else modalityIcon">
+            workspaces
+        </mat-icon>
+        <ng-template #modalityIcon>
+            <mat-icon class="icon" matTooltip="Ida / Ida y Vuelta" matTooltipPosition="above">swap_horiz</mat-icon>
+        </ng-template>
+    </h5>
+    <h5 *ngIf="col.name == 'Tipo de asignación'">
+        <mat-icon class="icon" matTooltip="Asignacion automatica" matTooltipPosition="above"
+            *ngIf="request['Tipo de asignación'] === publicationTypes.AUTOMATIC; else manualIcon">
+            alarm_on
+        </mat-icon>
+        <ng-template #manualIcon>
+            <mat-icon class="icon" matTooltip="Manual" matTooltipPosition="above">
+                alarm_off
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <!-- Carrocería -->
+    <h5 *ngIf="col.name == 'Carrocería'">
+        <mat-icon class="icon" matTooltip="No aplica" matTooltipPosition="above"
+            *ngIf="request['Carrocería'] === bodyworkType.DOES_NOT_APPLY; else bodySecond">
+            no_transfer
+        </mat-icon>
+        <ng-template #bodySecond>
+            <mat-icon class="icon" matTooltip="Estacas" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.STAKE_BODY; else bodyThird">
+                local_taxi
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyThird>
+            <mat-icon class="icon" matTooltip="Furgón" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.VAN; else bodyFourth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyFourth>
+            <mat-icon class="icon" matTooltip="Furgón refrigerado" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.REFRIGERATED_VAN; else bodyFifth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyFifth>
+            <mat-icon class="icon" matTooltip="Tanque" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.TANK; else bodySixth">
+                local_gas_station
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodySixth>
+            <mat-icon class="icon" matTooltip="Tolva" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.HOPPER; else bodySeventh">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodySeventh>
+            <mat-icon class="icon" matTooltip="Manual" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.IRON; else bodyEighth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyEighth>
+            <mat-icon class="icon" matTooltip="Portacontenedores" matTooltipPosition="above"
+                *ngIf="request['Carrocería'] === bodyworkType.CONTAINER_SHIP; else bodyninth">
+                directions_boat_filled
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyninth>
+            <mat-icon class="icon" matTooltip="Manual" matTooltipPosition="Nodriza">
+                local_taxi
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <!-- end carrocería -->
+    <h5 *ngIf="col.name == 'Descripcion de la carga'" class="js-center pop-up" (click)="onDescriptionClick()">
+        {{ request[col.name] | na | titlecase }}
+    </h5>
+    <h5 *ngIf="col.name == 'Fecha de publicación' || col.name == 'Fecha de cargue'">
+        {{ request[col.name] | date: 'medium' | na }}
+    </h5>
+    <h5 *ngIf="
+            col.name !== 'Fecha de publicación' &&
+            col.name !== 'Fecha de cargue' &&
+            col.name !== 'Tipo de asignación' &&
+            col.name !== 'Modalidad' &&
+            col.name !== 'Tipo de viaje' &&
+            col.name !== 'Descripcion de la carga' &&
+            col.name !== 'Carrocería' ">
+        {{ request[col.name] | na }}
+    </h5>
+</td>
+<td *ngIf="columns.length > 0 && state !== 'STATE.CANCELED'">
+    <h5 class="widthActions">
+        <mat-icon class="icon edit m-1" *ngIf="isGenerator && state !== 'STATE.FINISHED'" (click)="onEditClick()" matTooltipPosition="above" matTooltip="Editar" >edit</mat-icon>
+        <mat-icon class="icon view m-1" (click)="onViewOffersClick()" matTooltipPosition="above" matTooltip="Ver reportes">visibility</mat-icon>
+        <mat-icon class="icon delete m-1"*ngIf="isGenerator" (click)="removeRequest()" matTooltipPosition="above" matTooltip="Eliminar" >delete</mat-icon>
+    </h5>
+</td>

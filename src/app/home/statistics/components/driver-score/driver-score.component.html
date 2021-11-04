@@ -1,0 +1,36 @@
+<div class="responsive">
+    <div class="full-size line">
+        <div class="row middle-lg middle-md middle-sm middle-xs data-container">
+            <div class="col p-tb-20">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <h5 *ngIf="place == 0 || place == 1 || place == 2; else places">
+                        <span *ngIf="place == 0"><mat-icon style="color: #ffca28">verified</mat-icon></span>
+                        <span *ngIf="place == 1"><mat-icon style="color: #bdbdbd">verified</mat-icon></span>
+                        <span *ngIf="place == 2"><mat-icon style="color: #8d6e63">verified</mat-icon></span>
+                    </h5>
+                    <ng-template #places
+                        ><h5>{{ place + 1 }}</h5></ng-template
+                    >
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <h5>{{ driver.idCard }}</h5>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <h5>{{ driverName | titlecase }}</h5>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row center-lg center-md center-sm center-xs">
+                    <div *ngFor="let rating of ratings" matTooltip="{{ driver.rating }}">
+                        <mat-icon color="primary">{{ rating }}</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+</div>

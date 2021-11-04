@@ -1,0 +1,649 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>{{ inspectionInfo?.name }}</h3>
+        <button mat-icon-button class="bc-transparent" (click)="onClose(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+    <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" novalidate>
+        <div class="max-h-80vh">
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab label="{{ formatPrincipal?.name }}">
+                    <div class="vehicle">
+                        <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                            <div class="col-12 mb-2">
+                                <h4
+                                    class="font-weight-bold"
+                                    style="
+                                        font-size: 18px;
+                                        background-color: #fbaf3b;
+                                        padding: 3px 15px;
+                                        border-radius: 5px;
+                                    "
+                                >
+                                    DATOS DEL VEHÍCULO
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-8">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Empresa transportadora</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="transporter"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Placa</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="plate"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Modelo</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="model"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Marca</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="brand"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Capacidad de tonelaje</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="capacity"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Tarjeta de propiedad</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="card_property"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Número SOAT</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="num_soat"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Vencimiento SOAT</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="date_soat"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Número vencimiento tecnomecánica</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="num_tecno"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Vencimiento revisión</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="date_tecno"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-divider class="pb-3"></mat-divider>
+                    <div class="driver">
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-12 mb-2">
+                                <h4
+                                    class="font-weight-bold"
+                                    style="
+                                        font-size: 18px;
+                                        background-color: #fbaf3b;
+                                        padding: 3px 15px;
+                                        border-radius: 5px;
+                                    "
+                                >
+                                    DATOS DEL CONDUCTOR
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-8">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Nombre completo</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="fullname"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Cédula</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="cc"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Fecha expedición licencia tránsito</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="date_license"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Número</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="num"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Categoría</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="category"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Teléfono</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="phone"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">EPS</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="eps"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">ARL</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="arl"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Fondo de pensiones</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="found"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-md-7">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Nombre contacto de emergencia</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="name_contact"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-5">
+                                <mat-form-field appearance="outline" class="header">
+                                    <mat-label class="font-weight-bold">Teléfono</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="phone_contact"
+                                        style="text-transform: uppercase; text-align: center;"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-divider class="pb-3"></mat-divider>
+                    <div class="inspection">
+                        <div class="row zero between-lg between-md between-sm between-xs">
+                            <div class="col-12 mb-2">
+                                <h4
+                                    class="font-weight-bold"
+                                    style="
+                                        font-size: 18px;
+                                        background-color: #fbaf3b;
+                                        padding: 3px 15px;
+                                        border-radius: 5px;
+                                    "
+                                >
+                                    INSPECCIÓN DEL VEHÍCULO
+                                </h4>
+                            </div>
+                        </div>
+                        <div
+                            class="row zero between-lg between-md between-sm between-xs"
+                            *ngFor="let title of formatPrincipal?.sections"
+                        >
+                            <div class="col-md-12">
+                                <h4
+                                    class="font-weight-bold"
+                                    style="
+                                        font-size: 18px;
+                                        background-color: #f7bd67;
+                                        padding: 3px 15px;
+                                        border-radius: 5px;
+                                    "
+                                >
+                                    {{ title.name | titlecase }}
+                                </h4>
+                                <div class="row align-items-center" *ngFor="let item of title.items">
+                                    <div class="col-md-6">
+                                        {{ item?.description | titlecase }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div style="padding: 15px 0;"></div>
+                                                <mat-radio-group
+                                                    color="primary"
+                                                    *ngIf="item?.dataType === 'TYPE.RADIO_BUTTON'"
+                                                    formControlName="optionForm"
+                                                >
+                                                    <mat-radio-button
+                                                        *ngFor="let option of item?.options"
+                                                        [value]="option.id"
+                                                        class="mr-2"
+                                                        (change)="onChecked(1, item.id, option.id)"
+                                                        matTooltip="{{ option?.description }}"
+                                                        >{{ option.name }}</mat-radio-button
+                                                    >
+                                                    <mat-error *ngIf="inspectionForm.get('optionForm').touched">
+                                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}</mat-error
+                                                    >
+                                                </mat-radio-group>
+
+                                                <mat-radio-group
+                                                    color="primary"
+                                                    *ngIf="item?.dataType === 'TYPE.BOOLEAN'"
+                                                    (change)="onChangeEnabled($event, item?.description)"
+                                                    formControlName="optionForm"
+                                                >
+                                                    <mat-radio-button
+                                                        value="1"
+                                                        (change)="onChecked(1, item.id, true)"
+                                                        class="mr-2"
+                                                        matTooltip="Si"
+                                                        >Si</mat-radio-button
+                                                    >
+                                                    <mat-radio-button
+                                                        value="2"
+                                                        (change)="onChecked(1, item.id, false)"
+                                                        matTooltip="No"
+                                                        >No</mat-radio-button
+                                                    >
+                                                    <mat-error *ngIf="inspectionForm.get('optionForm').touched">
+                                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}</mat-error
+                                                    >
+                                                </mat-radio-group>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <mat-form-field
+                                                    appearance="outline"
+                                                    class="full-width"
+                                                    *ngIf="item?.dataType === 'TYPE.RADIO_BUTTON'"
+                                                >
+                                                    <mat-label>Observaciones</mat-label>
+                                                    <textarea
+                                                        matInput
+                                                        style="resize: none;"
+                                                        formControlName="observation"
+                                                        (change)="getObservation(1, item.id, $event.target.value)"
+                                                    ></textarea>
+                                                </mat-form-field>
+                                                <p *ngIf="item?.dataType === 'TYPE.BOOLEAN'">
+                                                    <mat-label class="font-weight-bold">Notas: </mat-label>
+                                                    {{ item?.note | titlecase }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <mat-divider></mat-divider>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{ formatA?.name }}" [disabled]="disabledForm">
+                    <div class="inspection">
+                        <div
+                            class="row zero between-lg between-md between-sm between-xs mt-4"
+                            *ngFor="let title of formatA?.sections"
+                        >
+                            <div class="col-md-12">
+                                <h4
+                                    class="font-weight-bold"
+                                    style="
+                                        font-size: 18px;
+                                        background-color: #f7bd67;
+                                        padding: 3px 15px;
+                                        border-radius: 5px;
+                                    "
+                                >
+                                    {{ title.name | titlecase }}
+                                </h4>
+                                <div class="row align-items-center" *ngFor="let item of title.items">
+                                    <div class="col-md-6">
+                                        {{ item?.description | titlecase }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div style="padding: 15px 0;"></div>
+                                                <mat-radio-group color="primary" formControlName="optionForm">
+                                                    <mat-radio-button
+                                                        *ngFor="let option of item?.options"
+                                                        matTooltip="{{ option?.description }}"
+                                                        [value]="option.id"
+                                                        (change)="onChecked(2, item.id, option.id)"
+                                                        class="mr-2"
+                                                        >{{ option.name }}</mat-radio-button
+                                                    >
+                                                    <mat-error *ngIf="inspectionForm.get('optionForm').touched">
+                                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}</mat-error
+                                                    >
+                                                </mat-radio-group>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <mat-form-field appearance="outline" class="full-width mt-1">
+                                                    <mat-label>Observaciones</mat-label>
+                                                    <textarea
+                                                        matInput
+                                                        style="resize: none;"
+                                                        formControlName="observation"
+                                                        (change)="getObservation(2, item.id, $event.target.value)"
+                                                    ></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <mat-divider></mat-divider>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{ formatB?.name }}" [disabled]="disabledForm">
+                    <div class="inspection">
+                        <div
+                            class="row zero between-lg between-md between-sm between-xs mt-4"
+                            *ngFor="let title of formatB?.sections"
+                        >
+                            <div class="col-md-12">
+                                <h4
+                                    class="font-weight-bold"
+                                    style="
+                                        font-size: 18px;
+                                        background-color: #f7bd67;
+                                        padding: 3px 15px;
+                                        border-radius: 5px;
+                                    "
+                                >
+                                    {{ title.name }}
+                                </h4>
+                                <div class="row align-items-center" *ngFor="let item of title.items">
+                                    <div class="col-md-6">
+                                        {{ item?.description }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div style="padding: 15px 0;"></div>
+                                                <mat-radio-group color="primary" formControlName="optionForm">
+                                                    <mat-radio-button
+                                                        *ngFor="let option of item?.options"
+                                                        [value]="option.id"
+                                                        class="mr-2"
+                                                        (change)="onChecked(3, item.id, option.id)"
+                                                        matTooltip="{{ option?.description }}"
+                                                        >{{ option.name }}</mat-radio-button
+                                                    >
+                                                    <mat-error *ngIf="inspectionForm.get('optionForm').touched">
+                                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}</mat-error
+                                                    >
+                                                </mat-radio-group>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <mat-form-field appearance="outline" class="full-width mt-1">
+                                                    <mat-label>Observaciones</mat-label>
+                                                    <textarea
+                                                        matInput
+                                                        style="resize: none;"
+                                                        formControlName="observation"
+                                                        (change)="getObservation(3, item.id, $event.target.value)"
+                                                    ></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <mat-divider></mat-divider>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+
+            <!-- Signatures -->
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-12 mb-2">
+                    <h4
+                        class="font-weight-bold"
+                        style="font-size: 18px; background-color: #fbaf3b; padding: 3px 15px; border-radius: 5px;"
+                    >
+                        FIRMAS
+                    </h4>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-12 mb-2">
+                    <mat-radio-group
+                        color="primary"
+                        [(ngModel)]="selectedRadio"
+                        [ngModelOptions]="{ standalone: true }"
+                        (change)="radioChange($event)"
+                    >
+                        <mat-radio-button value="signDigital" class="mr-2" matTooltip="Firma digital"
+                            >Firma digital</mat-radio-button
+                        >
+                        <mat-radio-button value="signImage" matTooltip="Subir firma en imagen"
+                            >Subir firma en imagen</mat-radio-button
+                        >
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-3 pb-5">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="header">
+                        <mat-label class="font-weight-bold">NOMBRE DE QUIEN REALIZA LA INSPECCIÓN</mat-label>
+                        <input matInput formControlName="generatorName" />
+                        <mat-error *ngIf="f.generatorName.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                    <div style="border: 1px dotted #000000; height: 100px;" *ngIf="isVisibleSign">
+                        <signature-pad
+                            #signatureInspection
+                            [options]="signaturePadOptions"
+                            (onEndEvent)="drawCompleteInspection()"
+                        ></signature-pad>
+                    </div>
+                    <button
+                        type="button"
+                        mat-raised-button
+                        (click)="clearDraw(1)"
+                        class="mt-3 mr-5"
+                        *ngIf="isVisibleSign"
+                    >
+                        Borrar firma
+                    </button>
+                    <input
+                        type="file"
+                        formControlName="signature1"
+                        (change)="onFileSelectedSign1($event)"
+                        *ngIf="!isVisibleSign"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="header">
+                        <mat-label class="font-weight-bold">NOMBRE DEL CONDUCTOR</mat-label>
+                        <input matInput formControlName="driverName" />
+                        <mat-error *ngIf="f.driverName.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                    <div style="border: 1px dotted #000000; height: 100px;" *ngIf="isVisibleSign">
+                        <signature-pad
+                            #signaturePadDriver
+                            [options]="signaturePadOptions"
+                            (onEndEvent)="drawCompleteDriver()"
+                        ></signature-pad>
+                    </div>
+                    <button
+                        type="button"
+                        mat-raised-button
+                        (click)="clearDraw(2)"
+                        class="mt-3 mr-5"
+                        *ngIf="isVisibleSign"
+                    >
+                        Borrar firma
+                    </button>
+                    <input
+                        type="file"
+                        formControlName="signature2"
+                        (change)="onFileSelectedSign2($event)"
+                        *ngIf="!isVisibleSign"
+                    />
+                </div>
+            </div>
+        </div>
+        <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+        <div class="row zero between-lg between-md between-sm between-xs full-width">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row zero between-lg between-md between-sm between-xs full-width">
+                    <div class="col-md-4">
+                        <button
+                            style="width: 200px;"
+                            mat-flat-button
+                            type="button"
+                            class="btn-cancelar full-width"
+                            (click)="onClose(false)"
+                        >
+                            <mat-icon color="white">close</mat-icon> Cancelar
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button
+                            style="width: 200px;"
+                            mat-flat-button
+                            type="button"
+                            class="btn-cancelar full-width"
+                            (click)="openInfo()"
+                        >
+                            <mat-icon color="white">info</mat-icon> Base legal
+                        </button>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button
+                            style="width: 200px;"
+                            type="submit"
+                            mat-flat-button
+                            [disabled]="submit"
+                            class="btn-submit full-width"
+                        >
+                            <mat-icon color="white">done</mat-icon>
+                            {{ submit ? 'Enviando...' : 'Enviar formulario' }}
+                            <img
+                                src="../../../../../../assets/loading.gif"
+                                class="ml-1"
+                                *ngIf="submit"
+                                alt="Cargando"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

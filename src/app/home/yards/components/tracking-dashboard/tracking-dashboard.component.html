@@ -1,0 +1,109 @@
+<div class="row mt-3 between-lg between-md between-sm between-xs full-width">
+    <div class="col-md-6"></div>
+    <div class="col-md-4">
+        <app-search (search)="handleSearchChange($event)" *ngIf="!map"></app-search>
+    </div>
+    <div class="col-md-2">
+        <button
+            mat-flat-button
+            class="bg-wo-gradient mt-2 pt-1 pb-1 mb-4"
+            matTooltip="Ver mapa"
+            (click)="viewMap()"
+            *ngIf="!map; else viewButton"
+        >
+            <mat-icon matSuffix>map</mat-icon>
+        </button>
+        <ng-template #viewButton>
+            <div class="row">
+                <div class="col-6">
+                    <button
+                        mat-flat-button
+                        class="bg-wo-gradient mt-2 pt-1 pb-1 mb-4 mr-1"
+                        (click)="onRefresh()"
+                        matTooltip="Recargar mapa"
+                        matTooltipPosition="above"
+                    >
+                        <mat-icon matSuffix>sync</mat-icon>
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button
+                        mat-flat-button
+                        class="bg-wo-gradient mt-2 pt-1 pb-1 mb-1"
+                        matTooltip="Ver listado"
+                        (click)="viewTable()"
+                    >
+                        <mat-icon matSuffix>view_list</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<mat-divider class="divider-thin"></mat-divider>
+
+<div class="row center-lg center-md center-sm center-xs full-width mt-3">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="!map; else viewmap">
+        <div class="table-responsive">
+            <table class="table table-sm mx-auto">
+                <thead style="text-align: center; background-color: #efefef;">
+                    <tr>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">ID Solicitud</h5>
+                        </th>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">Tipo de vehículo</h5>
+                        </th>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">Placa</h5>
+                        </th>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">Estado</h5>
+                        </th>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">Planta</h5>
+                        </th>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">Conductor</h5>
+                        </th>
+                        <th>
+                            <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                                {{ 'HEADER_TABLE.ACTIONS' | translate }}
+                            </h5>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center; color: #a6a6a6 !important;">
+                    <tr
+                        tracking-details
+                        *ngFor="let tracking of trackings"
+                        [tracking]="tracking"
+                        [refresh]="refresh"
+                    ></tr>
+                    <tr *ngIf="trackings.length === 0">
+                        <td [attr.colspan]="7">
+                            <span class="p-tb-20 text-muted h5 font-weight-bold">
+                                {{ 'GENERAL_WORD.EMPTY' | translate }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <ng-template #viewmap class="inherit-w"
+            ><app-tracking-map class="inherit-w" [refreshManual]="refreshManual.asObservable()"></app-tracking-map
+        ></ng-template>
+    </div>
+
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30" *ngIf="trackings?.length > 0">
+        <app-pagination
+            (pageEmitter)="goToPage($event)"
+            [page]="page"
+            [totalPages]="totalPages"
+            [elementPages]="elementPages"
+        ></app-pagination>
+    </div>
+</div>

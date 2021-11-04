@@ -1,0 +1,123 @@
+<div class="row mt-3">
+    <div class="row zero between-lg between-md between-sm between-xs inherit-w">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2 class="font-weight-bold">
+                {{ 'GENERAL.TITLE' | translate }}
+            </h2>
+        </div>
+    </div>
+</div>
+<div class="row center-lg center-md center-sm center-xs full-width mt-3 mb-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <form [formGroup]="generalForm" novalidate>
+            <div class="row middle-lg middle-md middle-sm middle-xs zero col-container">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 zero">
+                    <div class="row middle-lg middle-md middle-sm middle-xs zero col-container">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 zero">
+                            <div class="row zero">
+                                <span class="d-block d-sm-block d-md-none text-left">{{
+                                    'GENERAL.REPORT_UNSELETED' | translate
+                                }}</span
+                                ><br />
+                                <mat-slide-toggle
+                                    color="primary"
+                                    class="mt-2"
+                                    formControlName="reportedVehicles"
+                                    (change)="onSubmit()"
+                                >
+                                    <span class="d-block d-sm-block d-md-none">Activar</span
+                                    ><span class="d-none d-sm-none d-md-block">{{
+                                        'GENERAL.REPORT_UNSELETED' | translate
+                                    }}</span></mat-slide-toggle
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <h2 class="font-weight-bold">
+                            {{ 'YARDS.TITLE' | translate }}
+                        </h2>
+                    </div>
+                    <div class="row mt-3">
+                        <p class="text-left">
+                            {{ 'GENERAL.CONFIGURATION_BODY' | translate }}
+                        </p>
+                    </div>
+                    <div class="row zero">
+                        <mat-form-field appearance="legacy" class="mr-3" style="width: 120px;">
+                            <mat-label>{{ 'GENERAL.LIMIT' | translate }}</mat-label>
+                            <input matInput formControlName="yearsVehValid" maxlength="2" class="text-center" />
+                            <mat-error *ngIf="generalForm.get('yearsVehValid').hasError('required')">
+                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="generalForm.get('yearsVehValid').hasError('pattern')">
+                                El año del vehículo debe ser numérico
+                            </mat-error>
+                        </mat-form-field>
+                        <button
+                            style="width: 170px; height: 40px; color: #fff;"
+                            type="button"
+                            (click)="onSubmit()"
+                            mat-flat-button
+                            color="primary"
+                        >
+                            {{ 'GENERAL_WORD.SAVE' | translate }}
+                        </button>
+                    </div>
+                    <div class="row mt-3">
+                        <p class="text-left">
+                            {{ 'GENERAL.MINUTES_BETWEEN_YARDS_BODY' | translate }}
+                        </p>
+                    </div>
+                    <div class="row zero mt-2">
+                        <mat-form-field appearance="legacy" class="mr-3" style="width: 120px;">
+                            <mat-label>{{ 'GENERAL.MINUTES_BETWEEN_YARDS' | translate }}</mat-label>
+                            <input matInput formControlName="minutesBetweenYards" maxlength="4" class="text-center" />
+                            <mat-error *ngIf="generalForm.get('minutesBetweenYards').hasError('required')">
+                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="generalForm.get('minutesBetweenYards').hasError('pattern')">
+                                Los minutos deben ser numéricos
+                            </mat-error>
+                        </mat-form-field>
+                        <button
+                            style="width: 170px; height: 40px; color: #fff;"
+                            type="button"
+                            (click)="onSubmit()"
+                            mat-flat-button
+                            color="primary"
+                        >
+                            {{ 'GENERAL_WORD.SAVE' | translate }}
+                        </button>
+                    </div>
+                    <div class="row mt-3">
+                        <p class="text-left">
+                            {{ 'GENERAL.MINUTES_NEXT_SHIFT_BODY' | translate }}
+                        </p>
+                    </div>
+                    <div class="row zero mt-2">
+                        <mat-form-field appearance="legacy" class="mr-3" style="width: 120px;">
+                            <mat-label>{{ 'GENERAL.MINUTES_NEXT_SHIFT' | translate }}</mat-label>
+                            <input matInput formControlName="minutesNextShift" maxlength="4" class="text-center" />
+                            <mat-error *ngIf="generalForm.get('minutesNextShift').hasError('required')">
+                                {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="generalForm.get('minutesNextShift').hasError('pattern')">
+                                Los minutos deben ser numéricos
+                            </mat-error>
+                        </mat-form-field>
+                        <button
+                            style="width: 170px; height: 40px; color: #fff;"
+                            type="button"
+                            (click)="onSubmit()"
+                            mat-flat-button
+                            color="primary"
+                        >
+                            {{ 'GENERAL_WORD.SAVE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

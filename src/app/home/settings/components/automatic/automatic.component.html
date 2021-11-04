@@ -1,0 +1,95 @@
+<div class="row mt-3 mb-5">
+    <form [formGroup]="configForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row zero between-lg between-md between-sm between-xs">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h2 class="font-weight-bold">{{ 'AA_CONFIGURATION.CONFIGURATION_TITLE' | translate }}</h2>
+                <p>
+                    {{ 'AA_CONFIGURATION.CONFIGURATION_BODY' | translate }}
+                </p>
+                <div class="ml-3">
+                    <mat-slide-toggle color="primary" formControlName="isEnabled" class="mt-3" (change)="changeWait()">
+                        {{ 'AA_CONFIGURATION.ENABLE' | translate }}</mat-slide-toggle>
+                </div>
+                <div class="ml-3">
+                    <mat-form-field appearance="legacy" class="mr-3 widthCampos">
+                        <mat-label>{{ 'GENERAL_WORD.HOUR' | translate }}</mat-label>
+                        <input matInput formControlName="waitTimeHour" class="text-center" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" class="widthCampos">
+                        <mat-label>{{ 'GENERAL_WORD.MINUTE' | translate }}</mat-label>
+                        <input matInput formControlName="waitTimeMinute" class="text-center" />
+                    </mat-form-field>
+                    <mat-icon matSuffix class="ml-2">access_time</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="p-tb-15"></div>
+        <div class="row zero between-lg between-md between-sm between-xs">
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 ml-3">
+                <p>
+                    {{ 'AA_CONFIGURATION.FILTER.BODY' | translate }}
+                </p>
+                <div *ngFor="let item of configAssigment?.filters">
+                    <div *ngIf="item.type == 'AA_CONFIGURATION.FILTER.TYPE.TOLERANCE_TIME'">
+                        <div>
+                            <mat-slide-toggle color="primary" class="mt-3" formControlName="enabledTolerance"
+                                (change)="changeTolerance()">{{ 'AA_CONFIGURATION.FILTER.TYPE.TOLERANCE_TIME' |
+                                translate }}</mat-slide-toggle>
+                            <mat-form-field appearance="legacy" class="ml-1 widthCampos">
+                                <input matInput formControlName="priorityTolerance" class="text-center" maxlength="1" />
+                            </mat-form-field>
+                        </div>
+                        <mat-form-field appearance="legacy" class="mr-3 widthCampos">
+                            <mat-label>{{ 'GENERAL_WORD.HOUR' | translate }}</mat-label>
+                            <input matInput formControlName="toleranceTimeHour" class="text-center" />
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" class="widthCampos">
+                            <mat-label>{{ 'GENERAL_WORD.MINUTE' | translate }}</mat-label>
+                            <input matInput formControlName="toleranceTimeMinute" class="text-center" />
+                        </mat-form-field>
+                        <mat-icon matSuffix class="ml-2">access_time</mat-icon>
+                    </div>
+                    <div *ngIf="item.type == 'AA_CONFIGURATION.FILTER.TYPE.INTERVENTED_ROUTES'">
+                        <mat-slide-toggle color="primary" class="mt-3" formControlName="enabledRoute"
+                            (change)="changeRoute()">{{ 'AA_CONFIGURATION.FILTER.TYPE.INTERVENTED_ROUTES' | translate }}
+                        </mat-slide-toggle>
+                        <mat-form-field appearance="legacy" class="ml-1 widthCampos">
+                            <input matInput formControlName="priorityRoute" class="text-center" maxlength="1" />
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="item.type == 'AA_CONFIGURATION.FILTER.TYPE.FARE_VALUE'">
+                        <mat-slide-toggle color="primary" class="mt-3" formControlName="enabledFare"
+                            (change)="changeFare()">{{ 'AA_CONFIGURATION.FILTER.TYPE.FARE_VALUE' | translate }}
+                        </mat-slide-toggle>
+                        <mat-form-field appearance="legacy" class="ml-1 widthCampos">
+                            <input matInput formControlName="priorityFare" class="text-center" maxlength="1" />
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="item.type == 'AA_CONFIGURATION.FILTER.TYPE.RESPONSE_TIME'">
+                        <mat-slide-toggle color="primary" class="mt-3" formControlName="enabledResponse"
+                            (change)="changeResponse()">{{ 'AA_CONFIGURATION.FILTER.TYPE.RESPONSE_TIME' | translate }}
+                        </mat-slide-toggle>
+                        <mat-form-field appearance="legacy" class="ml-1 widthCampos">
+                            <input matInput formControlName="priorityResponse" class="text-center" maxlength="1" />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-tb-20"></div>
+        <div class="row zero full-width ml-5">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div mat-dialog-actions>
+                    <div class="row zero full-width">
+                        <div>
+                            <button class="text-white button" type="submit" [disabled]="submit" mat-flat-button color="primary">
+                                <mat-icon>save</mat-icon> {{ 'GENERAL_WORD.SAVE' | translate }}
+                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

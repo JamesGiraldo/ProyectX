@@ -1,0 +1,36 @@
+.not-found {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.not-found-is-spaced {
+    padding: 90px 0px;
+}
+.not-found-error-message-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+}
+.not-found-container {
+    margin-top: 7%;
+    display: flex;
+    align-items: center;
+    min-height: 250px;
+}
+.not-found-image {
+    width: 250px;
+    height: 250px;
+}
+.not-found-code {
+    font-family: SourceCodePro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: 20px;
+    color: #464c4f;
+}
+.not-found-text {
+    font-family: 'Akzidenz', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    margin: 10px;
+}

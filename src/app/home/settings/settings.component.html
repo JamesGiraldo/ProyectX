@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h3>{{ 'CONFIG' | translate }}</h3>
+        </div>
+    </div>
+
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link [routerLink]="['/settings/automatic']" routerLinkActive #rla1="routerLinkActive"
+            [active]="rla1.isActive" *ngIf="isGenerator">{{ 'AA_CONFIGURATION.TITLE' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/permissions']" routerLinkActive #rla2="routerLinkActive"
+            [active]="rla2.isActive" *ngIf="isGenerator">{{ 'OPERATIONAL_GROUP.PLURAL' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/fares']" routerLinkActive #rla3="routerLinkActive"
+            [active]="rla3.isActive" *ngIf="isGenerator">{{ 'FARE.PLURAL' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/blockages']" routerLinkActive #rla4="routerLinkActive"
+            [active]="rla4.isActive" *ngIf="isGenerator">{{ 'BLOCKAGES.PLURAL' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/intervented-routes']" routerLinkActive #rla5="routerLinkActive"
+            [active]="rla5.isActive" *ngIf="isGenerator">{{ 'INTERVENTED_ROUTE.PLURAL' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/service-failure']" routerLinkActive #rla6="routerLinkActive"
+            [active]="rla6.isActive" *ngIf="isGenerator">{{ 'BLACKLIST.PLURAL' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/custom-fields']" routerLinkActive #rla7="routerLinkActive"
+            [active]="rla7.isActive" *ngIf="isGenerator">{{ 'CUSTOM_FIELD.PLURAL' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/yards']" routerLinkActive #rla8="routerLinkActive"
+            [active]="rla8.isActive" *ngIf="isGenerator">{{ 'YARDS.TITLE' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/report-validations']" routerLinkActive #rla9="routerLinkActive"
+            [active]="rla9.isActive" *ngIf="isGenerator">{{ 'REPORTS.TITLE' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/general']" routerLinkActive #rla10="routerLinkActive"
+            [active]="rla10.isActive" *ngIf="isGenerator">{{ 'GENERAL.TITLE' | translate }}
+        </a>
+
+        <a mat-tab-link [routerLink]="['/settings/customer-service']" routerLinkActive #rla11="routerLinkActive"
+            [active]="rla11.isActive" *ngIf="!isGenerator">{{ 'CUSTOMER SERVICE.TITLE' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/reception-requests']" routerLinkActive #rla12="routerLinkActive"
+            [active]="rla12.isActive" *ngIf="!isGenerator">{{ 'RECEPTION OF REQUESTS.TITLE' | translate }}
+        </a>
+        <a mat-tab-link [routerLink]="['/settings/adjust-validity']" routerLinkActive #rla13="routerLinkActive"
+            [active]="rla13.isActive" *ngIf="!isGenerator">{{ 'ADJUST VALIDITY.TITLE' | translate }}
+        </a>
+    </nav>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title *ngIf="isGenerator; else noGenerator">{{ 'NAVBAR.TITLE4' | translate }}</h3>
+            <ng-template #noGenerator>
+                <h3>{{ 'NAVBAR.TITLE7' | translate }}</h3>
+            </ng-template>
+        </div>
+        <div class="col-1">
+            <button mat-flat-button class="bg-wo-gradient float-right"
+                matTooltip="{{ 'GENERAL_WORD.SET_COLUMNS' | translate }}" (click)="setColumns()">
+                <mat-icon>settings</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="row middle-lg middle-md middle-sm middle-xs full-height">
+                <div class="col" *ngFor="let type of tripType.items">
+                    <h4 class="text-center" [ngClass]="{ 'type-active': type.isActive }"
+                        (click)="toggleStatus(type.id)">
+                        {{ type.text | titlecase }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="range-bar">
+                <mat-label>{{ 'GENERAL_WORD.RANGE' | translate }}</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Fecha inicio" />
+                    <input matEndDate formControlName="end" placeholder="Fecha final" (dateChange)="getRange($event)" />
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+
+                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Fecha inicial inválida
+                </mat-error>
+                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha final inválida</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <app-search (search)="searchData($event)"></app-search>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field class="search-bar" appearance="outline">
+                <mat-label>Filtro</mat-label>
+                <mat-select appearance="outline" [formControl]="filter">
+                    <ng-container *ngFor="let filter of filters">
+                        <mat-option [value]="filter.key">{{ filter.value }}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" *ngFor="let column of columns">
+                        <div class="d-flex mr-2 theaderWidth">
+                            <h5 class="float-right headerSize m-2 w-100">{{ column.name }}</h5>
+                            <span class="float-left" *ngIf="
+                                    column.name == 'Descripcion de la carga' ||
+                                    column.name == 'Fecha de publicación' ||
+                                    column.name == 'Fecha de cargue' ||
+                                    column.name == 'Clientes' ||
+                                    column.name == 'Origen' ||
+                                    column.name == 'Lugar de cargue' ||
+                                    column.name == 'Fecha de cargue transportadora'
+                                ">
+                                <mat-icon *ngIf="!statusOrder; else asc" matSuffix class="orderby"
+                                    matTooltip="Ordenar por {{ column.name }} Desc" matTooltipPosition="above"
+                                    id="{{ column.name }}" (click)="sortData($event)">arrow_downward</mat-icon>
+                                <ng-template #asc>
+                                    <mat-icon matSuffix class="orderby" matTooltip="Ordenar por {{ column.name }} Asc"
+                                        matTooltipPosition="above" id="{{ column.name }}" (click)="sortData($event)">
+                                        arrow_upward</mat-icon>
+                                </ng-template>
+                            </span>
+                        </div>
+                    </th>
+                    <th *ngIf="totalColumns > 0">
+                        <h5 class="headerSize" *ngIf="isGenerator">
+                            {{ 'GENERAL_WORD.ACTIONS' | translate }}
+                        </h5>
+                        <h5 class="headerSize" *ngIf="!isGenerator">
+                            {{ 'HEADER_TABLE.ACTIONS' | translate }}
+                        </h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bodyColor" *ngIf="tripType.items[0].isActive">
+                <tr trip-detail *ngFor="let trip of trips" [trip]="trip" [columns]="columns"
+                    [state]="tripType.items[0].id" (updated)="onUpdated($event)" class="w-100"></tr>
+                <tr *ngIf="trips.length === 0" class="text-center">
+                    <td [attr.colspan]="colspan">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="bodyColor" *ngIf="tripType.items[1].isActive">
+                <tr trip-detail *ngFor="let completed of completed" [trip]="completed" [columns]="columns"
+                    [state]="tripType.items[1].id" (updated)="onUpdated($event)" class="w-100"></tr>
+                <tr *ngIf="completed.length === 0" class="text-center">
+                    <td [attr.colspan]="colspan">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="bodyColor" *ngIf="tripType.items[2].isActive">
+                <tr trip-detail *ngFor="let incompleted of incompleted" [trip]="incompleted" [columns]="columns"
+                    [state]="tripType.items[2].id" (updated)="onUpdated($event)" class="w-100"></tr>
+                <tr *ngIf="incompleted.length === 0" class="text-center">
+                    <td [attr.colspan]="colspan">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row center-lg center-md center-sm center-xs full-width p-tb-30" *ngIf="totalColumns > 0">
+        <app-pagination (pageEmitter)="goToPage($event, index)" (limitEmitter)="getCurrentElements($event)"
+            [page]="page" [totalPages]="totalPages" [elementPages]="elementPages"></app-pagination>
+    </div>
+</div>

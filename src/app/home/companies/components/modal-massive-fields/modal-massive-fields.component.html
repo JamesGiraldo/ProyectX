@@ -1,0 +1,504 @@
+<div class="col zero">
+    <div class="row zero between-lg between-md between-sm between-xs">
+        <h3 mat-dialog-title>{{ 'GENERAL_WORD.MASSIVE' | translate }}</h3>
+        <button mat-icon-button class="bc-transparent" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+    <form [formGroup]="massiveForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="max-h-80vh">
+            <div class="row zero between-lg between-md between-sm between-xs">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center">
+                    <p>
+                        {{ 'TRANSPORTER.INFO' | translate }}
+                    </p>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.TYPE' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="tripType">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.tripType.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.PARCEL' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="isParcelService">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.CUSTOMER' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="client">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.REQUEST_ID' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="requestId">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.requestId.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.FARE_TYPE' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="fareType">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.fareType.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.MODE_TRAVEL' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="tripModality">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.tripModality.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">Fecha (<span class="text-danger">*</span>)</div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="date">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.date.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- CAMPOS DE LA CARGA -->
+            <mat-divider></mat-divider>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.CARGO_DESCRIPTION' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="description">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.description.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.CARGO_TYPE' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="typeLoad">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.typeLoad.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.LENGTH_CARGO' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="length">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.HEIGHT_CARGO' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="height">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.WIDTH_CARGO' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="width">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.LOAD_VOLUME' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="volume">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.WEIGHT_LOAD' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="weight">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- CAMPOS DE LA OFERTA -->
+            <mat-divider></mat-divider>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.TYPE_VEHICLE' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="vehicleType">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.vehicleType.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.NUMBER_VEHICLES' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="vehicleLimit">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.vehicleLimit.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.CARROCERIA' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="vehicleBodywork">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">Tarifa (<span class="text-danger">*</span>)</div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="proposedFare">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.proposedFare.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.MAX_RATE' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="maximumFare">
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.maximumFare.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- CAMPOS DE LAS UBICACIONES -->
+            <mat-divider></mat-divider>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.CITY_ORIGIN' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="nameOrigin" multiple>
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.nameOrigin.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.PLACE_LOAD' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="placeOrigin" multiple>
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.DATE_LOAD' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="dateOrigin" multiple>
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.CITY_DESTINATION' | translate }} (<span class="text-danger">*</span>)
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="nameDestiny" multiple>
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="f.nameDestiny.hasError('required')">
+                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.PLACE_UNLOAD' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="placeDestiny" multiple>
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row zero between-lg between-md between-sm between-xs mt-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+                    {{ 'TRANSPORTER.FIELD_MODAL.DATE_UNLOAD' | translate }}
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-select appearance="outline" class="full-width" formControlName="dateDestiny" multiple>
+                            <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                            <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                <mat-option [value]="field">{{ field }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!-- CAMPOS PERSONALIZADOS -->
+            <ng-container *ngIf="customFields?.length > 0" formArrayName="customFields">
+                <div
+                    class="row zero between-lg between-md between-sm between-xs mt-4"
+                    *ngFor="let customField of getCustomFields.controls; let i = index"
+                    [formGroupName]="i"
+                >
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">{{ customFields[i].name | titlecase }}</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-select
+                                appearance="outline"
+                                class="full-width"
+                                formControlName="{{ getFormControlName(customField) }}"
+                            >
+                                <mat-option value="N/A">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
+                                <ng-container *ngFor="let field of fieldsMassiveData.fields">
+                                    <mat-option [value]="field">{{ field }}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="row zero between-lg between-md between-sm between-xs full-width mt-4">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row zero between-lg between-md between-sm between-xs full-width">
+                    <div class="col-12 pb-2 mt-2" *ngIf="submit">
+                        <p class="text-center">
+                            <span class="alert alert-warning">{{ 'GENERAL_WORD.WAIT' | translate }}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <button
+                            style="width: 220px;"
+                            mat-flat-button
+                            [disabled]="submit"
+                            type="submit"
+                            class="btn-cancelar full-width"
+                            (click)="onSubmit(false)"
+                        >
+                            <mat-icon color="white">assignment</mat-icon> {{ 'GENERAL_WORD.DRAFT' | translate }}
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            style="width: 220px;"
+                            type="submit"
+                            [disabled]="submit"
+                            mat-flat-button
+                            class="btn-submit full-width"
+                        >
+                            <mat-icon color="white">done</mat-icon>
+                            {{ 'GENERAL_WORD.PUBLISH_TO_ALL' | translate }}
+                            <img
+                                src="../../../../../../assets/loading.gif"
+                                class="ml-1"
+                                *ngIf="submit"
+                                alt="Cargando"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

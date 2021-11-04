@@ -1,0 +1,277 @@
+<td *ngFor="let col of columns">
+    <h5 *ngIf="col.name == 'Tipo de viaje'">
+        <mat-icon class="icon" matTooltip="Nacional"
+            *ngIf="trip['Tipo de viaje'] === tripType.NATIONAL; else localIcon">
+            map
+        </mat-icon>
+        <ng-template #localIcon>
+            <mat-icon class="icon" matTooltip="Local">local_shipping</mat-icon>
+        </ng-template>
+    </h5>
+    <h5 *ngIf="col.name == 'Modalidad'">
+        <mat-icon class="icon" matTooltip="Tonelaje"
+            *ngIf="trip['Modalidad'] === tripmodality.TONNAGE; else modalityIcon">
+            workspaces
+        </mat-icon>
+        <ng-template #modalityIcon>
+            <mat-icon class="icon" matTooltip="Ida / Ida y Vuelta">swap_horiz</mat-icon>
+        </ng-template>
+    </h5>
+    <h5 *ngIf="col.name == 'Tipo de asignación'">
+        <mat-icon class="icon" matTooltip="Asignacion automatica"
+            *ngIf="trip['Tipo de asignación'] === publicationTypes.AUTOMATIC; else manualIcon">
+            alarm_on
+        </mat-icon>
+        <ng-template #manualIcon>
+            <mat-icon class="icon" matTooltip="Manual">
+                alarm_off
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <!-- Carrocería -->
+    <h5 *ngIf="col.name == 'Carrocería'">
+        <mat-icon class="icon" matTooltip="No aplica"
+            *ngIf="trip['Carrocería'] === bodyworkType.DOES_NOT_APPLY; else bodySecond">
+            no_transfer
+        </mat-icon>
+        <ng-template #bodySecond>
+            <mat-icon class="icon" matTooltip="Estacas"
+                *ngIf="trip['Carrocería'] === bodyworkType.STAKE_BODY; else bodyThird">
+                local_taxi
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyThird>
+            <mat-icon class="icon" matTooltip="Furgón" *ngIf="trip['Carrocería'] === bodyworkType.VAN; else bodyFourth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyFourth>
+            <mat-icon class="icon" matTooltip="Furgón refrigerado"
+                *ngIf="trip['Carrocería'] === bodyworkType.REFRIGERATED_VAN; else bodyFifth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyFifth>
+            <mat-icon class="icon" matTooltip="Tanque" *ngIf="trip['Carrocería'] === bodyworkType.TANK; else bodySixth">
+                local_gas_station
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodySixth>
+            <mat-icon class="icon" matTooltip="Tolva"
+                *ngIf="trip['Carrocería'] === bodyworkType.HOPPER; else bodySeventh">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodySeventh>
+            <mat-icon class="icon" matTooltip="Manual"
+                *ngIf="trip['Carrocería'] === bodyworkType.IRON; else bodyEighth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyEighth>
+            <mat-icon class="icon" matTooltip="Portacontenedores"
+                *ngIf="trip['Carrocería'] === bodyworkType.CONTAINER_SHIP; else bodyninth">
+                directions_boat_filled
+            </mat-icon>
+        </ng-template>
+        <ng-template #bodyninth>
+            <mat-icon class="icon" matTooltip="Manual" matTooltipPosition="Nodriza">
+                local_taxi
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <!-- end carrocería -->
+    <!-- Estado de reporte -->
+    <h5 *ngIf="col.name == 'Estado del viaje'">
+        <mat-icon class="icon" matTooltip="No iniciado"
+            *ngIf="trip['Estado del viaje'] === tripReport.NOT_STARTED; else stateSecond">
+            near_me_disabled
+        </mat-icon>
+        <ng-template #stateSecond>
+            <mat-icon class="icon" matTooltip="En origen"
+                *ngIf="trip['Estado del viaje'] === tripReport.AT_ORIGIN; else stateThird">
+                place
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateThird>
+            <mat-icon class="icon" matTooltip="Carga en espera"
+                *ngIf="trip['Estado del viaje'] === tripReport.WAITING_LOAD; else stateFourth">
+                navigation
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateFourth>
+            <mat-icon class="icon" matTooltip="Cargado"
+                *ngIf="trip['Estado del viaje'] === tripReport.LOADED; else stateFifth">
+                near_me
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateFifth>
+            <mat-icon class="icon" matTooltip="En ruta a origen"
+                *ngIf="trip['Estado del viaje'] === tripReport.ON_ROUTE_TO_ORIGIN; else stateSixth">
+                moving
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateSixth>
+            <mat-icon class="icon" matTooltip="En ruta a destino"
+                *ngIf="trip['Estado del viaje'] === tripReport.ON_ROUTE_TO_DESTINY; else stateSeventh">
+                moving
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateSeventh>
+            <mat-icon class="icon" matTooltip="En destino"
+                *ngIf="trip['Estado del viaje'] === tripReport.AT_DESTINY; else stateEighth">
+                place
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateEighth>
+            <mat-icon class="icon" matTooltip="Descarga"
+                *ngIf="trip['Estado del viaje'] === tripReport.UNLOADING; else stateninth">
+                near_me
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateninth>
+            <mat-icon class="icon" matTooltip="Completada"
+                *ngIf="trip['Estado del viaje'] === tripReport.COMPLETED; else stateTen">
+                file_download_done
+            </mat-icon>
+        </ng-template>
+        <ng-template #stateTen>
+            <mat-icon class="icon" matTooltip="Manual" matTooltip="Cancelada">
+                wrong_location
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <!-- end estado -->
+    <!-- Tipo vehículo -->
+    <h5 *ngIf="col.name == 'Tipo de vehículo'">
+        <mat-icon class="icon" matTooltip="Turbo"
+            *ngIf="trip['Estado del viaje'] === vehicleType.TURBOCHARGE; else vehicleSecond">
+            local_shipping
+        </mat-icon>
+        <ng-template #vehicleSecond>
+            <mat-icon class="icon" matTooltip="Sencillo"
+                *ngIf="trip['Estado del viaje'] === vehicleType.SIMPLE; else vehicleThird">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #vehicleThird>
+            <mat-icon class="icon" matTooltip="Tracción integral"
+                *ngIf="trip['Estado del viaje'] === vehicleType.FOUR_WHEEL_DRIVE; else vehicleFourth">
+                directions_car
+            </mat-icon>
+        </ng-template>
+        <ng-template #vehicleFourth>
+            <mat-icon class="icon" matTooltip="Mini truck"
+                *ngIf="trip['Estado del viaje'] === vehicleType.TRUNKING_RIG_MINI; else vehicleFifth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #vehicleFifth>
+            <mat-icon class="icon" matTooltip="Truck"
+                *ngIf="trip['Estado del viaje'] === vehicleType.TRUNKING_RIG; else vehicleSixth">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+        <ng-template #vehicleSixth>
+            <mat-icon class="icon" matTooltip="Manual" matTooltip="Cama baja">
+                local_shipping
+            </mat-icon>
+        </ng-template>
+    </h5>
+    <h5 *ngIf="col.name == 'Descripcion de la carga'" class="js-center pop-up" (click)="onDescriptionClick()">
+        {{ trip[col.name] | na }}
+    </h5>
+    <h5 *ngIf="col.name == 'Turnos asignados' && isGenerator && trip?.yardName.length > 0" class="js-center pop-up"
+        (click)="openDialogReschedule()">
+        {{ trip[col.name] | na }}
+    </h5>
+    <h5 *ngIf="col.name == 'Turnos asignados' && isGenerator && trip?.yardName.length === 0">
+        {{ trip[col.name] | na }}
+    </h5>
+    <h5 *ngIf="col.name == 'Turnos asignados' && !isGenerator">
+        {{ trip[col.name] | na }}
+    </h5>
+
+    <div *ngIf="isGenerator; else noGeneratorDriver">
+        <h5 *ngIf="col.name == 'Cédula del conductor'">
+            <span class="js-center pop-up" (click)="onDocumentsId('driver')"> {{ trip[col.name] | na }}</span>
+            <span class="badge badge-primary ml-2"
+                *ngIf="trip['validityDays'] > 5 && trip['validityDays'] !== null">Vigente</span>
+            <span class="badge badge-warning ml-2"
+                *ngIf="trip['validityDays'] <= 5 && trip['validityDays'] > 0 && trip['validityDays'] !== null">Pronto a
+                vencer</span>
+            <span class="badge badge-danger ml-2"
+                *ngIf="trip['validityDays'] <= 0 && trip['validityDays'] !== null">Vencido</span>
+        </h5>
+    </div>
+    <ng-template #noGeneratorDriver>
+        <h5 *ngIf="col.name == 'Cédula del conductor'">
+            {{ trip[col.name] | na }}
+            <span class="badge badge-primary ml-2" (click)="openCopy()" matTooltip="Click para copiar el enlace"
+                matTooltipPosition="above" style="cursor: pointer;"
+                *ngIf="trip['validityDays'] > 5 && trip['validityDays'] !== null">Vigente</span>
+            <span class="badge badge-warning ml-2" (click)="openCopy()" matTooltip="Click para copiar el enlace"
+                matTooltipPosition="above" style="cursor: pointer; color: #fff;"
+                *ngIf="trip['validityDays'] <= 5 && trip['validityDays'] > 0 && trip['validityDays'] !== null">Pronto a
+                vencer</span>
+            <span class="badge badge-danger ml-2" (click)="openCopy()" matTooltip="Click para copiar el enlace"
+                matTooltipPosition="above" style="cursor: pointer;"
+                *ngIf="trip['validityDays'] <= 0 && trip['validityDays'] !== null">Vencido</span>
+        </h5>
+    </ng-template>
+
+    <div *ngIf="isGenerator; else noGeneratorVehicle">
+        <h5 *ngIf="col.name == 'Placa'" class="js-center pop-up" (click)="onDocumentsPlate('vehicle')">
+            {{ trip[col.name] | na | uppercase }}
+        </h5>
+    </div>
+    <ng-template #noGeneratorVehicle>
+        <h5 *ngIf="col.name == 'Placa'">
+            {{ trip[col.name] | na | uppercase }}
+        </h5>
+    </ng-template>
+    <!-- end tipo vehículo -->
+    <h5 *ngIf="col.name == 'Fecha de publicación' || col.name == 'Fecha de cargue'">
+        {{ trip[col.name] | formatDate | na }}
+    </h5>
+    <h5 *ngIf="col.name == 'Fecha de cargue transportadora'">
+        {{ trip[col.name] | formatDate | na }}
+    </h5>
+    <h5 *ngIf="
+            col.name !== 'Fecha de publicación' &&
+            col.name !== 'Fecha de cargue transportadora' &&
+            col.name !== 'Fecha de cargue' &&
+            col.name !== 'Tipo de asignación' &&
+            col.name !== 'Modalidad' &&
+            col.name !== 'Tipo de viaje' &&
+            col.name !== 'Estado del viaje' &&
+            col.name !== 'Tipo de vehículo' &&
+            col.name !== 'Descripcion de la carga' &&
+            col.name !== 'Carrocería' &&
+            col.name !== 'Cédula del conductor' &&
+            col.name !== 'Placa' &&
+            col.name !== 'Turnos asignados'
+        ">
+        {{ trip[col.name] | na }}
+    </h5>
+</td>
+
+<td *ngIf="columns.length > 0">
+    <h5 class="widthActions">
+        <mat-icon matSuffix (click)="modalQR()" matTooltip="Generar Código QR"  class="m-1 mt-2 cursor">
+            qr_code_scanner
+        </mat-icon>
+        <mat-icon matSuffix *ngIf="(!isGenerator || trip?.myTransporter) && state != 1" (click)="openOrder()" matTooltip="Enviar reporte de estado" class="m-1 mt-2 cursor">
+            send
+        </mat-icon>
+        <mat-icon matSuffix *ngIf="isGenerator && state === 1" (click)="openRejectCompliment()" matTooltip="Rechazar cumplido" class="m-1 mt-2 cursor">
+            cancel_schedule_send
+        </mat-icon>
+        <mat-icon matSuffix matTooltip="Archivos de conductor y vehículo verificados" class="m-1 mt-2 cursor" color="primary" *ngIf="isGenerator && trip.driver_verified && trip.vehicle_verified">
+            task
+        </mat-icon>
+        <mat-icon matSuffix (click)="openNotesDialog()" matTooltip="Ver reportes de estado" class="cursor m-1">
+            visibility
+        </mat-icon>
+    </h5>
+</td>
