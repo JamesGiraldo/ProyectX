@@ -12,95 +12,50 @@
     </div>
 
     <mat-divider class="mt-3 mb-3"></mat-divider>
-    
-    
-    <div class="container-fluid sub-container table-responsive">
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">
-                        <div class="d-flex theaderWidth">
-                            <h5 class="headerSize">{{ 'HEADER_TABLE.TYPE' | translate }}</h5>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="d-flex theaderWidth">
-                            <h5 class="headerSize">{{ 'HEADER_TABLE.BODYWORK' | translate }}</h5>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="d-flex theaderWidth">
-                            <h5 class="headerSize">{{ 'HEADER_TABLE.QUANTITY' | translate }}</h5>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="d-flex theaderWidth">
-                            <h5 class="headerSize">{{ 'HEADER_TABLE.FARE' | translate }}</h5>
-                        </div>
-                    </th>
-                    <th scope="col" *ngIf="isGenerator">
-                        <div class="d-flex theaderWidth">
-                            <h5 class="headerSize">{{ 'HEADER_TABLE.FARE_MAX' | translate }}</h5>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="d-flex theaderWidth"></div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="bodyColor">
-                <mat-accordion *ngFor="let offer of offers; let offer_index = index">
-                   <tr>
-                        <app-offer-detail [offer]="offer" [isManual]="isManual" [publicationStatus]="publicationStatus"
-                            [idPublication]="idPublication" [shouldBeExpanded]="offer_index == 0" [historyVisible]="historyVisible"
-                            (addClicked)="onAddClicked($event)" (updated)="onReportUpdated($event)">
-                        </app-offer-detail>
-                   </tr>
-                </mat-accordion>
-            </tbody>
-        </table>
-    </div>
-    
 
     <!-- HEADERS -->
-    <div class="row middle-lg middle-md middle-sm middle-xs col-container">
-        <div [ngClass]="{
-                'col-3 zero': !isGenerator,
-                'col-2 zero': isGenerator
-            }">
-            <div class="row">
-                <h4 class="m-auto">{{ 'HEADER_TABLE.TYPE' | translate }}</h4>
+    <div class="row">
+        <div class="col-md-12 tabla-responsive">
+            <div class="row middle-lg middle-md middle-sm middle-xs col-container">
+                <div [ngClass]="{
+                        'col-3 zero': !isGenerator,
+                        'col-2 zero': isGenerator
+                    }">
+                    <div class="row">
+                        <h4 class="m-auto">{{ 'HEADER_TABLE.TYPE' | translate }}</h4>
+                    </div>
+                </div>
+                <div [ngClass]="{
+                        'col-3 zero': !isGenerator,
+                        'col-2 zero': isGenerator
+                    }">
+                    <div class="row">
+                        <h4 class="m-auto">{{ 'HEADER_TABLE.BODYWORK' | translate }}</h4>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <h4 class="m-auto">{{ 'HEADER_TABLE.QUANTITY' | translate }}</h4>
+                    </div>
+                </div>
+                <div class="col-2 zero">
+                    <div class="row">
+                        <h4 class="m-auto">{{ 'HEADER_TABLE.FARE' | translate }}</h4>
+                    </div>
+                </div>
+                <div class="col-2 zero" *ngIf="isGenerator">
+                    <div class="row">
+                        <h4 class="m-auto">{{ 'HEADER_TABLE.FARE_MAX' | translate }}</h4>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div [ngClass]="{
-                'col-3 zero': !isGenerator,
-                'col-2 zero': isGenerator
-            }">
-            <div class="row">
-                <h4 class="m-auto">{{ 'HEADER_TABLE.BODYWORK' | translate }}</h4>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="row">
-                <h4 class="m-auto">{{ 'HEADER_TABLE.QUANTITY' | translate }}</h4>
-            </div>
-        </div>
-        <div class="col-2 zero">
-            <div class="row">
-                <h4 class="m-auto">{{ 'HEADER_TABLE.FARE' | translate }}</h4>
-            </div>
-        </div>
-        <div class="col-2 zero" *ngIf="isGenerator">
-            <div class="row">
-                <h4 class="m-auto">{{ 'HEADER_TABLE.FARE_MAX' | translate }}</h4>
-            </div>
+        
+            <!-- OFFERS -->
+            <mat-accordion *ngFor="let offer of offers; let offer_index = index">
+                <app-offer-detail [offer]="offer" [isManual]="isManual" [publicationStatus]="publicationStatus"
+                    [idPublication]="idPublication" [shouldBeExpanded]="offer_index == 0" [historyVisible]="historyVisible"
+                    (addClicked)="onAddClicked($event)" (updated)="onReportUpdated($event)"></app-offer-detail>
+            </mat-accordion>
         </div>
     </div>
-
-    <!-- OFFERS -->
-    <mat-accordion *ngFor="let offer of offers; let offer_index = index">
-        <app-offer-detail [offer]="offer" [isManual]="isManual" [publicationStatus]="publicationStatus"
-            [idPublication]="idPublication" [shouldBeExpanded]="offer_index == 0" [historyVisible]="historyVisible"
-            (addClicked)="onAddClicked($event)" (updated)="onReportUpdated($event)"></app-offer-detail>
-    </mat-accordion>
 </div>
