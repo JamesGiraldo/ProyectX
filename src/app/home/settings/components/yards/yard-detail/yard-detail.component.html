@@ -37,9 +37,15 @@
                    </th>
                 </tr>
             </thead>
+<<<<<<< Updated upstream
             <tbody class="bodyColor" cdkDropList (cdkDropListDropped)="drop($event)">
                 <!-- <div class="example-list"> -->
                     <tr class="background-white" *ngFor="let stage of stages; let i = index" cdkDrag>
+=======
+            <tbody class="bodyColor">
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                    <tr class="row background-white" *ngFor="let stage of stages; let i = index" cdkDrag>
+>>>>>>> Stashed changes
                         <td>
                             <mat-icon cdkDragHandle style="cursor: move;">reorder</mat-icon>
                         </td>
