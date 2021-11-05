@@ -37,8 +37,8 @@
                    </th>
                 </tr>
             </thead>
-            <tbody class="bodyColor">
-                <div class="d-content" cdkDropList (cdkDropListDropped)="drop($event)">
+            <tbody class="bodyColor" cdkDropList (cdkDropListDropped)="drop($event)">
+                <!-- <div class="example-list"> -->
                     <tr class="background-white" *ngFor="let stage of stages; let i = index" cdkDrag>
                         <td>
                             <mat-icon cdkDragHandle style="cursor: move;">reorder</mat-icon>
@@ -60,7 +60,7 @@
                         </td>
                         <mat-divider></mat-divider>
                     </tr>
-                </div>
+                <!-- </div> -->
             </tbody>
         </table>
     </div>
