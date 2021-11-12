@@ -1,17 +1,17 @@
 <div class="col zero">
-    <div class="row zero between-lg between-md between-sm between-xs">
-        <div class="col-md-8">
-            <h3 mat-dialog-title>
-                Archivos cargados del reporte
-            </h3>
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Archivos cargados del reporte</h3>
         </div>
-        <div class="col-md-4 text-right">
-            <button mat-icon-button class="bc-transparent" (click)="onClose()">
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
                 <mat-icon>close</mat-icon>
             </button>
         </div>
     </div>
-    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+
+    <mat-divider class="mt-1 mb-3"></mat-divider>
+
     <div class="max-h-80vh">
         <div class="row zero between-lg between-md between-sm between-xs mb-1" *ngFor="let file of filesData">
             <button mat-flat-button class="bg-wo-gradient full-width b-h" (click)="preview(file)">

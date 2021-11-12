@@ -105,8 +105,7 @@
             <thead style="text-align: center; background-color: #efefef;">
                 <tr>
                     <th class="m-1" *ngFor="let column of columns">
-                        <h4 class="font-weight-bold fgc-gray-2"
-                            style="color: #434343; font-weight: bolder; margin-left: 3vw;" *ngIf="
+                        <h4 class="font-weight-bold fgc-gray-2 tableHeaders theaderWidth" *ngIf="
                                 column.name === 'HISTORY.DATE_REPORT' ||
                                     column.name === 'HISTORY.DATE_LOAD' ||
                                     column.name === 'HISTORY.TRANSPORTER';
@@ -116,8 +115,7 @@
                             <br /><br /><br />
                         </h4>
                         <ng-template #driver>
-                            <h4 class="font-weight-bold fgc-gray-2"
-                                style="color: #434343; font-weight: bolder; margin-left: 3vw;"
+                            <h4 class="font-weight-bold fgc-gray-2 tableHeaders theaderWidth"
                                 *ngIf="column.name === 'HISTORY.DRIVER.TITLE'; else reportTitle">
                                 {{ column.name | translate }} <br />
                                 <span>&nbsp;*{{ 'HISTORY.DRIVER.NAME' | translate }}</span><br />
@@ -126,8 +124,7 @@
                             </h4>
                         </ng-template>
                         <ng-template #reportTitle>
-                            <h4 class="font-weight-bold fgc-gray-2"
-                                style="color: #434343; font-weight: bolder; margin-left: 3vw;"
+                            <h4 class="font-weight-bold fgc-gray-2 tableHeaders theaderWidth"
                                 *ngIf="column.name === 'HISTORY.REPORT'; else observationTitle">
                                 {{ column.name | translate }} <br />
                                 <span>&nbsp;*{{ 'HISTORY.VEHICLE.PLATE' | translate }}</span><br />
@@ -135,16 +132,14 @@
                             </h4>
                         </ng-template>
                         <ng-template #observationTitle>
-                            <h4 class="font-weight-bold fgc-gray-2"
-                                style="color: #434343; font-weight: bolder; margin-left: 3vw;"
+                            <h4 class="font-weight-bold fgc-gray-2 tableHeaders theaderWidth"
                                 *ngIf="column.name === 'GENERAL_WORD.OBSERVATION'; else fareTitle">
                                 {{ column.name | translate }}
                                 <br /><br /><br />
                             </h4>
                         </ng-template>
                         <ng-template #fareTitle>
-                            <h4 class="font-weight-bold fgc-gray-2"
-                                style="color: #434343; font-weight: bolder; margin-left: 3vw;"
+                            <h4 class="font-weight-bold fgc-gray-2 tableHeaders theaderWidth"
                                 *ngIf="column.name === 'HISTORY.FARE'">
                                 {{ column.name | translate }} <br /><br /><br />
                             </h4>
@@ -152,15 +147,15 @@
                     </th>
 
                     <th *ngIf="columns.length > 0">
-                        <h5 style="color: #434343; font-weight: bolder; width: 10vw;"></h5>
+                        <h5 class="theaderWidth" style="color: #434343; font-weight: bolder; width: 10vw;"></h5>
                     </th>
                 </tr>
             </thead>
-            <tbody style="text-align: center; color: #a6a6a6 !important;">
+            <tbody class="bodyColor text-center">
                 <tr report-detail *ngFor="let report of reports; let rIndex = index" class="inherit-w" [report]="report"
                     [columns]="columns" [isManual]="isManual" [historyBtn]="historyBtn"
                     [imLast]="rIndex == reports.length - 1" (updated)="onReportUpdated($event)"></tr>
-                <tr *ngIf="reports.length === 0" style="text-align: center;">
+                <tr *ngIf="reports.length === 0" class="text-center mt-3 mb-1">
                     <td [attr.colspan]="colspan">
                         <span class="p-tb-20 text-muted h5 font-weight-bold">
                             {{ 'GENERAL_WORD.EMPTY' | translate }}

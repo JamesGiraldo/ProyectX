@@ -1,14 +1,20 @@
 <div class="col zero">
-    <div class="row zero between-lg between-md between-sm between-xs">
-        <h3 mat-dialog-title>{{ 'TRANSPORTER.LOYALTY_COMPANIES' | translate }}</h3>
-        <button mat-icon-button class="bc-transparent" (click)="onClose()">
-            <mat-icon>close</mat-icon>
-        </button>
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>{{ 'TRANSPORTER.LOYALTY_COMPANIES' | translate }}</h3>
+        </div>
+        <div class="col-1">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
     </div>
-    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
-    <div mat-dialog-content class="max-h-80vh">
+
+    <mat-divider class="py-3 mt-3"></mat-divider>
+
+    <div mat-dialog-content>
         <form [formGroup]="transporterForm" (ngSubmit)="onSubmit()" novalidate>
-            <div class="row between-lg between-md between-sm between-xs full-width">
+            <div class="row">
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>{{ 'TRANSPORTER.SEARCH_COMPANY' | translate }}</mat-label>
                     <input type="text" matInput formControlName="transporterId" [matAutocomplete]="auto" />
@@ -18,13 +24,13 @@
                             {{ transporter.name }}
                         </mat-option>
                     </mat-autocomplete>
-                    <mat-error *ngIf="f.transporterId.hasError('required')">
+                    <mat-error *ngIf="f.transporterId.hasError('required')" class="mb-1">
                         {{ 'TRANSPORTER.MSG_SEARCH' | translate }}
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div>
-                <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit full-width">
+            <div class="mt-2">
+                <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit full-width p-1">
                     <mat-icon color="white">done</mat-icon>
                     {{ 'TRANSPORTER.BTN_SEACRH' | translate }}
                     <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />

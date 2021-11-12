@@ -25,10 +25,7 @@
                         <h4 class="m-auto">{{ 'HEADER_TABLE.TYPE' | translate }}</h4>
                     </div>
                 </div>
-                <div [ngClass]="{
-                        'col-3 zero': !isGenerator,
-                        'col-2 zero': isGenerator
-                    }">
+                <div [ngClass]="{ 'col-3 zero': !isGenerator, 'col-2 zero': isGenerator }">
                     <div class="row">
                         <h4 class="m-auto">{{ 'HEADER_TABLE.BODYWORK' | translate }}</h4>
                     </div>
@@ -49,7 +46,6 @@
                     </div>
                 </div>
             </div>
-        
             <!-- OFFERS -->
             <mat-accordion *ngFor="let offer of offers; let offer_index = index">
                 <app-offer-detail [offer]="offer" [isManual]="isManual" [publicationStatus]="publicationStatus"

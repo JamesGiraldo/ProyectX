@@ -780,7 +780,7 @@ export class ModalNewPublicationComponent implements OnInit {
                 this.companyData.companiesToRequest?.length > 0
                     ? this.companyData.companiesToRequest
                     : this.companyIdArray,
-            sendRequestToEveryone: !this.companyData.companyType,
+            sendRequestToEveryone: !this.companyData.companyType ? (this.companyData.companiesToRequest?.length === 0 ? true  :  false) : (this.companyData.sendRequestToEveryone = false),
             customFields: this.customFieldArray,
         };
 

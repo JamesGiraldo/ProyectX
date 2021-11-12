@@ -139,7 +139,7 @@ export class ModalNewReportComponent implements OnInit {
             this.formBuilder.group({
                 vehiclePlate: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{6}$')]],
                 driverName: ['', [Validators.required, Validators.pattern('^[a-záéíóúñA-ZÑ ]+$')]],
-                driverIdCard: ['', [Validators.required, Validators.pattern('^[0-9]{7,10}$')]],
+                driverIdCard: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
                 driverPhone: ['', [Validators.required, Validators.pattern('^[0-9]{7,10}$')]],
                 vehicleCapacity: [0, [Validators.required, Validators.min(0), Validators.pattern('^[0-9]+$')]],
                 loadDate: ['', [Validators.required]],

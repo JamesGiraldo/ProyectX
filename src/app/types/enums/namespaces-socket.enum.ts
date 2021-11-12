@@ -1,3 +1,3 @@
 export enum NamespaceSocket {
-    COMPANY = 'COMPANY',
+    COMPANY = 'publication',
 }

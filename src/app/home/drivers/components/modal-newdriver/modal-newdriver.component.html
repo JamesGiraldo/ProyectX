@@ -16,7 +16,7 @@
     <form [formGroup]="driverForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Relaci&oacute;n con el conductor</mat-label>
                         <mat-select formControlName="ownershipRelation" appearance="outline" class="w-100">
@@ -30,15 +30,15 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>C&eacute;dula</mat-label>
-                        <input matInput formControlName="idCard" maxlength="10" minlength="7" />
+                        <input matInput formControlName="idCard" maxlength="11" max="11" min="4" minlength="4" />
                         <mat-error *ngIf="f.idCard.hasError('required')">
                             {{ 'GENERAL_WORD.MANDATORY' | translate }}
                         </mat-error>
                         <mat-error *ngIf="f.idCard.hasError('minlength')">
-                            El número de identificación debe contener mín. 7 y máx. 10 números
+                            El número de identificación debe contener mín. 4 y máx. 11 números
                         </mat-error>
                         <mat-error *ngIf="f.idCard.hasError('pattern')">
                             El número de identificación debe ser numérico
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Nombres</mat-label>
                         <input matInput formControlName="firstName" />
@@ -56,7 +56,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Apellidos</mat-label>
                         <input matInput formControlName="lastName" />
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>EPS</mat-label>
                         <mat-select formControlName="healthEntity" appearance="outline" class="w-100">
@@ -81,7 +81,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>ARL</mat-label>
                         <mat-select formControlName="riskManager" appearance="outline" class="w-100">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Tel&eacute;fono</mat-label>
                         <input matInput formControlName="phone" minlength="7" maxlength="10" />
@@ -114,10 +114,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <mat-slide-toggle color="primary" formControlName="available">Disponible</mat-slide-toggle>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-slide-toggle color="primary" formControlName="enabled">Estado</mat-slide-toggle>
                 </div>
             </div>
@@ -129,7 +129,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col" *ngIf="driverDataCopy.id">
-                        <button mat-flat-button type="submit" class="btn-cancelar btn-block p-1"
+                        <button mat-flat-button type="submit" class="btn-cancelar btn-block p-1 mb-1"
                             (click)="openDialogFiles('driver')">
                             <mat-icon color="white" class="">upload_file</mat-icon> Subir archivos
                         </button>

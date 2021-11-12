@@ -22,7 +22,8 @@
                     <p class="text-muted"><strong>Descripción: </strong>{{ fileDrive.description | titlecase }}</p>
                 </div>
                 <div class="col">
-                    <p class="text-muted"><strong>Fecha de expiración: </strong>{{ fileDrive.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                    <p class="text-muted" *ngIf="fileDrive.expireDate"><strong>Fecha de expiración: </strong>{{ fileDrive.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                    <p class="text-muted" *ngIf="!fileDrive.expireDate"></p>
                 </div>
                 <div class="col-2">
                     <button  *ngIf="!isGenerator" mat-icon-button [disabled]="submit" (click)="deleteFile(fileDrive)" class="btn btn-danger btn-block float-right">
@@ -32,18 +33,25 @@
            </div>
            <div class="row mt-2">
                <div class="col">
-                <button mat-flat-button class="bg-wo-gradient w-100 b-h m-1" (click)="preview(fileDrive)">
-                    <mat-icon color="white">insert_drive_file</mat-icon>
-                    <mat-divider vertical class="v-divider"></mat-divider>
-                    <span *ngIf="fileDrive.fileType === driverFileType.CUSTOM; else id">PERSONALIZADO</span>
-                    <ng-template #id><span *ngIf="fileDrive.fileType === driverFileType.ID; else license">
-                            CÉDULA
-                        </span></ng-template>
-                    <ng-template #license><span *ngIf="fileDrive.fileType === driverFileType.LICENSE; else security">
-                            LICENCIA DE CONDUCCIÓN
-                        </span></ng-template>
-                    <ng-template #security><span>SEGURIDAD SOCIAL</span></ng-template>
-                </button>
+                    <button mat-flat-button class="bg-wo-gradient w-100 b-h m-1" (click)="preview(fileDrive)">
+                        <mat-icon color="white">insert_drive_file</mat-icon>
+                        <mat-divider vertical class="v-divider"></mat-divider>
+                        <span *ngIf="fileDrive.fileType === driverFileType.CUSTOM; else id">PERSONALIZADO</span>
+                        <ng-template #id><span *ngIf="fileDrive.fileType === driverFileType.ID; else license">
+                                CÉDULA
+                            </span></ng-template>
+                        <ng-template #license><span *ngIf="fileDrive.fileType === driverFileType.LICENSE; else security">
+                                LICENCIA DE CONDUCCIÓN
+                            </span></ng-template>
+                        <ng-template #security><span>SEGURIDAD SOCIAL</span></ng-template>
+                    </button>
+               </div>
+               <div class="col">
+                   <button mat-button class="btn-black w-100 b-h" (click)="download(fileDrive)">
+                       <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 22px;">cloud_download
+                       </mat-icon>
+                       {{ 'GENERAL_WORD.DOWNLOAD' | translate }}
+                   </button>
                </div>
            </div>
         </div>
@@ -54,7 +62,8 @@
                      <p class="text-muted"><strong>Descripción:</strong>{{ fileVehicle.description | titlecase }}</p>
                  </div>
                  <div class="col">
-                     <p class="text-muted"><strong>Fecha de expiración: </strong>{{ fileVehicle.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                     <p class="text-muted" *ngIf="fileVehicle.expireDate"><strong>Fecha de expiración: </strong>{{ fileVehicle.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                     <p class="text-muted" *ngIf="!fileVehicle.expireDate"></p>
                  </div>
                  <div class="col-2">
                      <button mat-icon-button [disabled]="submit" (click)="deleteFile(fileVehicle)" class="btn btn-danger btn-block float-right">
@@ -76,6 +85,13 @@
                                 TECNOMECÁNICA
                             </span></ng-template>
                         <ng-template #insurance><span>SEGURO</span></ng-template>
+                    </button>
+                </div>
+                <div class="col">
+                    <button mat-button class="btn-black w-100 b-h" (click)="download(fileVehicle)">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 22px;">cloud_download
+                        </mat-icon>
+                        {{ 'GENERAL_WORD.DOWNLOAD' | translate }}
                     </button>
                 </div>
             </div>

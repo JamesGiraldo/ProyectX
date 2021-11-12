@@ -1,103 +1,85 @@
 <div class="col zero">
-    <div class="row zero between-lg between-md between-sm between-xs">
-        <h3 mat-dialog-title>{{ factory.data?.id ? 'Editar etapa' : 'Crear etapas' }}</h3>
-        <button mat-icon-button class="bc-transparent" (click)="onClose()">
-            <mat-icon>close</mat-icon>
-        </button>
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>{{ factory.data?.id ? 'Editar etapa' : 'Crear etapas' }}</h3>
+        </div>
+        <div class="col">
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
     </div>
-    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
     <form [formGroup]="stageForm" (ngSubmit)="onSubmit()" novalidate>
-        <div mat-dialog-content class="max-h-80vh">
-            <div class="row zero between-lg between-md between-sm between-xs">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div mat-dialog-content class="container-fluid">
+            <div class="row">
+                <div class="col">
                     <div class="row" formArrayName="stages">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pt-3" *ngIf="!factory.data?.id"></div>
                         <ng-container *ngFor="let stage of getStages.controls; let i = index" [formGroupName]="i">
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pt-3" *ngIf="i > 0">
-                                <a class="delete" style="cursor: pointer;" (click)="removeStage(i)">
-                                    <mat-icon>delete</mat-icon>
-                                </a>
-                            </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pt-3" *ngIf="!factory.data?.id">
-                                <b>{{ i + 1 }}.</b>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <mat-form-field appearance="outline" class="full-width">
-                                    <mat-label>{{ 'GENERAL_WORD.NAME' | translate }}</mat-label>
-                                    <input matInput formControlName="name" />
-                                    <mat-error *ngIf="getStages.controls[i].get('name').hasError('required')">
-                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                <mat-form-field appearance="outline" class="full-width">
-                                    <mat-label>{{ 'YARDS.ESTIMATED' | translate }}</mat-label>
-                                    <input matInput formControlName="timeEstimated" />
-                                    <mat-error *ngIf="getStages.controls[i].get('timeEstimated').hasError('required')">
-                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div
-                                [ngClass]="{
-                                    'col-lg-4 col-md-4 col-sm-4 col-xs-4': factory.data?.id,
-                                    'col-lg-3 col-md-3 col-sm-3 col-xs-3': !factory.data?.id
-                                }"
-                            >
-                                <mat-form-field appearance="outline" class="full-width">
-                                    <mat-label>Color</mat-label>
-                                    <input matInput [ngxMatColorPicker]="picker" formControlName="color" />
-                                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-                                    <ngx-mat-color-picker #picker [touchUi]="true"></ngx-mat-color-picker>
-                                    <mat-error *ngIf="getStages.controls[i].get('color').hasError('required')">
-                                        {{ 'GENERAL_WORD.MANDATORY' | translate }}
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div
-                                [ngClass]="{
-                                    'col-lg-2 col-md-2 col-sm-2 col-xs-2': factory.data?.id,
-                                    'col-lg-1 col-md-1 col-sm-1 col-xs-1': !factory.data?.id
-                                }"
-                            >
-                                <button
-                                    style="color: #fff;"
-                                    class="full-width mt-2"
-                                    mat-flat-button
-                                    color="primary"
-                                    type="button"
-                                    matTooltip="Agregar tiempos por vehículos"
-                                    *ngIf="!factory.data?.id && stateModal[i] == null"
-                                    (click)="openDialogVehiclesTypes(i)"
-                                >
-                                    <mat-icon>schedule</mat-icon>
-                                </button>
-                                <button
-                                    style="color: #fff;"
-                                    class="full-width mt-2"
-                                    mat-flat-button
-                                    color="warn"
-                                    type="button"
-                                    matTooltip="Quitar tiempos por vehículos"
-                                    *ngIf="!factory.data?.id && stateModal[i] != null"
-                                    (click)="removeState(i)"
-                                >
-                                    <mat-icon>schedule</mat-icon>
-                                </button>
-                                <!-- Edit -->
-                                <button
-                                    style="color: #fff;"
-                                    class="full-width mt-2"
-                                    mat-flat-button
-                                    color="primary"
-                                    type="button"
-                                    *ngIf="factory.data?.id"
-                                    matTooltip="Editar tiempos por vehículos"
-                                    (click)="openDialogEditVehiclesTypes()"
-                                >
-                                    <mat-icon>update</mat-icon>
-                                </button>
+                            <div class="row py-3">
+                                <div class="col-1 pt-3" *ngIf="!factory.data?.id">
+                                    <b class="mt-2">{{ i + 1 }}.</b>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>{{ 'GENERAL_WORD.NAME' | translate }}</mat-label>
+                                        <input matInput formControlName="name" />
+                                        <mat-error *ngIf="getStages.controls[i].get('name').hasError('required')">
+                                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>{{ 'YARDS.ESTIMATED' | translate }}</mat-label>
+                                        <input matInput formControlName="timeEstimated" />
+                                        <mat-error *ngIf="getStages.controls[i].get('timeEstimated').hasError('required')">
+                                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Color</mat-label>
+                                        <input matInput [ngxMatColorPicker]="picker" formControlName="color" />
+                                        <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                                        <ngx-mat-color-picker #picker [touchUi]="true"></ngx-mat-color-picker>
+                                        <mat-error *ngIf="getStages.controls[i].get('color').hasError('required')">
+                                            {{ 'GENERAL_WORD.MANDATORY' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="full-width mt-2 text-white p-1" mat-flat-button color="primary"
+                                                type="button" matTooltip="Agregar tiempos por vehículos"
+                                                *ngIf="!factory.data?.id && stateModal[i] == null"
+                                                (click)="openDialogVehiclesTypes(i)">
+                                                <mat-icon>schedule</mat-icon>
+                                            </button>
+                                            <button class="full-width mt-2 text-white p-1" mat-flat-button color="warn"
+                                                type="button" matTooltip="Quitar tiempos por vehículos"
+                                                *ngIf="!factory.data?.id && stateModal[i] != null" (click)="removeState(i)">
+                                                <mat-icon>schedule</mat-icon>
+                                            </button>
+                                            <!-- Edit -->
+                                            <button class="full-width mt-2 text-white p-1" mat-flat-button color="primary"
+                                                type="button" *ngIf="factory.data?.id" matTooltip="Editar tiempos por vehículos"
+                                                (click)="openDialogEditVehiclesTypes()">
+                                                <mat-icon>update</mat-icon>
+                                            </button>
+                                        </div>
+                                        <div class="col-2">
+                                            <a class="cursor mt-3 deleteRow float-right" *ngIf="i > 0" (click)="removeStage(i)">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </ng-container>
                     </div>
@@ -107,57 +89,32 @@
                                 <small style="font-size: smaller;">
                                     Los tiempos por vehículos serán agregados a cada etapa según los datos ingresados
                                     por el usuario. Sí no registra los tiempos manualmente, el sistema los guardará en
-                                    cero a cada uno de los tipos vehículares.</small
-                                >
+                                    cero a cada uno de los tipos vehículares.
+                                </small>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
-        <div class="row zero between-lg between-md between-sm between-xs full-width">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div mat-dialog-actions>
-                    <div class="row zero between-lg between-md between-sm between-xs full-width">
-                        <div>
-                            <button
-                                style="width: 100%;"
-                                mat-flat-button
-                                type="button"
-                                class="btn-cancelar full-width"
-                                (click)="onClose()"
-                            >
-                                <mat-icon color="white">close</mat-icon> Cancelar
-                            </button>
-                        </div>
-                        <div *ngIf="!factory.data?.id">
-                            <button
-                                mat-flat-button
-                                style="width: 100%; color: #fff;"
-                                color="primary"
-                                type="button"
-                                (click)="addstage()"
-                            >
+        <mat-divider class="py-3 mt-2"></mat-divider>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="py-1" *ngIf="!factory.data?.id">
+                            <button mat-flat-button color="primary" class="text-white btn-block p-1" type="button" (click)="addstage()">
                                 <mat-icon color="white">add</mat-icon> Agregar etapa
                             </button>
                         </div>
-                        <div>
-                            <button
-                                style="width: 100%;"
-                                type="submit"
-                                [disabled]="submit"
-                                mat-flat-button
-                                class="btn-submit full-width"
-                            >
+                    </div>
+                    <div class="col-6">
+                        <div class="py-1">
+                            <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block p-1">
                                 <mat-icon color="white">done</mat-icon>
                                 {{ factory.data?.id ? 'Editar' : 'Registrar' }}
-                                <img
-                                    src="../../../../../../assets/loading.gif"
-                                    class="ml-1"
-                                    *ngIf="submit"
-                                    alt="Cargando"
-                                />
+                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
                             </button>
                         </div>
                     </div>

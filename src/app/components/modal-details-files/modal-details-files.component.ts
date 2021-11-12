@@ -1,3 +1,4 @@
+import { Utilities } from './../../utils/utilities';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -29,6 +30,7 @@ export class ModalDetailsFilesComponent implements OnInit {
     isGenerator: boolean;
     public tripDriverDisabled;
     public tripVehicleDisabled;
+    public utilities =  Utilities;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public fileDetailsData: any,
@@ -128,6 +130,14 @@ export class ModalDetailsFilesComponent implements OnInit {
                 );
             }, 2500);
         }
+    }
+
+    public download( fileDrive ) {
+        const nameLink = fileDrive.url.split('/');
+        const name = nameLink[nameLink.length - 1].split('.')[0];
+        this.blockUI.start('Loading...');
+        this.utilities.downloadFiles(fileDrive.url, name);
+        this.blockUI.stop();
     }
 
     public preview(file: any) {

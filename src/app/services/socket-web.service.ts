@@ -3,19 +3,19 @@ import { Socket } from 'ngx-socket-io';
 import { shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
+const apiHost = environment.apiHost;
+
 @Injectable({
     providedIn: 'root',
 })
-export class SocketWebService extends Socket {
+export class SocketWebService {
     public socketsMap: Map<string, Socket> = new Map();
-    public uri = environment.apiHost + environment.apiVersion;
+    private url: string = `${ apiHost }`;
 
-    constructor(private socket: Socket) {
-        super({ url: '' });
-    }
+    constructor(private socket: Socket) {}
 
     public of(namespace: string): Socket {
-        const socketInstance = new Socket({ url: `${this.uri}/${namespace}` });
+        const socketInstance = new Socket({ url: `${ this.url }/${ namespace }` });
         this.socketsMap.set(namespace, socketInstance);
         return socketInstance;
     }

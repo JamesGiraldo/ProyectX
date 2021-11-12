@@ -7,3 +7,10 @@
 .widthSubtitle{
     width: 90%;
 }
+
+@media screen and (max-width: 697px) {
+    .tabla-responsive {
+        display: grid;
+        overflow-x: auto;
+    }
+}

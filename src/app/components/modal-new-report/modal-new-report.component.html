@@ -79,7 +79,7 @@
                             <div class="col">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Identificaci&oacute;n</mat-label>
-                                    <input matInput formControlName="driverIdCard" />
+                                    <input matInput formControlName="driverIdCard" min="4" minlength="4" max="10" maxlength="10"/>
                                     <mat-error
                                         *ngIf="getReports.controls[i].get('driverIdCard').hasError('required')">
                                         {{ 'GENERAL_WORD.MANDATORY' | translate }}

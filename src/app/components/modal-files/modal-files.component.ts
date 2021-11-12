@@ -9,6 +9,7 @@ import { VehicleService } from '@services/vehicle.service';
 import { ModalDetailsFilesComponent } from '../modal-details-files/modal-details-files.component';
 import { HandleErrorService } from '@services/handle-error.service';
 import * as moment from 'moment';
+import * as dayjs from 'dayjs'
 
 @Component({
     selector: 'app-modal-files',
@@ -24,6 +25,9 @@ export class ModalFilesComponent implements OnInit {
     public fileHasLoaded: boolean;
     public fileName: string;
     public uploadFile: boolean = false;
+
+    /* Hidden fields */
+    public dateExpire: boolean = true;
 
     /* DatePicker */
     @ViewChild('picker') picker: any;
@@ -76,18 +80,18 @@ export class ModalFilesComponent implements OnInit {
     }
 
     public onSubmit() {
-        if (this.filesForm.invalid) {
-            return;
-        }
-
+        if (this.filesForm.invalid) return;
         this.uploadFile = true;
-
         const formData = new FormData();
         formData.append('fileType', `FILE.TYPE.${this.filesForm.get('fileType').value}`);
         formData.append('description', this.filesForm.get('description').value);
-        formData.append('expireDate', new Date(this.filesForm.get('expireDate').value).toISOString());
         formData.append('numberId', this.filesForm.get('numberId').value);
         formData.append('file', this.filesForm.get('file').value);
+        if (this.filesForm.get('fileType').value === 'ID' || this.filesForm.get('fileType').value === 'OWNERSHIP_CARD') {
+            formData.append('expireDate', '');
+        } else {
+            formData.append('expireDate', this.filesForm.get('expireDate').value);
+        }
 
         if (this.fileData.type === 'driver') {
             this.driverService.uploadFile(this.fileData.data, formData).subscribe(
@@ -114,6 +118,7 @@ export class ModalFilesComponent implements OnInit {
                 (err) => this.handleErrorService.onFailure(err),
             );
         }
+        console.log( this.filesForm.value );
     }
 
     public openDialogDetailsFiles(type: string): void {
@@ -128,6 +133,25 @@ export class ModalFilesComponent implements OnInit {
             .subscribe((result) => {});
     }
 
+     /* Validation form */
+     private compareExpireDate(active, initialValue?: boolean) {
+		if (active) {
+			this.filesForm.controls.expireDate.setValidators([ Validators.required ])
+			if (!initialValue) this.filesForm.controls.expireDate.setValue('');
+		} else {
+			this.filesForm.controls.expireDate.setValidators([])
+			this.filesForm.controls.expireDate.setValue('');
+		}
+	}
+    public onFileTypeChange(event) {
+        if (event.value === 'ID' || event.value === 'OWNERSHIP_CARD') {
+            this.compareExpireDate(false, true);
+            this.dateExpire = false;
+        } else {
+            this.dateExpire = true;
+        }
+    }
+    /* End validation */
     private createForm() {
         this.filesForm = this.formBuilder.group({
             fileType: ['', [Validators.required]],

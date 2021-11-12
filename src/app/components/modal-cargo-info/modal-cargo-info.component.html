@@ -1,8 +1,8 @@
 <!-- inherit-h -->
-<div class="custom-flex inherit-h zero">
+<div class="custom-flex inherit-h zero ">
     <div class="row">
-        <div class="col zero" *ngIf="publication">
-            <div class="row zero between-lg between-md between-sm between-xs">
+        <div class="col" *ngIf="publication">
+            <div class="row">
                 <div class="col">
                     <h3 mat-dialog-title>{{ publication.load.description | uppercase }}
                         &nbsp;
@@ -14,7 +14,7 @@
                         </ng-template>
                     </h3>
                 </div>
-                <div>
+                <div class="col d-content">
                     <span *ngIf="btnShow">
                         <button mat-icon-button class="bc-transparent" matTooltip="Compartir carga con conductor"
                             matTooltipPosition="above" (click)="loadSharingDriver()" *ngIf="!isGenerator">
@@ -36,13 +36,13 @@
             <mat-divider class="mt-3 mb-3"></mat-divider>
 
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Solicitante: &nbsp;</h4>
                         <h4>{{ publisher }}</h4>
                     </div>
                 </div>
-                <div class="col" *ngIf="isGenerator">
+                <div class="col-md-6" *ngIf="isGenerator">
                     <div class="row">
                         <h4 class="title">Tipo de tarifa: &nbsp;</h4>
                         <h4>{{ publication.fareType | translate }}</h4>
@@ -50,13 +50,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Tipo de carga: &nbsp;</h4>
                         <h4>{{ publication.load.type | translate }}</h4>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Fecha de cargue: &nbsp;</h4>
                         <h4>{{ publication.date | formatDate }}</h4>
@@ -64,13 +64,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Altura: &nbsp;</h4>
                         <h4>{{ publication.load.height == 0 ? 'N/A' : publication.load.height }}</h4>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Modalidad: &nbsp;</h4>
                         <h4>{{ publication.tripModality ? (publication.tripModality | translate) : 'N/A' }}</h4>
@@ -78,13 +78,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Largo: &nbsp;</h4>
                         <h4>{{ publication.load.length == 0 ? 'N/A' : publication.load.length }}</h4>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Ancho: &nbsp;</h4>
                         <h4>{{ publication.load.width == 0 ? 'N/A' : publication.load.width }}</h4>
@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Volumen: &nbsp;</h4>
                         <h4>{{ publication.load.volume == 0 ? 'N/A' : publication.load.volume }}</h4>
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Id solicitud: &nbsp;</h4>
                         <h4>
@@ -114,7 +114,7 @@
                         </h4>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <div class="row">
                         <h4 class="title">Cliente: &nbsp;</h4>
                         <h4>{{ publication.client ? publication.client : 'N/A' }}</h4>
@@ -122,106 +122,91 @@
                 </div>
             </div>
 
-            <div class="row mt-3 mb-1">
-               <div class="col">
-                   <div class="row">
-                        <!-- ROUTE -->
+            <!-- ROUTE -->
+            <div class="row mt-3 mb-3">
+                <div class="col-md-6">
+                    <div class="row m-2">
                         <div class="col sub-container">
-                            <div class="row col-container pt-3">
-                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="font-weight-bold fgc-gray-2">{{ 'GENERAL_WORD.ORIGIN' | translate }}</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero"></div>
-                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="font-weight-bold fgc-gray-2">{{ 'GENERAL_WORD.DESTINY' | translate }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <mat-divider></mat-divider>
-                            <br />
-                            <div class="row">
-                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
-                                    <h4 class="stackable fgc-gray-1" *ngFor="let origin of publication.origins">
+                           <div class="text-center mt-2">
+                                <h4 class="font-weight-bold fgc-gray-2">{{ 'GENERAL_WORD.ORIGIN' | translate }}</h4>
+                           </div>
+                           <mat-divider class="mb-2"></mat-divider>
+
+                           <div class="row">
+                                <div class="col v-container">
+                                    <h4 class="text-center stackable fgc-gray-1" *ngFor="let origin of publication.origins">
                                         <span *ngIf="origin.loadPlace">{{ origin.loadPlace | titlecase }}, &nbsp;</span>
                                         <b>{{ origin.name | titlecase }}</b>
                                     </h4>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 i-container fgc-gray-1">
-                                    <mat-icon class="colorArrow_right">arrow_right_alt</mat-icon>
-                                </div>
-                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
-                                    <h4 class="stackable fgc-gray-1" *ngFor="let destiny of publication.destinies">
-                                        <span *ngIf="destiny.loadPlace">{{ destiny.downloadPlace | titlecase }}, &nbsp;</span>
-                                        <b>{{ destiny.name | titlecase }}</b>
-                                    </h4>
-                                </div>
                             </div>
                         </div>
-                   </div>
-               </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row m-2">
+                        <div class="col sub-container">
+                           <div class="text-center mt-2">
+                                <h4 class="font-weight-bold fgc-gray-2">{{ 'GENERAL_WORD.DESTINY' | translate }}</h4>
+                           </div>
+                           <mat-divider class="mb-2"></mat-divider>
+
+                           <div class="col v-container">
+                                <h4 class="text-center stackable fgc-gray-1" *ngFor="let destiny of publication.destinies">
+                                    <span *ngIf="destiny.loadPlace">{{ destiny.downloadPlace | titlecase }}, &nbsp;</span>
+                                    <b>{{ destiny.name | titlecase }}</b>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="row mt-3 mb-1">
-               <div class="col">
-                   <div class="row">
-                        <!-- VEHICLE TYPE -->
-                        <div class="col sub-container">
-                            <div class="row pt-3">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="font-weight-bold fgc-gray-2">{{ 'VEHICLE.TYPE.TITLE' | translate }}</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="font-weight-bold fgc-gray-2">
-                                            {{ 'HEADER_TABLE.QUANTITY' | translate }}
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
-                                    <h4 class="font-weight-bold fgc-gray-2">
-                                        {{ 'GENERAL_WORD.FARE' | translate }}
+            <!-- VEHICLE TYPE -->
+            <div class="row">
+                <div class="container-fluid table-responsive">
+                    <table class="table sub-container">
+                        <thead class="">
+                            <tr>
+                                <th scope="col" clas>
+                                        <h5 class="text-center headerSize">{{ 'VEHICLE.TYPE.TITLE' | translate }}</h5>
+                                </th>
+                                <th scope="col" clas>
+                                        <h5 class="text-center headerSize">{{ 'HEADER_TABLE.QUANTITY' | translate }}</h5>
+                                </th>
+                                <th scope="col" clas>
+                                        <h5 class="text-center headerSize">{{ 'GENERAL_WORD.FARE' | translate }}</h5>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bodyColor">
+                            <tr *ngFor="let offer of publication.offers">
+                                <td class="text-center">
+                                    <h4 class="stackable fgc-gray-1">
+                                        {{ offer.vehicleType | translate }}
                                     </h4>
-                                </div>
-                            </div>
-                            <mat-divider></mat-divider>
-                            <div class="row pt-3" *ngFor="let offer of publication.offers">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="stackable fgc-gray-1">
-                                            {{ offer.vehicleType | translate }}
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="stackable fgc-gray-1">
-                                            {{ offer.vehicleLimit }}
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero">
-                                    <div class="row center-lg center-md center-sm center-xs zero">
-                                        <h4 class="stackable fgc-gray-1">
-                                            <span *ngIf="user === country.COLOMBIA; else peru">
-                                                {{ offer.proposedFare | currency: 'COP':'symbol-narrow':'1.0' }}
+                                </td>
+                                <td class="text-center">
+                                    <h4 class="stackable fgc-gray-1">
+                                        {{ offer.vehicleLimit }}
+                                    </h4>
+                                </td>
+                                <td class="text-center">
+                                    <h4 class="stackable fgc-gray-1">
+                                        <span *ngIf="user === country.COLOMBIA; else peru">
+                                            {{ offer.proposedFare | currency: 'COP':'symbol-narrow':'1.0' }}
+                                        </span>
+                                        <ng-template #peru>
+                                            <span>
+                                                {{ offer.proposedFare | currency: 'S/ ':'symbol-narrow':'1.0' }}
                                             </span>
-                                            <ng-template #peru>
-                                                <span>
-                                                    {{ offer.proposedFare | currency: 'S/ ':'symbol-narrow':'1.0' }}
-                                                </span>
-                                            </ng-template>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                   </div>
-               </div>
+                                        </ng-template>
+                                    </h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Observation && CAMPOS PERSONALIZADOS -->

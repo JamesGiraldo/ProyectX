@@ -44,13 +44,14 @@ export class ListCompaniesComponent implements OnInit, OnDestroy {
 
     constructor(
         public dialog: MatDialog,
-        private companyService: CompanyService /* private socketService: SocketWebService, */,
+        private companyService: CompanyService,
+        // private socketService: SocketWebService,
     ) {
         this.blockUI.start('Loading...');
     }
 
     ngOnInit(): void {
-        //this.socketInstance = this.socketService.of(NamespaceSocket.COMPANY);
+        // this.socketInstance = this.socketService.of( 'publication' );
 
         this.loyalty = true;
         this.companyType = new StatusList();
@@ -67,9 +68,24 @@ export class ListCompaniesComponent implements OnInit, OnDestroy {
 
         /* All */
         this.getTransportersLoyalAll();
+
+        // this.socketService.emitToEvent(this.socketInstance, 'new-publication-to-client', {
+        //     namespace: 'publication',
+        //     event: 'new-publication-to-client',
+        //     data: {
+        //         id: 1,
+        //     },
+        // });
+
+        // this.socketService.fromToEvent(this.socketInstance, 'new-publication-to-client').subscribe((data) => {
+        //     // this.getCompanies(this.page, this.currentElements);
+        //     console.log('new-publication-to-client', data);
+        // });
     }
 
-    ngOnDestroy() {}
+    ngOnDestroy() {
+        // this.socketService.disconnect( NamespaceSocket.COMPANY );
+    }
 
     getCurrentElements($event) {
         this.currentElements = $event;

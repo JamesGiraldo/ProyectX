@@ -174,8 +174,8 @@ export class ModalNewdriverComponent implements OnInit {
                 '',
                 [
                     Validators.required,
-                    Validators.maxLength(10),
-                    Validators.minLength(7),
+                    Validators.maxLength(11),
+                    Validators.minLength(4),
                     Validators.pattern('^[0-9]{3,10}$'),
                 ],
             ],

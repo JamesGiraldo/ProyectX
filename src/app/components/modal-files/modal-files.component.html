@@ -21,7 +21,8 @@
                     <div *ngIf="fileData.type === 'driver'; else vehicle">
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Tipo de documento</mat-label>
-                            <mat-select appearance="outline" class="full-width" formControlName="fileType">
+                            <mat-select appearance="outline" class="full-width" formControlName="fileType"
+                                (selectionChange)="onFileTypeChange($event)">
                                 <mat-option value="">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
                                 <ng-container *ngFor="let item of driverFileType | enumToArray">
                                     <mat-option [value]="item.key">{{ item.value | translate }}</mat-option>
@@ -35,7 +36,8 @@
                     <ng-template #vehicle>
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Tipo de documento</mat-label>
-                            <mat-select appearance="outline" class="full-width" formControlName="fileType">
+                            <mat-select appearance="outline" class="full-width" formControlName="fileType"
+                                (selectionChange)="onFileTypeChange($event)">
                                 <mat-option value="">{{ 'GENERAL_WORD.NA' | translate }}</mat-option>
                                 <ng-container *ngFor="let item of vehicleFileType | enumToArray">
                                     <mat-option [value]="item.key">{{ item.value | translate }}</mat-option>
@@ -47,7 +49,7 @@
                         </mat-form-field>
                     </ng-template>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="dateExpire">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Fecha de expiración</mat-label>
                         <input matInput [ngxMatDatetimePicker]="picker" formControlName="expireDate" [min]="minDate"
@@ -82,6 +84,9 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
+                    <div class="container-fluid">
+                        <p class="text-muted float-right float-right">El tamaño maximo de los archivos es de <strong>10mb</strong><mat-icon class="text-muted">info</mat-icon></p>
+                    </div>
                     <button type="button" mat-flat-button class="bg-wo-gradient w-100 b-h" (click)="file.click()">
                         <mat-icon color="white">insert_drive_file</mat-icon>
                         <mat-divider vertical class="v-divider"></mat-divider> Adjuntar archivo *
@@ -103,12 +108,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="row w-100">
-                    <div class="col-6">
-                        <button mat-flat-button type="button" class="btn-cancelar btn-block p-1" (click)="onClose()">
+                    <div class="col">
+                        <button mat-flat-button type="button" class="btn-cancelar btn-block p-1 mb-1" (click)="onClose()">
                             <mat-icon color="white">close</mat-icon> Cancelar
                         </button>
                     </div>
-                    <div class="col-6">
+                    <div class="col">
                         <button [disabled]="submit || uploadFile" mat-flat-button type="submit" class="btn-submit btn-block p-1">
                             <mat-icon color="white">done</mat-icon>
                             <span *ngIf="!uploadFile; else submitTrue">

@@ -1,14 +1,12 @@
 <div class="col zero">
-    <div class="row zero between-lg between-md between-sm between-xs">
-        <h3 mat-dialog-title>Cargue masivo de tarifas</h3>
-        <div style="text-align: right;">
-            <button
-                mat-icon-button
-                class="bc-transparent"
-                matTooltip="Descargar Archivo de Muestra"
-                matTooltipPosition="above"
-                (click)="onDownload()"
-            >
+
+    <div class="row">
+        <div class="col">
+            <h3 mat-dialog-title>Cargue masivo de tarifas</h3>
+        </div>
+        <div class="col-5 text-right">
+            <button mat-icon-button class="bc-transparent" matTooltip="Descargar Archivo de Muestra"
+                matTooltipPosition="above" (click)="onDownload()">
                 <mat-icon>cloud_download</mat-icon>
             </button>
             <button mat-icon-button class="bc-transparent" (click)="onClose()">
@@ -16,43 +14,35 @@
             </button>
         </div>
     </div>
-    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
-    <div mat-dialog-content class="max-h-80vh">
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div mat-dialog-content class="conatiner-fluid">
         <form [formGroup]="uploadForm" (ngSubmit)="onUpload()" novalidate>
             <div class="row between-lg between-md between-sm between-xs full-width">
-                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                    <button
-                        type="button"
-                        mat-flat-button
-                        class="bg-wo-gradient full-width b-h"
-                        (click)="massiveFile.click()"
-                    >
+                <div class="col mt-1">
+                    <button type="button" mat-flat-button class="bg-wo-gradient full-width b-h"
+                        (click)="massiveFile.click()">
                         <mat-icon color="white">insert_drive_file</mat-icon>
                         <mat-divider vertical class="v-divider"></mat-divider> Cargar archivo *
                     </button>
-                    <input
-                        hidden
-                        type="file"
-                        (change)="onFileSelected($event)"
-                        #massiveFile
-                        id="massiveFile"
+                    <input hidden type="file" (change)="onFileSelected($event)" #massiveFile id="massiveFile"
                         formControlName="massiveFile"
-                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    />
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
                 </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mt-2">
+                <div class="col mt-2">
                     <button type="submit" mat-flat-button class="btn-submit full-width p-1" [disabled]="isDisabled">
                         Cargar
                     </button>
                 </div>
-            </div>
-            <div class="row">
-                <mat-error *ngIf="massiveFileHasLoaded" class="success">
-                    Se ha cargado {{ massiveFileName }} correctamente
-                </mat-error>
-                <mat-error *ngIf="massiveFileHasLoaded === false" class="danger">
-                    Ha ocurrido un problema al subir el archivo {{ massiveFileName }}
-                </mat-error>
+                <div class="row mt-2">
+                    <mat-error *ngIf="massiveFileHasLoaded" class="success">
+                        <p>Se ha cargado {{ massiveFileName }} correctamente</p>
+                    </mat-error>
+                    <mat-error *ngIf="massiveFileHasLoaded === false" class="danger">
+                        <p>Ha ocurrido un problema al subir el archivo {{ massiveFileName }}</p>
+                    </mat-error>
+                </div>
             </div>
         </form>
     </div>

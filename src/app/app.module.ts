@@ -21,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 //translation dependencies
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
 import { AuthGuard } from '@services/guards/auth.guard';
@@ -34,9 +34,9 @@ import { SafetyCourseComponent } from './landing/safety-course/safety-course.com
 import { TestFormComponent } from './landing/safety-course/test-form/test-form.component';
 import { VideoModalComponent } from './landing/safety-course/video-modal/video-modal.component';
 import { CounterDirective } from './services/directives/counter.directive';
-import { SocketWebService } from '@services/socket-web.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
+// const config: SocketIoConfig = { url: `http://localhost:3000`, options: { transports: [ 'websocket' ] } };
 
 @NgModule({
     declarations: [

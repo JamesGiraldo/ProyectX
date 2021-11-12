@@ -20,7 +20,7 @@
         <div class="col">
             <div class="row middle-lg middle-md middle-sm middle-xs full-height">
                 <div class="col" *ngFor="let type of tripType.items">
-                    <h4 class="text-center" [ngClass]="{ 'type-active': type.isActive }"
+                    <h4 class="text-center mt-3 mb-3" [ngClass]="{ 'type-active': type.isActive }"
                         (click)="toggleStatus(type.id)">
                         {{ type.text | titlecase }}
                     </h4>

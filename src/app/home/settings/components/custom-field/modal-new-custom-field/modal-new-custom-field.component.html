@@ -108,22 +108,18 @@
 
         <div class="row mt-3">
             <div class="col">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="py-1">
-                            <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onClose()">
-                                <mat-icon color="white">close</mat-icon> {{ 'GENERAL_WORD.CANCEL' | translate }}
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="py-1">
-                            <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block">
-                                <mat-icon color="white">done</mat-icon> {{ customFieldData.id ? 'Editar' : 'Crear' }}
-                                <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
-                            </button>
-                        </div>
-                    </div>
+                <div class="py-1">
+                    <button mat-flat-button type="button" class="btn-cancelar btn-block p-1" (click)="onClose()">
+                        <mat-icon color="white">close</mat-icon> {{ 'GENERAL_WORD.CANCEL' | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="py-1">
+                    <button type="submit" [disabled]="submit" mat-flat-button class="btn-submit btn-block p-1">
+                        <mat-icon color="white">done</mat-icon> {{ customFieldData.id ? 'Editar' : 'Crear' }}
+                        <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
+                    </button>
                 </div>
             </div>
         </div>

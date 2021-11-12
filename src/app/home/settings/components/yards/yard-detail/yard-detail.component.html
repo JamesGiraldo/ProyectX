@@ -11,7 +11,7 @@
         </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <!-- Trabajando en ello -->
+
     <div class="container-fluid sub-container table-responsive">
         <table class="table">
             <thead>
@@ -25,147 +25,72 @@
                             <h5 class="headerSize">Etapas</h5>
                         </div>
                     </th>
-                   <th scope="col">
+                    <th scope="col">
                         <div class="d-flex theaderWidth">
                             <h5 class="headerSize">{{ 'GENERAL_WORD.COLOR' | translate }}</h5>
                         </div>
-                   </th>
-                   <th scope="col">
+                    </th>
+                    <th scope="col">
                         <div class="d-flex theaderWidth">
                             <h5 class="headerSize">Acciones</h5>
                         </div>
-                   </th>
+                    </th>
                 </tr>
             </thead>
-            <tbody class="bodyColor">
-                <div class="d-content" cdkDropList (cdkDropListDropped)="drop($event)">
-                    <tr class="background-white" *ngFor="let stage of stages; let i = index" cdkDrag>
-                        <td>
-                            <mat-icon cdkDragHandle style="cursor: move;">reorder</mat-icon>
-                        </td>
-                        <td>
-                            <h4 class="stackable fgc-gray-1 mt-3" style="text-align: left;">
-                                <b>{{ i + 1 }}.</b>&nbsp; &nbsp; &nbsp;
-                                {{ stage.name | titlecase }}
-                            </h4>
-                        </td>
-                        <td>
-                            <input type="color" class="mt-3" value="#{{ stage.color }}" disabled />
-                        </td>
-                        <td>
-                            <h5 class="widthActions">
-                                <mat-icon class="icon edit m-1" (click)="editStage(stage, factory.id)" matTooltipPosition="above" matTooltip="Editar etapa">edit</mat-icon>
-                                <mat-icon class="icon delete m-1" (click)="removeStage(stage)" matTooltipPosition="above" matTooltip="Eliminar etapa">delete</mat-icon>
-                            </h5>
-                        </td>
-                        <mat-divider></mat-divider>
-                    </tr>
-                </div>
+            <tbody class="bodyColor" cdkDropList (cdkDropListDropped)="drop($event)">
+                <tr class="background-white" *ngFor="let stage of stages; let i = index" cdkDrag>
+                    <td>
+                        <mat-icon cdkDragHandle style="cursor: move;">reorder</mat-icon>
+                    </td>
+                    <td>
+                        <h4 class="stackable fgc-gray-1 float-left">
+                            <b>{{ i + 1 }}.</b>&nbsp; &nbsp;
+                            {{ stage.name | titlecase }}
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="color" class="float-left" value="#{{ stage.color }}" disabled />
+                    </td>
+                    <td>
+                        <h5 class="widthActions">
+                            <mat-icon class="icon edit m-1 float-rigth" (click)="editStage(stage, factory.id)"
+                                matTooltipPosition="above" matTooltip="Editar etapa">edit</mat-icon>
+                            <mat-icon class="icon delete m-1 float-rigth" (click)="removeStage(stage)"
+                                matTooltipPosition="above" matTooltip="Eliminar etapa">delete</mat-icon>
+                        </h5>
+                    </td>
+                    <mat-divider></mat-divider>
+                </tr>
+                <tr *ngIf="stages.length === 0" class="text-center mt-3">
+                    <td colspan="4">
+                        <span class="p-tb-20 text-muted h5 font-weight-bold">
+                            {{ 'GENERAL_WORD.EMPTY' | translate }}
+                        </span>
+                    </td>
+                </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="col-lg col-md col-sm col-xs">
-        <div class="row sub-container">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 zero">
-                <div class="row center-lg center-md center-sm center-xs full-width mt-3">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sub-container inner">
-                        <div class="row middle-lg middle-md middle-sm middle-xs zero col-container pt-3">
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
-                                <div class="row pl-5 zero">
-                                    <h4 class="font-weight-bold fgc-gray-2">
-                                        Etapas
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 zero">
-                                <div class="row zero">
-                                    <h4 class="font-weight-bold fgc-gray-2 ml-4">
-                                        {{ 'GENERAL_WORD.COLOR' | translate }}
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 zero">
-                                <div class="row center-lg center-md center-sm center-xs zero">
-                                    <h4 class="font-weight-bold fgc-gray-2">
-                                        Acciones
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <mat-divider class="mb-3"></mat-divider>
-
-                        <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                            <div class="row background-white" *ngFor="let stage of stages; let i = index" cdkDrag>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pt-3">
-                                    <mat-icon cdkDragHandle style="cursor: move;">reorder</mat-icon>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <h4 class="stackable fgc-gray-1 mt-3" style="text-align: left;">
-                                        <b>{{ i + 1 }}.</b>&nbsp; &nbsp; &nbsp;
-                                        {{ stage.name | titlecase }}
-                                    </h4>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: left;">
-                                    <input type="color" class="mt-3" value="#{{ stage.color }}" disabled />
-                                </div>
-                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 v-container">
-                                    <div class="row">
-                                        <div class="col-6">
-
-                                            <mat-icon class="icon edit m-1" (click)="editStage(stage, factory.id)" matTooltipPosition="above" matTooltip="Editar etapa">edit</mat-icon>
-                                            <!-- <button style="color: #fff;" mat-raised-button color="primary"
-                                                matTooltip="Editar etapa" matTooltipPosition="above"
-                                                (click)="editStage(stage, factory.id)">
-                                                <mat-icon>mode_edit</mat-icon>
-                                            </button> -->
-                                        </div>
-                                        <div class="col-6">
-                                            <mat-icon class="icon delete m-1" (click)="removeStage(stage)" matTooltipPosition="above" matTooltip="Eliminar etapa">delete</mat-icon>
-                                            <!-- <button mat-raised-button color="warn" matTooltip="Eliminar etapa"
-                                                matTooltipPosition="above" (click)="removeStage(stage)">
-                                                <mat-icon>delete</mat-icon>
-                                            </button> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <mat-divider></mat-divider>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <p *ngIf="stages.length === 0" class="p-tb-20 text-muted h5">
-                                {{ 'GENERAL_WORD.EMPTY' | translate }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <mat-divider class="mt-3"></mat-divider>
-                <div class="row">
-                    <div class="col">
-                        <button mat-raised-button color="primary" class="mt-3 mb-2" style="width: 150px; color: #fff;"
-                            matTooltip="Agregar etapa" matTooltipPosition="above" (click)="addStage()">
-                            Agregar etapa
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button mat-raised-button color="primary" class="mt-3 mb-2" style="width: 100px; color: #fff;"
-                            matTooltip="Eliminar planta" matTooltipPosition="above" (click)="editFactory(factory)">
-                            Editar
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button mat-raised-button color="warn" class="mt-3 mb-2" style="width: 100px;"
-                            matTooltip="Eliminar planta" matTooltipPosition="above" (click)="removeFactory(factory)">
-                            Eliminar
-                        </button>
-                    </div>
-                </div>
-                <div style="width: 100%; height: 10px;"></div>
+        <div class="row py-3">
+            <div class="col">
+                <button mat-raised-button color="warn" class="mt-3 mb-2 text-white btn-block"
+                    matTooltip="Eliminar planta" matTooltipPosition="above" (click)="removeFactory(factory)">
+                    <mat-icon class="icon text-white  m-1" matTooltipPosition="above">delete</mat-icon>
+                    Eliminar
+                </button>
             </div>
-
-            <br />
+            <div class="col">
+                <button mat-raised-button color="primary" class="mt-3 mb-2 text-white btn-block"
+                    matTooltip="Eliminar planta" matTooltipPosition="above" (click)="editFactory(factory)">
+                    <mat-icon class="icon edit m-1" matTooltipPosition="above">edit</mat-icon>
+                    Editar
+                </button>
+            </div>
+            <div class="col">
+                <button mat-flat-button class="mt-3 mb-2 text-white btn-submit btn-block" (click)="addStage()"
+                    matTooltip="Agregar etapa">
+                    <mat-icon color="white">add</mat-icon> Agregar etapa
+                </button>
+            </div>
         </div>
     </div>
 </mat-expansion-panel>

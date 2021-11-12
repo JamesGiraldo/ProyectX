@@ -29,7 +29,7 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Límite</mat-label>
-                        <input matInput formControlName="vehicleLimit" type="number" />
+                        <input matInput formControlName="vehicleLimit" type="number" min="1" minlength="1"/>
                         <mat-error *ngIf="f.vehicleLimit.hasError('required')">
                             {{ 'GENERAL_WORD.MANDATORY' | translate }}
                         </mat-error>
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>{{ 'GENERAL_WORD.WEEKDAY' | translate }}</mat-label>
                                     <mat-select appearance="outline" class="w-100" formControlName="day">
@@ -125,7 +125,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Horario de inicio</mat-label>
                                     <input matInput formControlName="startTime" type="time" />
@@ -135,7 +135,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="col-4 py-1">
+                            <div class="col-md-4 py-1">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Horario final</mat-label>
                                     <input matInput formControlName="endTime" type="time" />
@@ -154,19 +154,18 @@
         <div class="row mt-3">
             <div class="col">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col mt-2">
                         <button mat-flat-button type="submit" color="primary" class="btn-block text-white p-1"
                             (click)="addSchedule()">
                             <mat-icon color="white">add</mat-icon> Agregar horario
                         </button>
                     </div>
-                    <div class="col-6">
+                    <div class="col mt-2">
                         <button type="submit" [disabled]="submit || !range" mat-flat-button
                             class="btn-submit btn-block p-1">
                             <mat-icon color="white">done</mat-icon>
                             {{ factoryData.data?.id ? 'Editar' : 'Registrar' }}
-                            <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit"
-                                alt="Cargando" />
+                            <img src="../../../../../../assets/loading.gif" class="ml-1" *ngIf="submit" alt="Cargando" />
                         </button>
                     </div>
                 </div>

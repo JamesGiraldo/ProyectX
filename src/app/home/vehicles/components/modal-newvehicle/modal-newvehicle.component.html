@@ -16,7 +16,7 @@
     <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Relaci&oacute;n con el vehículo</mat-label>
                         <mat-select formControlName="ownershipRelation" appearance="outline" class="w-100">
@@ -29,7 +29,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Conductor</mat-label>
                         <input matInput appearance="outline" formControlName="driverId" [matAutocomplete]="auto"
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Placa</mat-label>
                         <input matInput formControlName="plate" maxlength="6" class="uppercase" />
@@ -55,7 +55,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Tipo</mat-label>
                         <mat-select formControlName="type" appearance="outline" class="full-width">
@@ -71,10 +71,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Año del vehículo</mat-label>
-                        <input matInput formControlName="vehicleAge" maxlength="4" />
+                        <input matInput formControlName="vehicleAge" maxlength="4" minlength="4"/>
                         <mat-error *ngIf="f.vehicleAge.hasError('required')">
                             {{ 'GENERAL_WORD.MANDATORY' | translate }}
                         </mat-error>
@@ -83,10 +83,10 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Capacidad</mat-label>
-                        <input matInput formControlName="capacity" type="number" />
+                        <input matInput formControlName="capacity" type="number" min="1" minlength="1"/>
                         <mat-error *ngIf="f.capacity.hasError('required')">
                             {{ 'GENERAL_WORD.MANDATORY' | translate }}
                         </mat-error>
@@ -128,7 +128,7 @@
 
         <div class="row" mat-dialog-actions>
             <div class="col" *ngIf="vehicleDataCopy.id">
-                <button mat-flat-button type="submit" class="btn-cancelar btn-block p-1" (click)="openDialogFiles('vehicle')">
+                <button mat-flat-button type="submit" class="btn-cancelar btn-block p-1 mb-1" (click)="openDialogFiles('vehicle')">
                     <mat-icon color="white" class="">upload_file</mat-icon> Subir archivos
                 </button>
             </div>

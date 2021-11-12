@@ -29,46 +29,46 @@
 
 <div class="table-responsive">
     <table class="table table-sm mx-auto">
-        <thead style="text-align: center; background-color: #efefef;">
+        <thead class="thead-light" style="text-align: center;">
             <tr>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'YARDS.FACTORY' | translate }}
                     </h5>
                 </th>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'GENERAL_WORD.TRIP' | translate }}
                     </h5>
                 </th>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'GENERAL_WORD.DRIVER' | translate }}
                     </h5>
                 </th>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'GENERAL_WORD.PLATE_VEHICLE' | translate }}
                     </h5>
                 </th>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'GENERAL_WORD.ENTRY' | translate }}
                     </h5>
                 </th>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'GENERAL_WORD.DEPARTURE' | translate }}
                     </h5>
                 </th>
                 <th>
-                    <h5 style="color: #434343; font-weight: bolder; width: 15vw;">
+                      <h5 class="ml-1 mr-1 headerSize auto-width">
                         {{ 'HEADER_TABLE.ACTIONS' | translate }}
                     </h5>
                 </th>
             </tr>
         </thead>
-        <tbody style="text-align: center; color: #a6a6a6 !important;">
+        <tbody class="bodyColor text-center">
             <tr schedule-detail *ngFor="let shift of shifts" [shift]="shift" class="inherit-w"></tr>
             <tr *ngIf="shifts.length === 0">
                 <td [attr.colspan]="7">
@@ -82,11 +82,6 @@
 </div>
 
 <div class="row center-lg center-md center-sm center-xs full-width p-tb-30" *ngIf="shifts.length > 0">
-    <app-pagination
-        (pageEmitter)="goToPage($event)"
-        (limitEmitter)="getCurrentElements($event)"
-        [page]="page"
-        [totalPages]="totalPages"
-        [elementPages]="elementPages"
-    ></app-pagination>
+    <app-pagination (pageEmitter)="goToPage($event)" (limitEmitter)="getCurrentElements($event)" [page]="page"
+        [totalPages]="totalPages" [elementPages]="elementPages"></app-pagination>
 </div>
