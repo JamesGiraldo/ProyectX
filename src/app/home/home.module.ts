@@ -15,6 +15,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { SharedModule } from '../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MapRoutesComponent } from './principal/map-routes/map-routes.component';
+import { DirectivesModule } from '../services/directives/directives.module';
 
 @NgModule({
     declarations: [HomeComponent, NavbarComponent, PrincipalComponent, MapRoutesComponent],
@@ -30,6 +31,7 @@ import { MapRoutesComponent } from './principal/map-routes/map-routes.component'
         MatMenuModule,
         SharedModule,
         TranslateModule,
+        DirectivesModule
     ],
 })
 export class HomeModule {}

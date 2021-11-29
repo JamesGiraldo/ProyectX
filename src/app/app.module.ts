@@ -36,6 +36,7 @@ import { VideoModalComponent } from './landing/safety-course/video-modal/video-m
 import { CounterDirective } from './services/directives/counter.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
+import { HomeModule } from './home/home.module';
 const config: SocketIoConfig = { url:  environment.socketHost , options: { transports: [ 'websocket' ], query: { token: `Bearer ${localStorage.getItem('token')}` } } };
 
 @NgModule({
@@ -47,7 +48,7 @@ const config: SocketIoConfig = { url:  environment.socketHost , options: { trans
         SafetyCourseComponent,
         TestFormComponent,
         VideoModalComponent,
-        CounterDirective,
+        CounterDirective
     ],
     imports: [
         AppRoutingModule,
@@ -60,6 +61,7 @@ const config: SocketIoConfig = { url:  environment.socketHost , options: { trans
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
+        HomeModule,
         MatIconModule,
         MatInputModule,
         MatMenuModule,

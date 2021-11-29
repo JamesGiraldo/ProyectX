@@ -2,7 +2,9 @@
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
         "outDir": "./out-tsc/app",
-        "types": ["googlemaps", "node"]
+        "types": ["googlemaps", "node"],
+        "experimentalDecorators": true,
+        "allowJs": true,
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/**/*.d.ts"]
