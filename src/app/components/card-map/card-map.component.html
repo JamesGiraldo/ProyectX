@@ -1,32 +1,51 @@
-<div class="body">
-    <div class="title-distance">
-        <p class="arrived-detail">Estimated Distance to arrived</p>
-        <p class="distance">235KM</p>
+<div *ngIf="!cargando && trips.length === 0" class="text-center mt-4">
+    <div class="alert alert-warning text-center mt-3 animated fadeIn faster">
+        <h3 class="alert-heading">{{ 'GENERAL_WORD.EMPTY' | translate }}</h3>
+        <h5>
+            <mat-icon>info</mat-icon>
+        </h5>
     </div>
-    <div class="card">
-        <div class="map">
-            <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
-            <div class='agm-map-content'>
-                <ng-content></ng-content>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-6 mt-4">
+    <div class="col mb-3" *ngFor="let trip of trips">
+        <div class="card h-100 box-shadow">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col float-letf">
+                        <h4 class=" card-title"> {{ trip.publication.load.description | na }} </h4>
+                    </div>
+                    <div class="col-1">
+                        <mat-icon class="icon" matTooltip="Nacional"
+                            *ngIf="trip.publication.tripType === tripType.NATIONAL; else localIcon">
+                            map
+                        </mat-icon>
+                        <ng-template #localIcon>
+                            <mat-icon class="icon" matTooltip="Local">local_shipping</mat-icon>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-title">Origen:
+                    <small *ngFor="let origin of trip.publication.origins">
+                        {{ origin.name | na }}
+                    </small>
+                </p>
+                <p class="card-title">Destino:
+                    <small *ngFor="let destinie of trip.publication.destinies">
+                        {{ destinie.name | na }}
+                    </small>
+                </p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">
+                    <small class="text-muted">Fecha de cargue: {{ trip.publication.date | formatDate | na }}</small>
+                </p>
+                <p class="card-text">
+                    <small class="text-muted">Publicado: {{ trip.publication.load.createdAt | formatDate | na }}
+                    </small>
+                </p>
             </div>
         </div>
-        <div class="driver-info">
-            <div class="row">
-                <div id="imgUser" class="col-xs-3">
-                    <img src="./../../../assets/user.png" alt="">
-                </div>
-                <div class="col-xs-9">
-                    <p class="type">DRIVER</p>
-                    <p class="name">Martijn DragonjerF</p>
-                </div>
-            </div>
-        </div>
-        <div class="detail">
-            <p class="title-d">Route between</p>
-            <p class="destinations">Bogota - Barranquilla</p>
-        </div>
-        <button class="options">
-            View more details
-        </button>
     </div>
 </div>

@@ -1,7 +1,7 @@
-import * as moment from 'moment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import * as moment from 'moment';
 
 import { PublicationService, GlobalService } from '@services/index';
 import { StatusList, Item } from '@apptypes/entities';
@@ -9,14 +9,28 @@ import { ModalColumnsComponent } from '../modal-columns/modal-columns.component'
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { CompanyType } from '@apptypes/enums';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { SocketWebService } from '@services/socket-web.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-list-requests',
     templateUrl: './list-requests.component.html',
     styleUrls: ['./list-requests.component.scss'],
 })
-export class ListRequestsComponent implements OnInit {
+export class ListRequestsComponent implements OnInit, OnDestroy {
     @BlockUI() blockUI: NgBlockUI;
+    public Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 6000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
     public columns = [];
     public currentElements: number = 12;
     public elementPages: number;
@@ -65,11 +79,13 @@ export class ListRequestsComponent implements OnInit {
         private publicationService: PublicationService,
         private readonly globalService: GlobalService,
         public dialog: MatDialog,
+        private socketService: SocketWebService
     ) {
         this.blockUI.start('Loading...');
     }
 
     ngOnInit(): void {
+        this.setIntervalServe = this.socketService.of( 'publication', this.globalService.getToken());
         const { company } = this.globalService.getDecodedToken();
         this.isGenerator = company.type === CompanyType.GENERATOR;
 
@@ -81,13 +97,17 @@ export class ListRequestsComponent implements OnInit {
         this.publicationType.add(new Item(1, 'Finalizados'));
         this.publicationType.add(new Item(2, 'Cancelados'));
 
-        this.getRequests(
-            this.page,
-            this.currentElements,
-            this.startDate,
-            this.endDate,
-            this.publicationType.items[0].id,
-        );
+        this.getRequests( this.page, this.currentElements, this.startDate, this.endDate, this.publicationType.items[0].id );
+
+        /* Socket */
+        this.socketService.fromToEvent( this.setIntervalServe,  'new-publication-to-client' ).subscribe( () => {
+            this.Toast.fire({ icon: 'success', title: `Nueva Solicitud` });
+            this.getRequests( this.page, this.currentElements, this.startDate, this.endDate, this.publicationType.items[0].id );
+        })
+    }
+
+    ngOnDestroy(): void {
+        this.socketService.disconnect( 'publication' );
     }
 
     getCurrentElements($event) {
@@ -464,8 +484,5 @@ export class ListRequestsComponent implements OnInit {
             this.colspan = this.totalColumns + 1;
             this.blockUI.stop();
         });
-    }
-
-    ngOnDestroy() {
     }
 }

@@ -1,18 +1,19 @@
 <div class="container-fluid">
-    <div class="row mt-4 mb-4">
-        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 h-100p">
-            <div class="row">
-                <div class="col" *ngFor="let status of routesStatusList.items">
-                    <h4 [ngClass]="{ 'status-active': status.isActive }" (click)="toggleStatus(status.id)">
-                        {{ status.text }}
-                    </h4>
-                </div>
-            </div>
+    <!-- <div class="row">
+        <div class="col" *ngFor="let status of routesStatusList.items">
+            <h4 class="cursor" [ngClass]="{ 'status-active': status.isActive }" (click)="toggleStatus(status.id)">
+                {{ status.text }}
+            </h4>
+        </div>
+    </div> -->
+
+    <div class="row mb-4">
+        <div class="col-md-6">
             <div class="row subtitle mb-3">
-                <div class="col-xs-10 mt-2 mb-3">
-                    <p class="title">Camiones en ruta</p>
+                <div class="col">
+                    <p class="title d-content">Camiones en ruta</p>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-2">
                     <div class="outer-circle">
                         <div class="middle-circle">
                             <div class="front-circle text-center">
@@ -22,21 +23,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-12 mt-3">
-                    <app-map-routes></app-map-routes>
-                </div>
-            </div>
+            <app-map-routes></app-map-routes>
         </div>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 h-100p">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-0 h-100p">
-                    <app-card-map></app-card-map>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-0 h-100p">
-                    <app-card-map></app-card-map>
+        <div class="col-md-6">
+            <div class="row subtitle mb-3">
+                <div class="col">
+                    <p class="title d-content">Ultimos viajes asignados</p>
                 </div>
             </div>
+            <app-card-map></app-card-map>
         </div>
     </div>
 </div>

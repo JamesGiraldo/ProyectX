@@ -13,5 +13,5 @@
     </div>
 </td>
 <td>
-    <mat-icon class="delete bodyColor" (click)="removeLoyalTransporter()">delete</mat-icon>
+    <mat-icon *ngIf="companyType.items[0].isActive" class="delete bodyColor" (click)="removeLoyalTransporter()">delete</mat-icon>
 </td>

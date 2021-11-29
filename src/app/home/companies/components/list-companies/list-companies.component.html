@@ -85,7 +85,7 @@
             <tbody>
                 <ng-container *ngIf="!loyalty">
                     <tr *ngFor="let company of companies">
-                        <app-company-detail class="d-content" [company]="company" [selected]="globalCheck"
+                        <app-company-detail class="d-content" [company]="company" [companyType]="companyType" [selected]="globalCheck"
                             (toggle)="onCompanyDetailToggle($event)" (remove)="onCompanyDetailRemove(company.id)">
                         </app-company-detail>
                     </tr>
@@ -99,7 +99,7 @@
                 </ng-container>
                 <ng-container *ngIf="loyalty">
                     <tr *ngFor="let transporter of transporters">
-                        <app-company-detail class="d-content" [company]="transporter" [selected]="globalCheck"
+                        <app-company-detail class="d-content" [company]="transporter" [companyType]="companyType" [selected]="globalCheck"
                             (toggle)="onCompanyDetailToggle($event)" (remove)="onCompanyDetailRemove(transporter.id)">
                         </app-company-detail>
                     </tr>

@@ -16,6 +16,7 @@ export const environment = {
     production: ${isProduction},
     apiVersion: '/api/v1/',
     apiHost: '${process.env.API_HOST}',
+    socketHost: ${process.env.socketHost},
     apiKeyMapbox: 'pk.eyJ1IjoibmV1dHJvIiwiYSI6ImNrYzEwZ24wNDBkNTYyeG56ejR4b2wxdDIifQ.ALrBoHZlfadG_Nf5NBdfrA',
 };
 `;
@@ -25,6 +26,7 @@ export const environment = {
     production: ${isProduction},
     apiVersion: '/api/v1/',
     apiHost: '${process.env.API_HOST}',
+    socketHost: ${process.env.socketHost},
     apiKeyMapbox: 'pk.eyJ1IjoibmV1dHJvIiwiYSI6ImNrYzEwZ24wNDBkNTYyeG56ejR4b2wxdDIifQ.ALrBoHZlfadG_Nf5NBdfrA',
 };
 `;

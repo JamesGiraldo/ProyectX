@@ -1,21 +1,23 @@
 <div class="col zero">
-
     <div class="row">
-        <div class="col">
-            <h3 mat-dialog-title>Cargue masivo de tarifas</h3>
-        </div>
-        <div class="col-5 text-right">
+        <div class="col"></div>
+        <div class="col d-content">
             <button mat-icon-button class="bc-transparent" matTooltip="Descargar Archivo de Muestra"
                 matTooltipPosition="above" (click)="onDownload()">
                 <mat-icon>cloud_download</mat-icon>
             </button>
-            <button mat-icon-button class="bc-transparent" (click)="onClose()">
+            <button mat-icon-button class="bc-transparent" matTooltip="Cerrar" (click)="onClose()">
                 <mat-icon>close</mat-icon>
             </button>
         </div>
     </div>
+    <div class="row mt-2">
+        <div class="col">
+            <h3 mat-dialog-title class="text-center">Cargue masivo de tarifas</h3>
+        </div>
+    </div>
 
-    <mat-divider class="mt-3 mb-3"></mat-divider>
+    <mat-divider class="mb-3"></mat-divider>
 
     <div mat-dialog-content class="conatiner-fluid">
         <form [formGroup]="uploadForm" (ngSubmit)="onUpload()" novalidate>
@@ -35,12 +37,12 @@
                         Cargar
                     </button>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-2 container-fluid">
                     <mat-error *ngIf="massiveFileHasLoaded" class="success">
-                        <p>Se ha cargado {{ massiveFileName }} correctamente</p>
+                        <p>Se ha cargado {{ massiveFileName | slice:0:20 }}{{ (massiveFileName.length > 20 ) ? '...' : '' }} correctamente</p>
                     </mat-error>
                     <mat-error *ngIf="massiveFileHasLoaded === false" class="danger">
-                        <p>Ha ocurrido un problema al subir el archivo {{ massiveFileName }}</p>
+                        <p>Ha ocurrido un problema al subir el archivo {{ massiveFileName | slice:0:20 }}{{ (massiveFileName.length > 20 ) ? '...' : '' }}</p>
                     </mat-error>
                 </div>
             </div>

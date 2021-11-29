@@ -29,6 +29,9 @@
                 </mat-error>
                 <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha final inválida</mat-error>
             </mat-form-field>
+            <button class="btn buttonClearDate" matTooltip="Limpiar filtro de fecha" (click)="clearRange()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 22px;">clear</mat-icon>
+            </button>
         </div>
         <div class="col"></div>
         <div class="col-md-4">

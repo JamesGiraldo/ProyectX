@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { CompanyService } from '@services/company.service';
@@ -6,20 +6,19 @@ import { ModalNewPublicationComponent } from '../modal-newpublication/modal-newp
 import { ModalNewcompanyComponent } from '../modal-newcompany/modal-newcompany.component';
 import { ModalNewloyalComponent } from '../modal-newloyal/modal-newloyal.component';
 import { ModalMassiveLoadComponent } from '../modal-massive-load/modal-massive-load.component';
-import { StatusList, Item, Company } from '@apptypes/entities';
+import { StatusList, Item, Company, User } from '@apptypes/entities';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ModalPublicationAsTransporterComponent } from '../modal-publication-as-transporter/modal-publication-as-transporter.component';
-import { SocketWebService } from '@services/socket-web.service';
-import { NamespaceSocket } from '@apptypes/enums/namespaces-socket.enum';
 
 @Component({
     selector: 'app-list-companies',
     templateUrl: './list-companies.component.html',
     styleUrls: ['./list-companies.component.scss'],
 })
-export class ListCompaniesComponent implements OnInit, OnDestroy {
+export class ListCompaniesComponent implements OnInit {
     @BlockUI() blockUI: NgBlockUI;
     public companies: Company[] = [];
+    public user: User;
     public companyType: StatusList;
     public currentElements: number = 12;
     public disable: boolean = true;
@@ -39,20 +38,14 @@ export class ListCompaniesComponent implements OnInit, OnDestroy {
     public sortArray: any[] = [];
     public sortFields = [{ key: '', value: '' }];
 
-    /* Socket */
-    public socketInstance;
-
     constructor(
         public dialog: MatDialog,
-        private companyService: CompanyService,
-        // private socketService: SocketWebService,
+        private companyService: CompanyService
     ) {
         this.blockUI.start('Loading...');
     }
 
     ngOnInit(): void {
-        // this.socketInstance = this.socketService.of( 'publication' );
-
         this.loyalty = true;
         this.companyType = new StatusList();
         this.companyType.add(new Item(0, 'Fidelizadas', true));
@@ -68,23 +61,6 @@ export class ListCompaniesComponent implements OnInit, OnDestroy {
 
         /* All */
         this.getTransportersLoyalAll();
-
-        // this.socketService.emitToEvent(this.socketInstance, 'new-publication-to-client', {
-        //     namespace: 'publication',
-        //     event: 'new-publication-to-client',
-        //     data: {
-        //         id: 1,
-        //     },
-        // });
-
-        // this.socketService.fromToEvent(this.socketInstance, 'new-publication-to-client').subscribe((data) => {
-        //     // this.getCompanies(this.page, this.currentElements);
-        //     console.log('new-publication-to-client', data);
-        // });
-    }
-
-    ngOnDestroy() {
-        // this.socketService.disconnect( NamespaceSocket.COMPANY );
     }
 
     getCurrentElements($event) {

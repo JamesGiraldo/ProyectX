@@ -12,6 +12,14 @@ import { HttpHeaders } from '@angular/common/http';
 export class TripService {
     constructor(private globalService: GlobalService) {}
 
+    public All(pageNumber: number, pageElements: number, start: string, end: string): Observable<any> {
+        return this.globalService.get(Api.Endpoints.TRIP.ALL(pageNumber, pageElements, start, end)).pipe(
+            map((res) => {
+                return res;
+            })
+        );
+    }
+
     public getAll(pageNumber: number, pageElements: number, start: string, end: string): Observable<any> {
         return this.globalService.get(Api.Endpoints.TRIP.TRIP_COLUMNS(pageNumber, pageElements, start, end)).pipe(
             map((res) => {
@@ -19,6 +27,7 @@ export class TripService {
             }),
         );
     }
+
 
     public getAllDestiny(id: number): Observable<any> {
         return this.globalService.get(Api.Endpoints.TRIP.ALL_DESTINY(id)).pipe(

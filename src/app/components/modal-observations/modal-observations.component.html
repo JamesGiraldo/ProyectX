@@ -5,13 +5,7 @@
                 {{ 'GENERAL_WORD.OBSERVATION' | translate }}
             </h3>
         </div>
-        <button
-            mat-icon-button
-            class="bc-transparent"
-            matTooltip="Cerrar"
-            matTooltipPosition="above"
-            (click)="onClose()"
-        >
+        <button mat-icon-button class="bc-transparent" matTooltip="Cerrar" matTooltipPosition="above" (click)="onClose()">
             <mat-icon>close</mat-icon>
         </button>
     </div>
@@ -23,8 +17,8 @@
                 No hay observaciones reportadas!
             </p>
             <ng-template #noObservations>
-                <p class="text-muted">{{ dataDescription | titlecase }}</p></ng-template
-            >
+                <p class="text-muted">{{ dataDescription | titlecase }}</p>
+            </ng-template>
         </div>
     </div>
 </div>

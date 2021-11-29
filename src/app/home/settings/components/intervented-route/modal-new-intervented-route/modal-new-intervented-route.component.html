@@ -1,16 +1,19 @@
 <div class="col zero">
     <div class="row">
-        <div class="col">
-            <h3 mat-dialog-title>Crear Ruta Intervenida</h3>
-        </div>
-        <div class="col-1">
-            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
+        <div class="col"></div>
+        <div class="col d-content">
+            <button mat-icon-button matTooltip="Cerrar" class="bc-transparent" matTooltipPosition="above" (click)="onClose()">
                 <mat-icon>close</mat-icon>
             </button>
         </div>
     </div>
+    <div class="row mt-2">
+        <div class="col">
+            <h3 mat-dialog-title class="text-center">Crear Ruta Intervenida</h3>
+        </div>
+    </div>
 
-    <mat-divider class="mt-3 mb-3"></mat-divider>
+    <mat-divider class="mb-3"></mat-divider>
 
     <form [formGroup]="interventedRouteForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
         <div mat-dialog-content class="container-fluid">

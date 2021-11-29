@@ -1,54 +1,46 @@
 <div class="col zero">
     <div class="row">
-        <div class="col">
-            <h3 mat-dialog-title>Archivos cargados del reporte</h3>
-        </div>
+        <div class="col"> <h3 mat-dialog-title>Archivos cargados del reporte</h3> </div>
         <div class="col-1">
-            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()">
-                <mat-icon>close</mat-icon>
-            </button>
+            <button mat-icon-button class="bc-transparent float-right" (click)="onClose()"> <mat-icon>close</mat-icon> </button>
         </div>
     </div>
 
     <mat-divider class="mt-1 mb-3"></mat-divider>
 
-    <div class="max-h-80vh">
-        <div class="row zero between-lg between-md between-sm between-xs mb-1" *ngFor="let file of filesData">
+    <div class="row mt-2" *ngFor="let file of filesData">
+        <div class="col">
             <button mat-flat-button class="bg-wo-gradient full-width b-h" (click)="preview(file)">
                 <mat-icon color="white">insert_drive_file</mat-icon>
                 <mat-divider vertical class="v-divider"></mat-divider>
                 <span>Visualizar archivo</span>
             </button>
         </div>
-        <div class="row" *ngIf="filesData.length === 0">
-            <div class="col-md-12 text-center">
-                <p class="p-tb-20 text-muted h5">
-                    {{ 'GENERAL_WORD.EMPTY' | translate }}
-                </p>
-            </div>
+        <div class="col">
+            <button mat-button class="btn-black w-100 b-h" (click)="download( file )">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 22px;">cloud_download
+                </mat-icon>
+                {{ 'GENERAL_WORD.DOWNLOAD' | translate }}
+            </button>
         </div>
     </div>
 
-    <mat-divider style="margin-top: 10px; margin-bottom: 20px;"></mat-divider>
-    <div class="row zero between-lg between-md between-sm between-xs full-width mb-3">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div mat-dialog-actions>
-                <div class="row zero between-lg between-md between-sm between-xs full-width">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <button
-                            mat-flat-button
-                            type="button"
-                            class="btn-cancelar full-width"
-                            style="width: 100%;"
-                            (click)="onClose()"
-                        >
-                            <mat-icon color="white">close</mat-icon> Cerrar
-                        </button>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-            </div>
+    <div class="row" *ngIf="filesData.length === 0">
+        <div class="col-md-12 text-center">
+            <p class="p-tb-20 text-muted h5">
+                {{ 'GENERAL_WORD.EMPTY' | translate }}
+            </p>
+        </div>
+    </div>
+
+    <mat-divider class="mt-3 mb-3"></mat-divider>
+
+    <div class="row" mat-dialog-actions>
+        <div class="col-md-6 mx-auto">
+            <button mat-flat-button type="button" class="btn-cancelar full-width" style="width: 100%;"
+                (click)="onClose()">
+                <mat-icon color="white">close</mat-icon> Cerrar
+            </button>
         </div>
     </div>
 </div>

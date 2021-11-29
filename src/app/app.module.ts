@@ -36,7 +36,7 @@ import { VideoModalComponent } from './landing/safety-course/video-modal/video-m
 import { CounterDirective } from './services/directives/counter.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
-// const config: SocketIoConfig = { url: `http://localhost:3000`, options: { transports: [ 'websocket' ] } };
+const config: SocketIoConfig = { url:  environment.socketHost , options: { transports: [ 'websocket' ], query: { token: `Bearer ${localStorage.getItem('token')}` } } };
 
 @NgModule({
     declarations: [
@@ -69,7 +69,7 @@ import { environment } from 'src/environments/environment';
         BlockUIModule.forRoot({
             delayStop: 300,
         }),
-        SocketIoModule,
+        SocketIoModule.forRoot(config),
         ToastrModule.forRoot({ preventDuplicates: true }),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyB8m_BcijLwI0AKniS7gEGFMEcTtNGGH9A',

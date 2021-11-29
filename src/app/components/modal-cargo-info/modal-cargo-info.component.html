@@ -3,17 +3,7 @@
     <div class="row">
         <div class="col" *ngIf="publication">
             <div class="row">
-                <div class="col">
-                    <h3 mat-dialog-title>{{ publication.load.description | uppercase }}
-                        &nbsp;
-                        <mat-icon class="title-icon mt-1" matTooltip="Nacional" matTooltipPosition="above" *ngIf="true; else localIcon">
-                            map
-                        </mat-icon>
-                        <ng-template #localIcon>
-                            <mat-icon class="icon mt-1" matTooltip="Local" matTooltipPosition="above">local_shipping</mat-icon>
-                        </ng-template>
-                    </h3>
-                </div>
+                <div class="col"></div>
                 <div class="col d-content">
                     <span *ngIf="btnShow">
                         <button mat-icon-button class="bc-transparent" matTooltip="Compartir carga con conductor"
@@ -30,6 +20,19 @@
                         (click)="onClose()">
                         <mat-icon>close</mat-icon>
                     </button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <h3 mat-dialog-title class="text-center">{{ publication.load.description | uppercase }}
+                        &nbsp;
+                        <mat-icon class="title-icon mt-1" matTooltip="Nacional" matTooltipPosition="above" *ngIf="true; else localIcon">
+                            map
+                        </mat-icon>
+                        <ng-template #localIcon>
+                            <mat-icon class="icon mt-1" matTooltip="Local" matTooltipPosition="above">local_shipping</mat-icon>
+                        </ng-template>
+                    </h3>
                 </div>
             </div>
 

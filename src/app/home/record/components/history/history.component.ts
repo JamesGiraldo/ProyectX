@@ -100,6 +100,13 @@ export class HistoryComponent implements OnInit {
         }
     }
 
+    public clearRange() {
+        this.blockUI.start('Loading...');
+        this.range.reset();
+        this.getHistory(this.page, this.currentElements, this.startDate, this.endDate);
+        this.blockUI.stop();
+    }
+
     public onDownload() {
         this.dialog
             .open(ModalOptionsDownloadComponent, {

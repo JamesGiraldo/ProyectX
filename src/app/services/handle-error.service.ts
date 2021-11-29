@@ -29,7 +29,7 @@ export class HandleErrorService {
     public onSuccess(res) {
         Swal.fire({
             icon: 'success',
-            title: 'Operación exitosa!',
+            title: 'Successful operation!',
             text: res.message,
         });
     }
@@ -37,7 +37,7 @@ export class HandleErrorService {
     public onFailure(err) {
         Swal.fire({
             icon: 'error',
-            title: `Error de operación: #${err.code}`,
+            title: `Operation error: #${err.code}`,
             text: err.error?.statusCode === 500 ? err.error.message : err.error,
         });
     }
@@ -45,7 +45,7 @@ export class HandleErrorService {
     public onFailureDoc(err) {
         Swal.fire({
             icon: 'error',
-            title: `Error de operación: #${err.code}`,
+            title: `Operation error: #${err.code}`,
             html:
                 `${err.error}<br><br><b>Documentos conductores:</b> [${err.data.drivers},]<br>` +
                 `<b>Documentos vehículos:</b> [${err.data.vehicles}, ]`,

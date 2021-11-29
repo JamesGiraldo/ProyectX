@@ -3,7 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-const apiHost = environment.apiHost;
+const apiHost = environment.socketHost;
 
 @Injectable({
     providedIn: 'root',
@@ -14,8 +14,8 @@ export class SocketWebService {
 
     constructor(private socket: Socket) {}
 
-    public of(namespace: string): Socket {
-        const socketInstance = new Socket({ url: `${ this.url }/${ namespace }` });
+    public of(namespace: string, soket: string): Socket {
+        const socketInstance = new Socket({ url: `${ this.url }/${ namespace }`, options: { query: { token: `Bearer ${soket}` } } });
         this.socketsMap.set(namespace, socketInstance);
         return socketInstance;
     }

@@ -32,35 +32,22 @@
     <div class="row center-lg center-md center-sm center-xs">
         <div class="col" *ngIf="isGenerator && accept; else justCancel">
             <div class="row between-lg between-md between-sm between-xs">
-                <h5>
-                    <mat-icon
-                        class="clickable accept"
-                        matTooltip="Aceptar"
-                        matTooltipPosition="above"
-                        (click)="onAcceptClick()"
-                    >
+                <h5 class="theaderWidth">
+                    <mat-icon class="clickable accept" matTooltip="Aceptar" matTooltipPosition="above"
+                        (click)="onAcceptClick()">
                         done
                     </mat-icon>
-                    <mat-icon
-                        class="clickable rejectOrCancel"
-                        matTooltip="Rechazar"
-                        matTooltipPosition="above"
-                        (click)="onRejectClick()"
-                    >
+                    <mat-icon class="clickable rejectOrCancel" matTooltip="Rechazar" matTooltipPosition="above"
+                        (click)="onRejectClick()">
                         clear
                     </mat-icon>
                 </h5>
             </div>
         </div>
         <ng-template #justCancel>
-            <h5>
-                <mat-icon
-                    *ngIf="reject"
-                    class="clickable rejectOrCancel"
-                    matTooltip="Cancelar"
-                    matTooltipPosition="above"
-                    (click)="onCancelClick()"
-                >
+            <h5 class="theaderWidth">
+                <mat-icon *ngIf="reject" class="clickable rejectOrCancel" matTooltip="Cancelar"
+                    matTooltipPosition="above" (click)="onCancelClick()">
                     clear
                 </mat-icon>
             </h5>

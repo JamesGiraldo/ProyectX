@@ -123,6 +123,7 @@ export class PublicationService {
             .post(Api.Endpoints.PUBLICATION.SEARCH_PUBLICATION(pageNumber, pageElements, start, end, state), filter)
             .pipe(
                 map((res) => {
+                    console.log( res )
                     return res;
                 }),
             );

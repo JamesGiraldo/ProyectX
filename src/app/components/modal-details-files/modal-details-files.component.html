@@ -1,14 +1,15 @@
 <div class="col zero">
     <div class="row">
-        <div class="col">
-            <h3 mat-dialog-title>Archivos cargados del {{ fileDetailsData.data.type === 'driver' ? 'conductor' :
-                'vehículo' }}</h3>
-        </div>
-        <div class="col-1">
-            <button mat-icon-button matTooltip="Cerrar" class="bc-transparent float-right" matTooltipPosition="above"
-                (click)="onClose()">
+        <div class="col"></div>
+        <div class="col d-content">
+            <button mat-icon-button class="bc-transparent" matTooltip="Cerrar" matTooltipPosition="above" (click)="onClose()">
                 <mat-icon>close</mat-icon>
             </button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <h3 mat-dialog-title class="text-center">Archivos cargados del {{ fileDetailsData.data.type === 'driver' ? 'conductor' : 'vehículo' }}</h3>
         </div>
     </div>
 
@@ -22,7 +23,7 @@
                     <p class="text-muted"><strong>Descripción: </strong>{{ fileDrive.description | titlecase }}</p>
                 </div>
                 <div class="col">
-                    <p class="text-muted" *ngIf="fileDrive.expireDate"><strong>Fecha de expiración: </strong>{{ fileDrive.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                    <p class="text-muted" *ngIf="fileDrive.expireDate"><strong>Fecha de expiración: </strong>{{ fileDrive.expireDate | date: 'd - MMM - y' }}</p>
                     <p class="text-muted" *ngIf="!fileDrive.expireDate"></p>
                 </div>
                 <div class="col-2">
@@ -62,7 +63,7 @@
                      <p class="text-muted"><strong>Descripción:</strong>{{ fileVehicle.description | titlecase }}</p>
                  </div>
                  <div class="col">
-                     <p class="text-muted" *ngIf="fileVehicle.expireDate"><strong>Fecha de expiración: </strong>{{ fileVehicle.expireDate | date: 'MMM d y, h:mm a' }}</p>
+                     <p class="text-muted" *ngIf="fileVehicle.expireDate"><strong>Fecha de expiración: </strong>{{ fileVehicle.expireDate | date: 'd - MMM - y' }}</p>
                      <p class="text-muted" *ngIf="!fileVehicle.expireDate"></p>
                  </div>
                  <div class="col-2">

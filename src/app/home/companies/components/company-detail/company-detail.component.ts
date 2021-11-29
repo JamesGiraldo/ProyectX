@@ -1,9 +1,11 @@
-import Swal from 'sweetalert2';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+
+import { StatusList } from '@entities/index';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import Swal from 'sweetalert2';
 
 import { Company } from '@apptypes/entities/company';
 import { CompanyService, HandleErrorService } from '@services/index';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
     selector: 'app-company-detail',
@@ -15,6 +17,7 @@ export class CompanyDetailComponent implements OnInit {
     @Output() refresh = new EventEmitter<boolean>();
     @Input('company') company: Company;
     @Input('selected') selected: boolean;
+    @Input('companyType') companyType: StatusList;
     @Output('toggle') toggle: EventEmitter<{ checked: boolean; id: number }> = new EventEmitter();
     @Output('remove') remove: EventEmitter<number> = new EventEmitter();
 
