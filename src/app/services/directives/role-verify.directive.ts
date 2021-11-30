@@ -26,35 +26,24 @@ export class RoleVerifyDirective implements OnInit {
   }
 
   @Input()
-  set appRoleVerify(val: any)
-  {
+  set appRoleVerify(val: any){
     this.viewContainer.createEmbeddedView(this.templateRef);
     this.CurrentUserPermiso = val;
     this.updateView();
   }
 
-  private updateView(): void
-  {
+  private updateView(): void{
     this.viewContainer.clear();
-    if (this.checkPermission()) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
-    }
+    if (this.checkPermission()) this.viewContainer.createEmbeddedView(this.templateRef);
   }
 
-  private checkPermission(): boolean
-  {
-    let hasPermission = false;
+  private checkPermission(): boolean{
+    let hasPermission = true;
     if (this.Permission && this.CurrentUserPermiso) {
-
       const permisoEncotrado = this.CurrentUserPermiso.find(p => {
-        console.log(p.toUpperCase().trim());
-        console.log(this.Permission.toUpperCase().trim());
-        console.log('---------');
-        return (p.toUpperCase().trim() === this.Permission.toUpperCase().trim());
+        return ( `USER.TYPE.${ p.toUpperCase().trim() }` === this.Permission.toUpperCase().trim());
       });
-      if (permisoEncotrado) {
-        hasPermission = true;
-      }
+      if (permisoEncotrado) hasPermission = false;
     }
     return hasPermission;
   }

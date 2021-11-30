@@ -6,10 +6,12 @@
                 <div class="col"></div>
                 <div class="col d-content">
                     <span *ngIf="btnShow">
-                        <button mat-icon-button class="bc-transparent" matTooltip="Compartir carga con conductor"
-                            matTooltipPosition="above" (click)="loadSharingDriver()" *ngIf="!isGenerator">
-                            <mat-icon>send</mat-icon>
-                        </button>
+                        <div *appRoleVerify="['SUPERVISOR']">
+                            <button mat-icon-button class="bc-transparent" matTooltip="Compartir carga con conductor"
+                                matTooltipPosition="above" (click)="loadSharingDriver()" *ngIf="!isGenerator">
+                                <mat-icon>send</mat-icon>
+                            </button>
+                        </div>
                     </span>
                     <button mat-icon-button class="bc-transparent" matTooltip="Copiar contenidos"
                         matTooltipPosition="above" (click)="onContentCopy()" *ngIf="isGenerator">
@@ -329,7 +331,7 @@
     <div class="row"  *ngIf="!isGenerator && btnShow">
         <div class="col">
             <div class="row mb-4">
-                <div class="col mb-2 mt-1">
+                <div class="col mb-2 mt-1" *appRoleVerify="['SUPERVISOR']">
                     <button mat-flat-button type="button" class="btn-cancelar btn-block" (click)="onRejectClicked()"
                         *ngIf="publication?.state === publicationStatus.ACTIVE">
                         <mat-icon color="white">close</mat-icon> Rechazar
@@ -340,7 +342,7 @@
                         <mat-icon color="white">local_shipping</mat-icon> Reportes
                     </button>
                 </div>
-                <div class="col mt-1">
+                <div class="col mt-1" *appRoleVerify="['SUPERVISOR']">
                     <button mat-flat-button class="btn-submit btn-block" (click)="onClose(true, true)"
                         *ngIf="publication?.state === publicationStatus.ACTIVE">
                         <mat-icon color="white">done</mat-icon> Proponer

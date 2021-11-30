@@ -16,6 +16,7 @@ import { PipeModule } from '../../services/pipes/pipe.module';
 import { RecordRoutingModule } from './record-routing.module';
 import { RecordsComponent } from './records.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DirectivesModule } from './../../services/directives/directives.module';
 import { ExporterService } from '@services/exporter.service';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { ExporterService } from '@services/exporter.service';
         PipeModule.forRoot(),
         RecordRoutingModule,
         SharedModule,
+        DirectivesModule
     ],
     providers: [DatePipe, ExporterService],
 })

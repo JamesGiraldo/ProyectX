@@ -21,6 +21,7 @@ import { ListTripsComponent } from './components/list-trips/list-trips.component
 import { TripsComponent } from './trips.component';
 import { TripsRoutingModule } from './trips-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { DirectivesModule } from './../../services/directives/directives.module';
 import { PipeModule } from '@services/pipes/pipe.module';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { ModalOrderComponent } from './components/modal-order/modal-order.component';
@@ -60,6 +61,7 @@ import { ModalFilesComponent } from './components/modal-files/modal-files.compon
         MatTooltipModule,
         PipeModule.forRoot(),
         ReactiveFormsModule,
+        DirectivesModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

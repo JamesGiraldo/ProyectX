@@ -16,6 +16,7 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatListModule } from '@angular/material/list';
 
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ListRequestsComponent } from './components/list-requests/list-requests.component';
@@ -26,7 +27,7 @@ import { RequestsRoutingModule } from './requests-routing.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ModalOptionsComponent } from './components/modal-options/modal-options.component';
 import { ModalColumnsComponent } from './components/modal-columns/modal-columns.component';
-import { MatListModule } from '@angular/material/list';
+import { DirectivesModule } from './../../services/directives/directives.module';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { MatListModule } from '@angular/material/list';
         ReactiveFormsModule,
         RequestsRoutingModule,
         TranslateModule,
+        DirectivesModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [],

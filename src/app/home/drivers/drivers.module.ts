@@ -26,6 +26,8 @@ import { ListDriversComponent } from './components/list-drivers/list-drivers.com
 import { ModalNewdriverComponent } from './components/modal-newdriver/modal-newdriver.component';
 import { PipeModule } from '@services/pipes/pipe.module';
 
+import { DirectivesModule } from '../../services/directives/directives.module';
+
 @NgModule({
     declarations: [ListDriversComponent, DriversComponent, ModalNewdriverComponent, DriverDetailComponent],
     imports: [
@@ -51,6 +53,7 @@ import { PipeModule } from '@services/pipes/pipe.module';
         PipeModule.forRoot(),
         ReactiveFormsModule,
         TranslateModule,
+        DirectivesModule
     ],
 })
 export class DriversModule {}

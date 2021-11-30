@@ -40,6 +40,8 @@ import { ModalObservationsComponent } from './modal-observations/modal-observati
 import { SearchComponent } from './search/search.component';
 import { ModalRescheduleComponent } from './modal-reschedule/modal-reschedule.component';
 
+import { DirectivesModule } from './../services/directives/directives.module';
+
 @NgModule({
     declarations: [
         CardMapComponent,
@@ -83,6 +85,7 @@ import { ModalRescheduleComponent } from './modal-reschedule/modal-reschedule.co
         NgxMatMomentModule,
         MatSlideToggleModule,
         MatChipsModule,
+        DirectivesModule,
         PipeModule.forRoot(),
         BlockUIModule.forRoot({
             delayStop: 300,

@@ -168,7 +168,7 @@
     <div class="pt-3 pb-5"></div>
     <div class="row between-lg between-md between-sm between-xs zero"
         *ngIf="!isGenerator && historyBtn && publicationStatus === publicationStatusActive.ACTIVE">
-        <div class="col zero">
+        <div class="col zero" *appRoleVerify="['SUPERVISOR']">
             <button style="width: 170px;" mat-flat-button class="btn-submit stick-r" (click)="onAddClick()">
                 <mat-icon color="white">add_circle_outline</mat-icon> {{ 'GENERAL_WORD.PROPOSE' | translate }}
             </button>

@@ -4,7 +4,9 @@
             <h3 mat-dialog-title>{{ 'DRIVER.TITLE' | translate }}</h3>
         </div>
         <div class="col">
-            <button mat-flat-button class="bg-wo-gradient float-right" (click)="openDialog()">
+            <button
+                *appRoleVerify="['SUPERVISOR']"
+                mat-flat-button class="bg-wo-gradient float-right" (click)="openDialog()">
                 {{ 'DRIVER.BTN_DRIVER' | translate }}
             </button>
         </div>

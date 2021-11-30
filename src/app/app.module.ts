@@ -33,10 +33,9 @@ import { ResetPasswordComponent } from './landing/reset-password/reset-password.
 import { SafetyCourseComponent } from './landing/safety-course/safety-course.component';
 import { TestFormComponent } from './landing/safety-course/test-form/test-form.component';
 import { VideoModalComponent } from './landing/safety-course/video-modal/video-modal.component';
-import { CounterDirective } from './services/directives/counter.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { DirectivesModule } from './services/directives/directives.module';
 import { environment } from 'src/environments/environment';
-import { HomeModule } from './home/home.module';
 const config: SocketIoConfig = { url:  environment.socketHost , options: { transports: [ 'websocket' ], query: { token: `Bearer ${localStorage.getItem('token')}` } } };
 
 @NgModule({
@@ -47,8 +46,7 @@ const config: SocketIoConfig = { url:  environment.socketHost , options: { trans
         ResetPasswordComponent,
         SafetyCourseComponent,
         TestFormComponent,
-        VideoModalComponent,
-        CounterDirective
+        VideoModalComponent
     ],
     imports: [
         AppRoutingModule,
@@ -61,7 +59,6 @@ const config: SocketIoConfig = { url:  environment.socketHost , options: { trans
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
-        HomeModule,
         MatIconModule,
         MatInputModule,
         MatMenuModule,
@@ -72,6 +69,7 @@ const config: SocketIoConfig = { url:  environment.socketHost , options: { trans
             delayStop: 300,
         }),
         SocketIoModule.forRoot(config),
+        DirectivesModule,
         ToastrModule.forRoot({ preventDuplicates: true }),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyB8m_BcijLwI0AKniS7gEGFMEcTtNGGH9A',

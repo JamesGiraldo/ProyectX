@@ -25,6 +25,7 @@ import { VehiclesComponent } from './vehicles.component';
 import { VehiclesRoutingModule } from './vehicles-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DirectivesModule } from './../../services/directives/directives.module';
 
 @NgModule({
     declarations: [VehiclesComponent, ListVehiclesComponent, VehicleDetailComponent, ModalNewvehicleComponent],
@@ -51,6 +52,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         ReactiveFormsModule,
         VehiclesRoutingModule,
         TranslateModule,
+        DirectivesModule
     ],
 })
 export class VehiclesModule {}

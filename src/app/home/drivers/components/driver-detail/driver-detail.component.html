@@ -21,7 +21,7 @@
             Ver documentos
         </span>
     </h5>
-    <h5 *ngIf="col.name == 'HEADER_TABLE.RATING'">
+    <h5 *ngIf="col.name == 'HEADER_TABLE.RATING'" class="d-flex">
         <span *ngFor="let rating of ratings" matTooltip="{{ driver.rating }}">
             <mat-icon color="primary">{{ rating }}</mat-icon>
         </span>
@@ -29,7 +29,7 @@
 </td>
 
 <td *ngIf="columns.length > 0">
-    <div class="col-3">
+    <div class="col-3"   *appRoleVerify="['SUPERVISOR']">
         <h5>
             <mat-icon class="edit" (click)="openDialog()" matTooltip="Editar">edit</mat-icon>
         </h5>
