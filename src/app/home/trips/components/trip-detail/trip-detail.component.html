@@ -261,12 +261,16 @@
         <mat-icon matSuffix (click)="modalQR()" matTooltip="Generar Código QR"  class="m-1 mt-2 cursor">
             qr_code_scanner
         </mat-icon>
-        <mat-icon matSuffix *ngIf="(!isGenerator || trip?.myTransporter) && state != 1" (click)="openOrder()" matTooltip="Enviar reporte de estado" class="m-1 mt-2 cursor">
-            send
-        </mat-icon>
-        <mat-icon matSuffix *ngIf="isGenerator && state === 1" (click)="openRejectCompliment()" matTooltip="Rechazar cumplido" class="m-1 mt-2 cursor">
-            cancel_schedule_send
-        </mat-icon>
+        <span *ngIf="(!isGenerator || trip?.myTransporter) && state != 1">
+            <mat-icon *appRoleVerify="['SUPERVISOR']" matSuffix (click)="openOrder()" matTooltip="Enviar reporte de estado" class="m-1 mt-2 cursor">
+                send
+            </mat-icon>
+        </span>
+        <span *ngIf="isGenerator && state === 1">
+            <mat-icon *appRoleVerify="['SUPERVISOR']" matSuffix (click)="openRejectCompliment()" matTooltip="Rechazar cumplido" class="m-1 mt-2 cursor">
+                cancel_schedule_send
+            </mat-icon>
+        </span>
         <mat-icon matSuffix matTooltip="Archivos de conductor y vehículo verificados" class="m-1 mt-2 cursor" color="primary" *ngIf="isGenerator && trip.driver_verified && trip.vehicle_verified">
             task
         </mat-icon>

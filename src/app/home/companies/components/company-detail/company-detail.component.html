@@ -1,5 +1,5 @@
 <!-- LIST VIEW -->
-<td class="text-center ">
+<td class="text-center" *appRoleVerify="['SUPERVISOR']">
     <mat-checkbox class="example-margin primary" color="primary" [checked]="selected"
         (change)="onCheckboxChanged($event)">
     </mat-checkbox>
@@ -12,6 +12,6 @@
         <mat-icon color="primary">{{ rating }}</mat-icon>
     </div>
 </td>
-<td>
+<td *appRoleVerify="['SUPERVISOR']">
     <mat-icon *ngIf="companyType.items[0].isActive" class="delete bodyColor" (click)="removeLoyalTransporter()">delete</mat-icon>
 </td>

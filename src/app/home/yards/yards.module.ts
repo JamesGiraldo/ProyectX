@@ -40,6 +40,7 @@ import { VehicleControlModalComponent } from './components/tracking-dashboard/tr
 import { VehicleDetailComponent } from './components/tracking-dashboard/tracking-map/track-detail/stage-detail/vehicle-detail/vehicle-detail.component';
 import { YardsComponent } from './yards.component';
 import { YardsRoutingModule } from './yards-routing.module';
+import { DirectivesModule } from './../../services/directives/directives.module';
 import { SchedulesComponent } from './components/schedules/schedules.component';
 import { SchedulesDetailComponent } from './components/schedules/schedules-detail/schedules-detail.component';
 import { ModalInspectionComponent } from './components/operations/modal-inspection/modal-inspection.component';
@@ -96,6 +97,7 @@ import { ModalLegalBaseComponent } from './components/operations/modal-legal-bas
         MatTooltipModule,
         PipeModule.forRoot(),
         ComponentsModule,
+        DirectivesModule
     ],
 })
 export class YardsModule {}

@@ -50,7 +50,7 @@
                         <h5>{{ report.loadedTonnage }}</h5>
                     </td>
                     <td class="text-center">
-                        <h5>
+                        <h5 *appRoleVerify="['SUPERVISOR']">
                             <mat-icon matTooltip="Eliminar estado" matTooltipPosition="above" class="delete"
                                 (click)="deleteReport(report)">delete</mat-icon>
                         </h5>

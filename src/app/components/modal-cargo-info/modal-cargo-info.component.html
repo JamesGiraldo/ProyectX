@@ -13,10 +13,12 @@
                             </button>
                         </div>
                     </span>
-                    <button mat-icon-button class="bc-transparent" matTooltip="Copiar contenidos"
-                        matTooltipPosition="above" (click)="onContentCopy()" *ngIf="isGenerator">
-                        <mat-icon>content_copy</mat-icon>
-                    </button>
+                    <span *appRoleVerify="['SUPERVISOR']">
+                        <button mat-icon-button class="bc-transparent" matTooltip="Copiar contenidos"
+                            matTooltipPosition="above" (click)="onContentCopy()" *ngIf="isGenerator">
+                            <mat-icon>content_copy</mat-icon>
+                        </button>
+                    </span>
                     &nbsp; &nbsp;
                     <button mat-icon-button class="bc-transparent" matTooltip="Cerrar" matTooltipPosition="above"
                         (click)="onClose()">

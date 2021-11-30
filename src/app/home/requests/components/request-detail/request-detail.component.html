@@ -102,8 +102,12 @@
 </td>
 <td *ngIf="columns.length > 0 && state !== 'STATE.CANCELED'">
     <h5 class="widthActions">
-        <mat-icon class="icon edit m-1" *ngIf="isGenerator && state !== 'STATE.FINISHED'" (click)="onEditClick()" matTooltipPosition="above" matTooltip="Editar" >edit</mat-icon>
+        <span *ngIf="isGenerator && state !== 'STATE.FINISHED'">
+            <mat-icon *appRoleVerify="['SUPERVISOR']" class="icon edit m-1" (click)="onEditClick()" matTooltipPosition="above" matTooltip="Editar" >edit</mat-icon>
+        </span>
         <mat-icon class="icon view m-1" (click)="onViewOffersClick()" matTooltipPosition="above" matTooltip="Ver reportes">visibility</mat-icon>
-        <mat-icon class="icon delete m-1"*ngIf="isGenerator" (click)="removeRequest()" matTooltipPosition="above" matTooltip="Eliminar" >delete</mat-icon>
+        <span *ngIf="isGenerator">
+            <mat-icon *appRoleVerify="['SUPERVISOR']" class="icon delete m-1" (click)="removeRequest()" matTooltipPosition="above" matTooltip="Eliminar" >delete</mat-icon>
+        </span>
     </h5>
 </td>

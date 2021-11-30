@@ -33,11 +33,11 @@
         <div class="col" *ngIf="isGenerator && accept; else justCancel">
             <div class="row between-lg between-md between-sm between-xs">
                 <h5 class="theaderWidth">
-                    <mat-icon class="clickable accept" matTooltip="Aceptar" matTooltipPosition="above"
+                    <mat-icon *appRoleVerify="['SUPERVISOR']" class="clickable accept" matTooltip="Aceptar" matTooltipPosition="above"
                         (click)="onAcceptClick()">
                         done
                     </mat-icon>
-                    <mat-icon class="clickable rejectOrCancel" matTooltip="Rechazar" matTooltipPosition="above"
+                    <mat-icon *appRoleVerify="['SUPERVISOR']" class="clickable rejectOrCancel" matTooltip="Rechazar" matTooltipPosition="above"
                         (click)="onRejectClick()">
                         clear
                     </mat-icon>

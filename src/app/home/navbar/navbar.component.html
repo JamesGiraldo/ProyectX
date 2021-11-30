@@ -128,9 +128,11 @@
                         <span>{{ currentUser.role | titlecase }}</span>
                     </button>
                     <!-- <button mat-menu-item (click)="goToProfile()">{{ 'NAVBAR.MENU1' | translate }}</button> -->
-                    <button mat-menu-item (click)="goToSettings()" *ngIf="isGeneradora">
-                        {{ 'NAVBAR.MENU2' | translate }}
-                    </button>
+                    <span *ngIf="isGeneradora">
+                        <button *appRoleVerify="['SUPERVISOR']" mat-menu-item (click)="goToSettings()">
+                            {{ 'NAVBAR.MENU2' | translate }}
+                        </button>
+                    </span>
                     <button mat-menu-item (click)="logout()">
                         {{ 'NAVBAR.MENU3' | translate }}
                     </button>

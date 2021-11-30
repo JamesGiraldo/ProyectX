@@ -4,21 +4,23 @@
             <h3>{{ 'TRANSPORTER.TITLE' | translate }}</h3>
         </div>
         <div class="col-md-6 d-flex justify-content-end mt-5">
-            <button mat-flat-button class="bg-wo-gradient mr-2" matTooltip="{{ 'GENERAL_WORD.MASSIVE' | translate }}"
-                (click)="openDialogMassive(companyType.items[0].isActive)">
-                <mat-icon>attach_file</mat-icon>
-            </button>
-            <button mat-flat-button class="bg-wo-gradient mr-2" matTooltip="{{ 'COMPANY.AS_TRANSPORTER' | translate }}"
-                (click)="openDialogAsTranporter()">
-                <mat-icon>local_shipping</mat-icon>
-            </button>
-            <button mat-flat-button class="bg-wo-gradient mr-2"
-                matTooltip="{{ 'TRANSPORTER.LOYALTY_COMPANIES' | translate }}" (click)="openDialogLoyal()">
-                <mat-icon>assignment</mat-icon>
-            </button>
-            <!-- <button mat-flat-button class="bg-wo-gradient" matTooltip="Crear empresa" (click)="openDialogCreate()">
-                <mat-icon>add_circle</mat-icon>
-            </button> -->
+            <span *appRoleVerify="['SUPERVISOR']">
+                <button mat-flat-button class="bg-wo-gradient mr-2" matTooltip="{{ 'GENERAL_WORD.MASSIVE' | translate }}"
+                    (click)="openDialogMassive(companyType.items[0].isActive)">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <button mat-flat-button class="bg-wo-gradient mr-2" matTooltip="{{ 'COMPANY.AS_TRANSPORTER' | translate }}"
+                    (click)="openDialogAsTranporter()">
+                    <mat-icon>local_shipping</mat-icon>
+                </button>
+                <button mat-flat-button class="bg-wo-gradient mr-2"
+                    matTooltip="{{ 'TRANSPORTER.LOYALTY_COMPANIES' | translate }}" (click)="openDialogLoyal()">
+                    <mat-icon>assignment</mat-icon>
+                </button>
+                <!-- <button mat-flat-button class="bg-wo-gradient" matTooltip="Crear empresa" (click)="openDialogCreate()">
+                    <mat-icon>add_circle</mat-icon>
+                </button> -->
+            </span>
         </div>
     </div>
 
@@ -34,8 +36,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-flex justify-content-end mt-4">
-            <button mat-flat-button class="bg-wo-gradient" [disabled]="disable"
+        <div class="col-md-6 d-flex justify-content-end mt-4" >
+            <button mat-flat-button class="bg-wo-gradient" [disabled]="disable" *appRoleVerify="['SUPERVISOR']"
                 (click)="openDialogPublication(companyType.items[0].isActive)">
                 <span *ngIf="companyType.items[0].isActive; else noLoyal">
                     {{ 'GENERAL_WORD.PUBLISH' | translate }}{{ 'TRANSPORTER.LOYAL' | translate }}
@@ -57,7 +59,7 @@
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col" class="text-center">
+                    <th scope="col" class="text-center" *appRoleVerify="['SUPERVISOR']">
                         <mat-checkbox class="example-margin primary headerSize" color="primary" [checked]="globalCheck"
                             (change)="onCheckboxChanged($event)"></mat-checkbox>
                     </th>

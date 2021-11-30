@@ -35,6 +35,7 @@ import { ModalMassiveLoadComponent } from './components/modal-massive-load/modal
 import { ModalMassiveFieldsComponent } from './components/modal-massive-fields/modal-massive-fields.component';
 import { ModalFormatComponent } from './components/modal-massive-load/modal-format/modal-format.component';
 import { ModalPublicationAsTransporterComponent } from './components/modal-publication-as-transporter/modal-publication-as-transporter.component';
+import { DirectivesModule } from '@services/directives/directives.module';
 
 @NgModule({
     declarations: [
@@ -77,6 +78,7 @@ import { ModalPublicationAsTransporterComponent } from './components/modal-publi
         PipeModule.forRoot(),
         ReactiveFormsModule,
         TranslateModule,
+        DirectivesModule
     ],
 })
 export class CompaniesModule {}

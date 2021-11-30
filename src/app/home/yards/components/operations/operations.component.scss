@@ -5,6 +5,10 @@
     pointer-events: none !important;
 }
 
+.box-shadow{
+    box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.1)
+}
+
 .spacer {
     padding: 40px 0;
 }
@@ -22,8 +26,6 @@
     border-radius: 5px;
     padding: 10px;
     height: auto;
-    width: 90%;
-    margin-left: 5%;
 }
 
 .mat-step-header .mat-step-icon {
