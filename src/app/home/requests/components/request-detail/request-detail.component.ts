@@ -120,6 +120,7 @@ export class RequestDetailComponent implements OnInit {
     }
 
     removeRequest() {
+        console.log('ress');
         Swal.fire({
             title: `¿Estas seguro que deseas remover la solicitud?`,
             text: 'En caso de querer añadir esta solicitud nuevamente se tendra que publicar nuevamente.',
@@ -134,6 +135,7 @@ export class RequestDetailComponent implements OnInit {
                 this.blockUI.start('Loading...');
                 this.publicationService.remove(this.request.id).subscribe(
                     (res) => {
+                        console.log(res);
                         if (res.code >= 1000) {
                             Swal.fire(
                                 'Solicitud Removida!',
@@ -141,6 +143,8 @@ export class RequestDetailComponent implements OnInit {
                                 'success',
                             );
                             this.onRemove.emit(true);
+                        }else if (res.code === 23) {
+                            this.handleErrorService.onFailure(res);
                         }
                     },
                     (err) => this.handleErrorService.onFailure(err),
